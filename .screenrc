@@ -1,5 +1,6 @@
-hardstatus string "%{= g} %{= w}%-w%{=r}%n %t%{-}%+W"
-hardstatus alwayslastline
+#hardstatus string "%{= g} %{= w}%-w%{=r}%n %t%{-}%+W"
+#hardstatus alwayslastline
+caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %LD %d %LM - %c"
 term xterm-256color
 maptimeout 5
 attrcolor b ".I"    # allow bold colors - necessary for some reason
