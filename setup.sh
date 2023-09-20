@@ -1,5 +1,7 @@
 #! /bin/bash
 
+set -xe
+
 for arg in "$@"; do
 	if [[ $arg == *"="* ]]; then
 		export "$arg"
@@ -55,4 +57,10 @@ install neovim unzip
 #curl -fsSL https://bun.sh/install | bash
 # get vim-plug
 #curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+cp ./screenrc ~/.screenrc
+cp ./vimrc ~/.vimrc
+cp ./zshrc ~/.zshrc
+
+# rm -rf .
 
