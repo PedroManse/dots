@@ -1,5 +1,4 @@
 " Plugins
-source ~/.config/plug.vim
 call plug#begin()
 	Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 	Plug 'morhetz/gruvbox'

@@ -54,9 +54,9 @@ setup_install
 install neovim unzip
 
 # get bun
-#curl -fsSL https://bun.sh/install | bash
+curl -fsSL https://bun.sh/install | bash
 # get vim-plug
-#curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 cp ./screenrc ~/.screenrc
 cp ./vimrc ~/.vimrc
