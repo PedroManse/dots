@@ -1,11 +1,13 @@
 " Plugins
 source ~/.config/plug.vim
 call plug#begin()
+	Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 	Plug 'morhetz/gruvbox'
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'tmhedberg/matchit'
 	Plug 'frazrepo/vim-rainbow'
+	Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " rgb {[()]}
@@ -14,19 +16,13 @@ let g:rainbow_active = 1
 " tree
 let g:netrw_liststyle=3
 
-" only execute if buffer is modifiable
-function! BufDo(command)
-	if !&modifiable
-		exe a:command
-	endif
-endfun
-command! -nargs=+ BufDo call BufDo(<q-args>)
-
 " ; at $
 autocmd FileType c nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType javascript nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType css nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType go nnoremap <buffer> ; :
+
+autocmd BufWritePost * GitGutterBufferEnable
 
 " Sets
 set tabstop=2
@@ -39,7 +35,7 @@ set nowrap
 " nMaps
 " add ; to EOL
 "nmap ; msA;<ESC>`s
-nmap <space> <ESC>:noh<CR>:<BS>
+nmap <SPACE> <ESC>:noh<CR>:<BS>
 " move the screen
 nmap <C-j> <C-e>
 nmap <C-k> <C-y>
@@ -47,7 +43,7 @@ nmap <C-k> <C-y>
 nmap j gj
 nmap k gk
 " oposite of J (Join/Split)
-nmap S mar<linefeed>`a
+nmap S mar<LINEFEED>`a
 " move the line
 nmap <A-j>	:m +1<CR><Space>
 nmap <A-k>	:m -2<CR><Space>
@@ -62,19 +58,20 @@ imap <A-j>	<ESC>:m +1<CR>i
 imap <A-k>	<ESC>:m -2<CR>i
 imap jj <ESC>
 
-imap <A-(> ()<left>
-imap <A-[> []<left>
-imap <A-{> {}<left>
-imap <A-"> ""<left>
-imap <A-<> <><left>
+imap <A-(> ()<LEFT>
+imap <A-[> []<LEFT>
+imap <A-{> {}<LEFT>
+imap <A-"> ""<LEFT>
+imap <A-<> <><LEFT>
 imap <C-l> @q
+
+" tMaps
+tnoremap <ESC> <C-\><C-n>
+
 
 " Commands
 command Vmod :tabe ~/.vimrc
 command Tmod :tabe ~/.zshrc
-" delete <tag>, retab children
-" not working :(
-command HtmlDelTab normal! lv%<mk%dd`kdd
 
 " typos
 iab hepl help
@@ -93,9 +90,3 @@ color gruvbox
 "AirlineTheme desertink
 
 au BufWinEnter * ++once AirlineTheme desertink
-
-
-" open files from netrw in a previous window, unless we're opening the current dir
-command Tree let g:netrw_browse_split=4
-command Select let g:netrw_browse_split=0
-
