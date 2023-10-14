@@ -123,7 +123,11 @@ TIMEFMT=$'\n================\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E'
 # bun completions
 [ -s "/home/ow/.bun/_bun" ] && source "/home/ow/.bun/_bun"
 
+# TODO: -Wpedantic -Wextra to ccom
+# cc -O3 -o ${file%.c} -Wextra -Wall -Werror -Wpedantic $file
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+#TODO: add ~/code/*/bin to PATH:%

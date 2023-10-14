@@ -65,8 +65,8 @@ nvim -u ~/.vimrc --headless +"PlugInstall" +"qa" &> /dev/null &
 jbs="$jbs $!"
 
 cp ./screenrc ~/.screenrc
-cp ./zshrc ~/.zshrc
-
+# bash good :)
+cp ./bashrc ~/.shrc.sh
 
 # clone or update github repo
 cloneat() {
