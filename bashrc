@@ -35,7 +35,7 @@ screenat() {
 	fi
 }
 
-alias old="screenat $HOME/done/nosso-grupo/PiaCheia/servidor/"
+alias old="screenat $HOME/code/nosso-grupo/PiaCheia/servidor/"
 alias clock="screenat $HOME/working/clock/"
 alias bot="screenat $HOME/working/go-wabot"
 
@@ -46,7 +46,7 @@ alias gp="git push"
 alias gu="git fetch --prune"
 alias gd="git diff"
 
-#alias todos="$HOME/done/devaps/bin/todos"
+#alias todos="$HOME/code/devaps/bin/todos"
 alias nc="echo -ne '\x1b[38;2;255;255;255m'"
 alias red="echo -ne '\x1b[38;2;255;100;100m'"
 alias green="echo -ne '\x1b[38;2;0;255;0m'"
@@ -55,15 +55,19 @@ alias er='echo -ne $?'
 PROMPT_COMMAND=prompt_command # Function to generate PS1 after CMDs
 prompt_command() {
 	e=$?
-	if [[ $e = '0' ]]
-	then
-		echo -e "$($HOME/code/devaps/bin/spwd) $($HOME/code/devaps/bin/gs)"
-	else
-		echo -e "$($HOME/code/devaps/bin/spwd) $($HOME/code/devaps/bin/gs) [$(red)$e$(nc)]"
+	PS="$($HOME/code/devaps/bin/spwd)"
+
+	if [[ $e != '0' ]] ; then
+		PS="${PS} [$(red)$e$(nc)]"
 	fi
+
+	if [ -f ./.git ] ; then
+		PS="${PS} $($HOME/code/devaps/bin/gs)"
+	fi
+	echo $PS
 }
 export PS1="λ"
-PS0='\[${PS1:$((PS0time=\D{%s}, PS1calc=1, 0)):0}\]'
+export PS0=""
 
 
 export GOPATH=$HOME
@@ -79,30 +83,33 @@ export EDITOR="nvim"
 ccom() {
 	file=$1
 	out=$2
-	flags=$3
+	flags="$3 "
+	defaultflags="-O3 -Wall -Wextra -Werror -Wpedantic -Wno-error=pedantic -std=c2x"
 
-	if [ "$flags" = "gdb" ] || [ "$flags" = "debug" ]
-	then
-		flags="-g3"
+	if ! [[ "$file" =~ '^.*\.c$' ]] ; then
+		file="$file.c"
 	fi
 
-	if [ "$out" = "" ]
-	then
+	first=$(echo "$flags" | cut -f -1 -d ' ')
+	if [[ $first = "-cus" ]] ; then
+		flags=$(echo "$flags" | cut -f 2- -d ' ')
+		defaultflags=""
+	fi
+
+	if [ "$out" = "" ] ; then
 		out=${file%.c}
 	fi
 
 	t1=$(date +%s.%N)
 
-	if [ -f "./.build" ]
-	then
+	if [ -f "./.build" ] ; then
 		bcmd=$(cat .build)
 		eval "$bcmd"
 	else
-		cc -O3 -o $out -Wextra -Wall -Werror -Wpedantic $file $flags
+		cc -o $out $defaultflags $flags $file
 	fi
 
-	if [ $? = 0 ]
-	then
+	if [ $? = 0 ] ; then
 		t2=$(date +%s.%N)
 		elapsed=$(python -c "
 e = ($t2-$t1)
@@ -115,10 +122,13 @@ else:
 }
 
 # bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+if [ -f "$HOME/.bun" ]
+then
+	[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+	# bun
+	export BUN_INSTALL="$HOME/.bun"
+	export PATH="$BUN_INSTALL/bin:$PATH"
+fi
 
 #TODO: add $HOME/code/*/bin to PATH:%
