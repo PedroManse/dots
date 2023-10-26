@@ -61,10 +61,11 @@ prompt_command() {
 		PS="${PS} [$(red)$e$(nc)]"
 	fi
 
-	if [ -f ./.git ] ; then
+	if [ -d ./.git ] ; then
 		PS="${PS} $($HOME/code/devaps/bin/gs)"
 	fi
-	echo $PS
+
+	echo -e $PS
 }
 export PS1="λ"
 export PS0=""
