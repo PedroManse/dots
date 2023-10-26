@@ -1,6 +1,6 @@
 #! /bin/bash
 
-set -xe
+set -x
 jbs=""
 
 for arg in "$@"; do

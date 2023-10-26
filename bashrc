@@ -52,6 +52,14 @@ alias red="echo -ne '\x1b[38;2;255;100;100m'"
 alias green="echo -ne '\x1b[38;2;0;255;0m'"
 alias er='echo -ne $?'
 
+if [[ $COMPUTER_NAME == "" ]] ; then
+	if [ -f /etc/hostname ] ; then
+		COMPUTER_NAME=$(cat /etc/hostname)
+	else
+		COMPUTER_NAME="unnamed computer"
+	fi
+fi
+
 PROMPT_COMMAND=prompt_command # Function to generate PS1 after CMDs
 prompt_command() {
 	e=$?
@@ -64,6 +72,9 @@ prompt_command() {
 	if [ -d ./.git ] ; then
 		PS="${PS} $($HOME/code/devaps/bin/gs)"
 	fi
+
+
+	PS="${PS} @ $COMPUTER_NAME"
 
 	echo -e $PS
 }
@@ -123,13 +134,18 @@ else:
 }
 
 # bun completions
-if [ -f "$HOME/.bun" ]
-then
-	[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+if [ -d "$HOME/.bun" ] ; then
+	# [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 	# bun
 	export BUN_INSTALL="$HOME/.bun"
 	export PATH="$BUN_INSTALL/bin:$PATH"
 fi
 
-#TODO: add $HOME/code/*/bin to PATH:%
+if [ -d "$HOME/code/devaps" ] ; then
+	export PATH="$HOME/code/devaps/bin:$PATH"
+fi
+
+if [ -d "$HOME/.zig" ] ; then
+	export PATH="$HOME/.zig:$PATH"
+fi
