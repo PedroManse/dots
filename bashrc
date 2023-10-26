@@ -73,8 +73,9 @@ prompt_command() {
 		PS="${PS} $($HOME/code/devaps/bin/gs)"
 	fi
 
-
-	PS="${PS} @ $COMPUTER_NAME"
+	if [[ $COMPUTER_NAME != "-" ]] ; then
+		PS="$COMPUTER_NAME: ${PS}"
+	fi
 
 	echo -e $PS
 }
