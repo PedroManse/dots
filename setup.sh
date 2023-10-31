@@ -51,7 +51,7 @@ function setup_install() {
 
 setup_install
 
-install neovim unzip golang-go bat
+install neovim unzip golang-go bat exa
 
 # get bun
 curl -fsSL https://bun.sh/install | bash &> /dev/null &
