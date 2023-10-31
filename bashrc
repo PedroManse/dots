@@ -134,6 +134,28 @@ else:
 	fi
 }
 
+cloneat() {
+	repo=$1
+	author=$2
+	todir=$3
+	if [[ -d $todir ]]; then
+		back=$(pwd)
+		git pull
+		cd $back
+		return
+	fi
+
+	if [[ $todir = "" ]]; then
+		todir=$repo
+	fi
+
+	if [[ $author = "" ]]; then
+		author="pedromanse"
+	fi
+
+	git clone "https://github.com/$author/$repo" "$todir"
+}
+
 # bun completions
 if [ -d "$HOME/.bun" ] ; then
 	# [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
