@@ -22,8 +22,8 @@ default workdir ~/code
 default asroot "sudo"
 
 function setup_install() {
-	if ! command -v sudo &> /dev/null; then
-		echo "could not find program 'sudo'"
+	if ! command -v $asroot &> /dev/null; then
+		echo "could not find program '$asroot'"
 		exit 1
 	fi
 
@@ -51,7 +51,7 @@ function setup_install() {
 
 setup_install
 
-install neovim unzip golang-go bat exa
+install neovim unzip golang-go bat exa curl
 
 # get bun
 curl -fsSL https://bun.sh/install | bash &> /dev/null &
