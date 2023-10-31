@@ -1,6 +1,11 @@
 #! /bin/bash
+set -xe
 
-set -x
+# go to folder
+back=$(pwd)
+cd $(dirname "$(realpath $0)")
+echo $dirname
+
 jbs=""
 
 for arg in "$@"; do
@@ -78,6 +83,9 @@ cloneat() {
 		git pull
 		cd $back
 		return
+	else
+		echo "no such directory $todir"
+		exit 1
 	fi
 
 	if [[ $todir = "" ]]; then
@@ -99,3 +107,4 @@ for pid in $jbs; do
 	wait $pid
 done
 
+cd $back
