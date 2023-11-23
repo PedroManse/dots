@@ -62,7 +62,6 @@ imap <A-[> []<LEFT>
 imap <A-{> {}<LEFT>
 imap <A-"> ""<LEFT>
 imap <A-<> <><LEFT>
-imap <C-l> @q
 
 " tMaps
 tnoremap <ESC> <C-\><C-n>
@@ -70,7 +69,7 @@ tnoremap <ESC> <C-\><C-n>
 
 " Commands
 command Vmod :tabe ~/.vimrc
-command Tmod :tabe ~/.zshrc
+command Tmod :tabe ~/.shrc.sh
 
 " typos
 iab hepl help

@@ -1,6 +1,5 @@
 #! /bin/sh
 
-
 alias nvim="/bin/nvim -n -u $HOME/.vimrc"
 alias svi="sudo /bin/nvim -u $HOME/.vimrc"
 alias tmod="nvim $HOME/.shrc.sh; source $HOME/.shrc.sh"
@@ -47,8 +46,13 @@ alias gu="git fetch --prune"
 alias gd="git diff"
 
 #alias todos="$HOME/code/devaps/bin/todos"
+alias reset="echo -ne '\x1b[0m'"
 alias nc="echo -ne '\x1b[38;2;255;255;255m'"
-alias red="echo -ne '\x1b[38;2;255;100;100m'"
+alias red="echo -ne '\x1b[31m'"
+alias bold="echo -ne '\x1b[1m'"
+alias underline="echo -ne '\x1b[4m'"
+alias blink="echo -ne '\x1b[5m'"
+alias reverse="echo -ne '\x1b[7m'"
 alias green="echo -ne '\x1b[38;2;0;255;0m'"
 alias er='echo -ne $?'
 
@@ -66,7 +70,7 @@ prompt_command() {
 	PS="$($HOME/code/devaps/bin/spwd)"
 
 	if [[ $e != '0' ]] ; then
-		PS="${PS} [$(red)$e$(nc)]"
+		PS="${PS} [$(bold)$(underline)$(reverse)$(red)$e$(reset)]"
 	fi
 
 	if [ -d ./.git ] ; then
@@ -172,3 +176,16 @@ fi
 if [ -d "$HOME/.zig" ] ; then
 	export PATH="$HOME/.zig:$PATH"
 fi
+
+alias accs="echo 'SELECT printf(\"%014d | %s: %s\", id, name, case when isAdmin=1 then \"Admin\" else \"User\" end) FROM accounts;' | sqlite3 $HOME/timecard/accounts.db"
+alias tmrs="echo '
+SELECT printf(
+	\"%s:%s since %s\",
+	(SELECT name FROM accounts WHERE accounts.id=timers.id),
+	taskid,
+	strftime(
+		\"%d-%m-%Y %H:%m:%S\",
+		DATETIME(timers.since, \"unixepoch\", \"-3 hours\")
+	)
+)
+	FROM timers;' | sqlite3 $HOME/timecard/accounts.db"
