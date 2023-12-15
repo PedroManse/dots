@@ -73,7 +73,8 @@ prompt_command() {
 		PS="${PS} [$(bold)$(underline)$(reverse)$(red)$e$(reset)]"
 	fi
 
-	if [ -d ./.git ] ; then
+	git rev-parse --is-inside-work-tree > /dev/null 2> /dev/null
+	if [ $? = 0 ] ; then
 		PS="${PS} $($HOME/code/devaps/bin/gs)"
 	fi
 
@@ -103,14 +104,8 @@ ccom() {
 	flags="$3 "
 	defaultflags="-O3 -Wall -Wextra -Werror -Wpedantic -Wno-error=pedantic -std=c2x"
 
-	if ! [[ "$file" =~ '^.*\.c$' ]] ; then
+	if ! [[ "$file" =~ ^.*\.c$ ]] ; then
 		file="$file.c"
-	fi
-
-	first=$(echo "$flags" | cut -f -1 -d ' ')
-	if [[ $first = "-cus" ]] ; then
-		flags=$(echo "$flags" | cut -f 2- -d ' ')
-		defaultflags=""
 	fi
 
 	if [ "$out" = "" ] ; then
