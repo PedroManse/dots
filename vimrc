@@ -7,6 +7,7 @@ call plug#begin()
 	Plug 'tmhedberg/matchit'
 	Plug 'frazrepo/vim-rainbow'
 	Plug 'airblade/vim-gitgutter'
+	Plug 'mattn/emmet-vim'
 call plug#end()
 
 " rgb {[()]}
@@ -19,11 +20,13 @@ let g:netrw_liststyle=3
 autocmd FileType c nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType javascript nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType css nnoremap <buffer> ; msA;<ESC>`s
-autocmd FileType go nnoremap <buffer> ; :
+autocmd FileType sql nnoremap <buffer> ; msA;<ESC>`s
+autocmd FileType go nnoremap <buffer> ; msA,<ESC>`s
 
 autocmd BufWritePost * GitGutterBufferEnable
 
 " Sets
+let g:user_emmet_leader_key=','
 set tabstop=2
 set shiftwidth=2
 set noexpandtab
@@ -88,3 +91,5 @@ color gruvbox
 "AirlineTheme desertink
 
 au BufWinEnter * ++once AirlineTheme desertink
+au BufWinEnter * ++once RainbowLoad
+au BufWinEnter * ++once syntax enable
