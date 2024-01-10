@@ -64,7 +64,7 @@ setup_install
 apps="neovim unzip golang-go bat exa curl"
 for app in $apps ; do
 	if [[ ! $(dpkg -s $app) ]] ; then
-		read -p "download $app? [y/N]>" -n 1 usi
+		read -e -p "download $app? [y/N]>" -n 1 usi
 		if [[ $usi == "y" ]] ; then
 			install $app
 		fi
@@ -72,7 +72,7 @@ for app in $apps ; do
 done
 
 # get bun
-read -p "download bun? [y/N]>" -n 1 usi
+read -e -p "download bun? [y/N]>" -n 1 usi
 if [[ $usi == "y" ]] ; then
 	curl -fsSL https://bun.sh/install | bash &> /dev/null &
 	jbs="$jbs $!"
@@ -88,9 +88,9 @@ ln -sf "$(pwd)/vimrc" ~/.vimrc
 echo "setup .screenrc symlink"
 ln -sf "$(pwd)/screenrc" ~/.screenrc
 echo "setup .bashrc symlink"
-ln -sf "$(pwd)/bachrd" ~/.shrc.sh
+ln -sf "$(pwd)/bashrc" ~/.shrc.sh
 
-read -p "download vim-plug plugins? [y/N]>" -n 1 usi
+read -e -p "download vim-plug plugins? [y/N]>" -n 1 usi
 if [[ $usi == "y" ]] ; then
 	# download plugins
 	nvim -u ~/.vimrc --headless +"PlugInstall" +"qa" &> /dev/null &
@@ -124,7 +124,7 @@ cloneat() {
 	jbs="$jbs $!"
 }
 
-read -p "download github.com/owseiwastaken/devaps? [y/N]>" -n 1 usi
+read -e -p "download github.com/owseiwastaken/devaps? [y/N]>" -n 1 usi
 if [[ $usi == "y" ]] ; then
 	echo "cloning to $workdir/devaps"
 	cloneat devaps owseiwastaken "$workdir/devaps"
