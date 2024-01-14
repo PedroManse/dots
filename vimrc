@@ -18,6 +18,7 @@ let g:netrw_liststyle=3
 
 " ; at $
 autocmd FileType c nnoremap <buffer> ; msA;<ESC>`s
+autocmd FileType cpp nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType javascript nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType css nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType sql nnoremap <buffer> ; msA;<ESC>`s
@@ -25,8 +26,12 @@ autocmd FileType go nnoremap <buffer> ; msA,<ESC>`s
 
 autocmd BufWritePost * GitGutterBufferEnable
 
-" Sets
+" emmet
 let g:user_emmet_leader_key=','
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
+" Sets
 set tabstop=2
 set shiftwidth=2
 set noexpandtab
@@ -65,6 +70,7 @@ imap <A-[> []<LEFT>
 imap <A-{> {}<LEFT>
 imap <A-"> ""<LEFT>
 imap <A-<> <><LEFT>
+imap <C-l> @q
 
 " tMaps
 tnoremap <ESC> <C-\><C-n>
@@ -86,10 +92,19 @@ iab jsf function
 iab vsqrt √
 iab vlambda λ
 
-" Fancy colors
-color gruvbox
-"AirlineTheme desertink
-
-au BufWinEnter * ++once AirlineTheme desertink
-au BufWinEnter * ++once RainbowLoad
 au BufWinEnter * ++once syntax enable
+au BufWinEnter * ++once RainbowLoad
+
+" Fancy colors
+if $INTTY == "true"
+	" "in a tty"
+	colorscheme peachpuff
+	autocmd BufWritePost * GitGutterBufferDisable
+	au BufWinEnter * ++once AirlineTheme base16_bespin
+else
+	" "in pts"
+	colorscheme gruvbox
+	autocmd BufWritePost * GitGutterBufferEnable
+	au BufWinEnter * ++once AirlineTheme desertink
+endif
+
