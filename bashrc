@@ -45,15 +45,14 @@ alias gp="git push"
 alias gu="git fetch --prune"
 alias gd="git diff"
 
-#alias todos="$HOME/code/devaps/bin/todos"
-alias reset="echo -ne '\x1b[0m'"
-alias nc="echo -ne '\x1b[38;2;255;255;255m'"
-alias red="echo -ne '\x1b[31m'"
-alias bold="echo -ne '\x1b[1m'"
-alias underline="echo -ne '\x1b[4m'"
-alias blink="echo -ne '\x1b[5m'"
-alias reverse="echo -ne '\x1b[7m'"
-alias green="echo -ne '\x1b[38;2;0;255;0m'"
+alias col_reset="echo -ne '\x1b[0m'"
+alias col_nc="echo -ne '\x1b[38;2;255;255;255m'"
+alias col_red="echo -ne '\x1b[31m'"
+alias col_bold="echo -ne '\x1b[1m'"
+alias col_underline="echo -ne '\x1b[4m'"
+alias col_blink="echo -ne '\x1b[5m'"
+alias col_reverse="echo -ne '\x1b[7m'"
+alias col_green="echo -ne '\x1b[38;2;0;255;0m'"
 alias er='echo -ne $?'
 
 if [[ $COMPUTER_NAME == "" ]] ; then
@@ -70,7 +69,7 @@ prompt_command() {
 	PS="$($HOME/code/devaps/bin/spwd)"
 
 	if [[ $e != '0' ]] ; then
-		PS="${PS} [$(bold)$(underline)$(reverse)$(red)$e$(reset)]"
+		PS="${PS} [$(col_bold)$(col_underline)$(col_reverse)$(col_red)$e$(col_reset)]"
 	fi
 
 	git rev-parse --is-inside-work-tree > /dev/null 2> /dev/null
@@ -129,7 +128,7 @@ if e > 1:
 	print(f'{round(e, 3)}s')
 else:
 	print(f'{int(e*1000)}ms')")
-		echo "Compiled $file -> $(green)*$out$(nc) in ${elapsed}"
+		echo "Compiled $file -> $(col_green)*$out$(col_reset) in ${elapsed}"
 	fi
 }
 
@@ -172,15 +171,34 @@ if [ -d "$HOME/.zig" ] ; then
 	export PATH="$HOME/.zig:$PATH"
 fi
 
-alias accs="echo 'SELECT printf(\"%014d | %s: %s\", id, name, case when isAdmin=1 then \"Admin\" else \"User\" end) FROM accounts;' | sqlite3 $HOME/timecard/accounts.db"
-alias tmrs="echo '
-SELECT printf(
-	\"%s:%s since %s\",
-	(SELECT name FROM accounts WHERE accounts.id=timers.id),
-	taskid,
-	strftime(
-		\"%d-%m-%Y %H:%m:%S\",
-		DATETIME(timers.since, \"unixepoch\", \"-3 hours\")
-	)
-)
-	FROM timers;' | sqlite3 $HOME/timecard/accounts.db"
+export TTY=$(tty)
+if [[ "$TTY" =~ .*tty.* ]] ; then
+	export INTTY="true"
+else
+	export INTTY=""
+fi
+
+function blt() {
+	dvc=$1
+	case $dvc in
+		30|q30|Q30)
+			dvc="E8:EE:CC:6F:35:FE"
+		;;
+		uwu)
+			dvc="5D:E2:D1:57:82:0A"
+		;;
+		bug)
+			dvc="9C:19:C2:16:86:55"
+			;;
+	esac
+	act=$2
+	case $act in
+		"on")
+			echo "connect $dvc" | bluetoothctl
+		;;
+		"off")
+			echo "disconnect $dvc" | bluetoothctl
+		;;
+	esac
+}
+
