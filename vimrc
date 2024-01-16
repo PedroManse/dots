@@ -24,6 +24,7 @@ autocmd FileType javascript nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType css nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType sql nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType go nnoremap <buffer> ; msA,<ESC>`s
+autocmd BufWinEnter *.gohtml setfiletype html
 
 autocmd BufWritePost * GitGutterBufferEnable
 
