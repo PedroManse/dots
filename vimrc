@@ -8,6 +8,7 @@ call plug#begin()
 	Plug 'frazrepo/vim-rainbow'
 	Plug 'airblade/vim-gitgutter'
 	Plug 'mattn/emmet-vim'
+	Plug 'mbbill/undotree'
 call plug#end()
 
 " rgb {[()]}
@@ -55,6 +56,7 @@ nmap S mar<LINEFEED>`a
 nmap <A-j>	:m +1<CR><Space>
 nmap <A-k>	:m -2<CR><Space>
 nmap <C-l> @q
+nmap U :UndotreeToggle<CR><C-w><left><C-w><up>
 
 " iMaps
 " move the screen
