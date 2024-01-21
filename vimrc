@@ -14,6 +14,9 @@ call plug#end()
 " rgb {[()]}
 let g:rainbow_active = 1
 
+let netrw_banner=0
+let netrw_browse_split=3
+
 " tree
 let g:netrw_liststyle=3
 
@@ -57,7 +60,9 @@ nmap S mar<LINEFEED>`a
 nmap <A-j>	:m +1<CR><Space>
 nmap <A-k>	:m -2<CR><Space>
 nmap <C-l> @q
-nmap U :UndotreeToggle<CR><C-w><left><C-w><up>
+nmap U :UndotreeToggle<CR>:UndotreeFocus<CR>
+nmap - :tabclose<CR> :tabfirst<CR>
+nmap + :tabfirst<CR>
 
 " iMaps
 " move the screen
