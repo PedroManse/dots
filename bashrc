@@ -66,7 +66,7 @@ fi
 PROMPT_COMMAND=prompt_command # Function to generate PS1 after CMDs
 prompt_command() {
 	e=$?
-	PS="$($HOME/code/devaps/bin/spwd)"
+	PS="$($HOME/code/devaps/bin/fpwd)"
 
 	if [[ $e != '0' ]] ; then
 		PS="${PS} [$(col_bold)$(col_underline)$(col_reverse)$(col_red)$e$(col_reset)]"
