@@ -172,11 +172,16 @@ if [ -d "$HOME/.zig" ] ; then
 fi
 
 export TTY=$(tty)
-if [[ "$TTY" =~ .*tty.* ]] ; then
-	export INTTY="true"
+if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]] ; then
+	export INWSL="true"
 else
-	export INTTY=""
+	if [[ "$TTY" =~ .*tty.* ]] ; then
+		export INTTY="true"
+	else
+		export INTTY=""
+	fi
 fi
+
 
 function blt() {
 	dvc=$1
