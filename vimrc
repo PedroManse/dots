@@ -26,8 +26,9 @@ autocmd FileType cpp nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType javascript nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType css nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType sql nnoremap <buffer> ; msA;<ESC>`s
+autocmd FileType rust nnoremap <buffer> ; msA;<ESC>`s
+
 autocmd FileType go nnoremap <buffer> ; msA,<ESC>`s
-autocmd FileType rust nnoremap <buffer> ; msA,<ESC>`s
 autocmd BufWinEnter *.gohtml setfiletype html
 
 autocmd BufWritePost * GitGutterBufferEnable
@@ -62,7 +63,6 @@ nmap <A-j>	:m +1<CR><Space>
 nmap <A-k>	:m -2<CR><Space>
 nmap <C-l> @q
 nmap U :UndotreeToggle<CR>:UndotreeFocus<CR>
-nmap - :tabclose<CR> :tabfirst<CR>
 nmap + :tabfirst<CR>
 
 " iMaps
@@ -101,6 +101,9 @@ iab jsf function
 iab vsqrt √
 iab vlambda λ
 
+au BufWinEnter * :set tabstop=2
+au BufWinEnter * :set shiftwidth=2
+au BufWinEnter * :set noexpandtab
 au BufWinEnter * ++once syntax enable
 au BufWinEnter * ++once RainbowLoad
 au TermEnter * ++once syntax enable
