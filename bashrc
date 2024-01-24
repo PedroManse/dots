@@ -97,6 +97,32 @@ export TERM=xterm-256color
 
 export EDITOR="nvim"
 
+rcom() {
+	file=$1
+	out=$2
+
+	if ! [[ "$file" =~ ^.*\.rs$ ]] ; then
+		file="$file.rs"
+	fi
+
+	if [ "$out" = "" ] ; then
+		out=${file%.rs}
+	fi
+
+	t1=$(date +%s.%N)
+	rustc -v -C opt-level=2 -C prefer-dynamic $file -o $out
+	if [ $? = 0 ] ; then
+		t2=$(date +%s.%N)
+		elapsed=$(python -c "
+e = ($t2-$t1)
+if e > 1:
+	print(f'{round(e, 3)}s')
+else:
+	print(f'{int(e*1000)}ms')")
+		echo "Compiled $file -> $(col_green)*$out$(col_reset) in ${elapsed}"
+	fi
+}
+
 ccom() {
 	file=$1
 	out=$2
