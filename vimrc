@@ -79,7 +79,7 @@ imap <A-[> []<LEFT>
 imap <A-{> {}<LEFT>
 imap <A-"> ""<LEFT>
 imap <A-<> <><LEFT>
-imap <C-l> @q
+imap <C-l> <ESC>@q
 
 " tMaps
 tnoremap <ESC> <C-\><C-n>
