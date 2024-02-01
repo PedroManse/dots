@@ -107,7 +107,6 @@ au BufWinEnter * :set noexpandtab
 au BufWinEnter * ++once syntax enable
 au BufWinEnter * ++once RainbowLoad
 au TermEnter * ++once syntax enable
-au TermEnter * ++once RainbowLoad
 
 " Fancy colors
 if $INTTY == "true"
