@@ -197,6 +197,10 @@ if [ -d "$HOME/.zig" ] ; then
 	export PATH="$HOME/.zig:$PATH"
 fi
 
+if [ -d "$HOME/.cargo" ] ; then
+	export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
 export TTY=$(tty)
 if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]] ; then
 	export INWSL="true"
