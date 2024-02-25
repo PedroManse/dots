@@ -99,6 +99,9 @@ iab cosnt const
 
 " abbreviation
 iab jsf function
+iab jaf async function
+iab eaf export async function
+iab jef export function
 iab udef undefined
 iab vsqrt √
 iab vlambda λ
