@@ -24,6 +24,7 @@ let g:netrw_liststyle=3
 autocmd FileType c nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType cpp nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType javascript nnoremap <buffer> ; msA;<ESC>`s
+autocmd FileType typescript nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType css nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType sql nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType rust nnoremap <buffer> ; msA;<ESC>`s
@@ -98,6 +99,7 @@ iab cosnt const
 
 " abbreviation
 iab jsf function
+iab udef undefined
 iab vsqrt √
 iab vlambda λ
 

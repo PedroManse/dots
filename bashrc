@@ -251,3 +251,12 @@ function blt() {
 	esac
 }
 
+function frink() {
+	from=$1
+	to=$2
+	from=$('echo' $from | 'sed' "s/ /+/")
+	to=$('echo' $to | 'sed' "s/ /+/")
+	'curl' -s "http://frinklang.org/fsp/frink.fsp?fromVal=${from}&toVal=${to}" > /tmp/frink
+	'grep' "results" /tmp/frink | 'sed' "s/<A NAME=results>\\(.*\\)<\\/A>/\\1/"
+}
+
