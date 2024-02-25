@@ -21,13 +21,12 @@ let netrw_browse_split=3
 let g:netrw_liststyle=3
 
 " ; at $
-autocmd FileType c nnoremap <buffer> ; msA;<ESC>`s
-autocmd FileType cpp nnoremap <buffer> ; msA;<ESC>`s
-autocmd FileType javascript nnoremap <buffer> ; msA;<ESC>`s
-autocmd FileType typescript nnoremap <buffer> ; msA;<ESC>`s
-autocmd FileType css nnoremap <buffer> ; msA;<ESC>`s
-autocmd FileType sql nnoremap <buffer> ; msA;<ESC>`s
-autocmd FileType rust nnoremap <buffer> ; msA;<ESC>`s
+autocmd FileType c,cpp,javascript,typescript,sql,css,rust nnoremap <buffer> ; msA;<ESC>`s
+autocmd FileType typescript iab jsf function
+			\ iab jaf async function
+			\ | iab eaf export async function
+			\ | iab jef export function
+			\ | iab udef undefined
 
 autocmd FileType go nnoremap <buffer> ; msA,<ESC>`s
 autocmd BufWinEnter *.gohtml setfiletype html
@@ -98,11 +97,6 @@ iab coudl could
 iab cosnt const
 
 " abbreviation
-iab jsf function
-iab jaf async function
-iab eaf export async function
-iab jef export function
-iab udef undefined
 iab vsqrt √
 iab vlambda λ
 
