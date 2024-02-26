@@ -9,6 +9,7 @@ call plug#begin()
 	Plug 'airblade/vim-gitgutter'
 	Plug 'mattn/emmet-vim'
 	Plug 'mbbill/undotree'
+	Plug 'prisma/vim-prisma'
 call plug#end()
 
 " rgb {[()]}
