@@ -72,15 +72,19 @@ for app in $apps ; do
 done
 
 # get bun
-read -e -p "download bun? [y/N]>" -n 1 usi
-if [[ $usi == "y" ]] ; then
-	curl -fsSL https://bun.sh/install | bash &> /dev/null &
-	jbs="$jbs $!"
+if [[ ! $(command -v bun) ]] ; then
+	read -e -p "download bun? [y/N]>" -n 1 usi
+	if [[ $usi == "y" ]] ; then
+		curl -fsSL https://bun.sh/install | bash &> /dev/null &
+		jbs="$jbs $!"
+	fi
 fi
 
-# get vim-plug
-curl -fsSLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-echo "installed vim-plug"
+if [ ! -f ~/.local/share/nvim/site/autoload/plug.vim ] ; then
+	# get vim-plug
+	curl -fsSLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	echo "installed vim-plug"
+fi
 
 # setup config
 echo "setup .vimrc symlink"
@@ -124,10 +128,12 @@ cloneat() {
 	jbs="$jbs $!"
 }
 
-read -e -p "download github.com/owseiwastaken/devaps? [y/N]>" -n 1 usi
-if [[ $usi == "y" ]] ; then
-	echo "cloning to $workdir/devaps"
-	cloneat devaps owseiwastaken "$workdir/devaps"
+if [ ! -d $workdir/devaps ] ; then
+	read -e -p "download github.com/owseiwastaken/devaps? [y/N]>" -n 1 usi
+	if [[ $usi == "y" ]] ; then
+		echo "cloning to $workdir/devaps"
+		cloneat devaps owseiwastaken "$workdir/devaps"
+	fi
 fi
 
 for pid in $jbs; do
