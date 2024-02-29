@@ -9,6 +9,7 @@ call plug#begin()
 	Plug 'airblade/vim-gitgutter'
 	Plug 'mattn/emmet-vim'
 	Plug 'mbbill/undotree'
+	Plug 'jnurmine/Zenburn'
 call plug#end()
 
 " rgb {[()]}
@@ -116,8 +117,15 @@ if $INTTY == "true"
 	au BufWinEnter * ++once AirlineTheme base16_bespin
 else
 	" "in pts"
-	colorscheme gruvbox
 	autocmd BufWritePost * GitGutterBufferEnable
-	au BufWinEnter * ++once AirlineTheme desertink
+	if $ZEN == "true"
+		let g:zenburn_transparent = 1
+		colorscheme zenburn
+		au BufWinEnter * ++once AirlineTheme zenburn
+	else
+		colorscheme gruvbox
+		"au BufWinEnter * ++once AirlineTheme desertink
+		au BufWinEnter * ++once AirlineTheme gruvbox
+	endif
 endif
 
