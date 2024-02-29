@@ -63,7 +63,7 @@ setup_install
 
 apps="neovim unzip golang-go bat exa curl"
 for app in $apps ; do
-	if [[ ! $(dpkg -s $app) ]] ; then
+	if [[ $(command -v $app) || $(dpkg -s $app 2> /dev/null) ]] ; then : ; else
 		read -e -p "download $app? [y/N]>" -n 1 usi
 		if [[ $usi == "y" ]] ; then
 			install $app
