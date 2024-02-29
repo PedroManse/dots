@@ -61,7 +61,9 @@ function setup_install() {
 
 setup_install
 
-apps="neovim unzip golang-go bat exa curl"
+#TODO use rustup and cargo to install bat and eza
+
+apps="neovim unzip golang-go exa curl"
 for app in $apps ; do
 	if [[ $(command -v $app) || $(dpkg -s $app 2> /dev/null) ]] ; then : ; else
 		read -e -p "download $app? [y/N]>" -n 1 usi

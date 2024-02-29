@@ -6,7 +6,6 @@ alias tmod="nvim $HOME/.shrc.sh; source $HOME/.shrc.sh"
 alias ref="source $HOME/.shrc.sh"
 alias vmod="nvim $HOME/.vimrc"
 alias ls="/bin/exa"
-alias bat="batcat"
 alias ..="cd .."
 alias ...="cd ../.."
 alias _="nvim $HOME/_"
@@ -20,8 +19,9 @@ do
 done"
 
 export ZEN="true"
+export BAT_THEME="zenburn"
 
-#alias node="screen -R"
+a#lias node="screen -R"
 alias grep="grep --color=always -rn"
 screenat() {
 	back=$(pwd)
