@@ -19,6 +19,7 @@ do
 	kill \$i
 done"
 
+export ZEN="true"
 
 #alias node="screen -R"
 alias grep="grep --color=always -rn"
@@ -211,7 +212,6 @@ else
 		export INTTY=""
 	fi
 fi
-
 
 function blt() {
 	dvc=$1
