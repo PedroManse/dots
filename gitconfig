@@ -1,0 +1,38 @@
+[save]
+	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/
+	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/(
+	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/*
+	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/clone
+	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/clone/crm
+	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/clones/crm
+	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/clones/crm/
+[safe]
+	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/clones/crm
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[user]
+	name = Pedro Manse
+	email = pedro.manse@dmk3.com.br
+
+[core]
+	editor = nvim
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true    # use n and N to move between diff sections
+	light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+	line-numbers = true
+	side-by-side = true
+	features = unobtrusive-line-numbers decorations
+	diff-highligh = true
+	syntax-theme = zenburn
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = false

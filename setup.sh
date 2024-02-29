@@ -93,12 +93,15 @@ echo "setup .screenrc symlink"
 ln -sf "$(pwd)/screenrc" ~/.screenrc
 echo "setup .bashrc symlink"
 ln -sf "$(pwd)/bashrc" ~/.shrc.sh
+echo "setup .gitconfig symlink"
+ln -sf "$(pwd)/gitconfig" ~/.gitconfig
 
 read -e -p "download vim-plug plugins? [y/N]>" -n 1 usi
 if [[ $usi == "y" ]] ; then
 	# download plugins
-	nvim -u ~/.vimrc --headless +"PlugInstall" +"qa" &> /dev/null &
-	jbs="$jbs $!"
+	nvim -u ~/.vimrc --headless +"PlugUpgrade" +"qa" &> /dev/null
+	nvim -u ~/.vimrc --headless +"PlugUpdate" +"qa" &> /dev/null
+	nvim -u ~/.vimrc --headless +"PlugInstall" +"qa" &> /dev/null
 fi
 
 # clone or update github repo
