@@ -25,10 +25,10 @@ let g:netrw_liststyle=3
 " ; at $
 autocmd FileType c,cpp,javascript,typescript,sql,css,rust nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType typescript iab jsf function
-			\ | iab jaf async function
-			\ | iab eaf export async function
-			\ | iab jef export function
-			\ | iab udef undefined
+			\|iab jaf async function
+			\|iab eaf export async function
+			\|iab jef export function
+			\|iab udef undefined
 
 autocmd FileType go nnoremap <buffer> ; msA,<ESC>`s
 autocmd BufWinEnter *.gohtml setfiletype html
