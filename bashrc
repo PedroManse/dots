@@ -82,6 +82,21 @@ prompt_command() {
 		PS="$COMPUTER_NAME: ${PS}"
 	fi
 
+	# TODO: integrate with fpwd
+	dirlist=$(dirs -p -l)
+	dircount=$(echo "$dirlist" | wc -w)
+	stack=$(($dircount-1))
+	comdirs=""
+	for i in $(seq 1 $stack); do
+		d='$'
+		d+="$i"
+		comdirs+=$(echo $dirlist | awk "{printf $d }")
+		comdirs+=" "
+	done
+	if [ ! "$comdirs" = '' ] ; then
+		PS="${PS} (${comdirs}\b)"
+	fi
+
 	echo -e $PS
 }
 export PS1="λ"
