@@ -21,7 +21,7 @@ done"
 export ZEN="true"
 export BAT_THEME="zenburn"
 
-a#lias node="screen -R"
+#lias node="screen -R"
 alias grep="grep --color=always -rn"
 screenat() {
 	back=$(pwd)
