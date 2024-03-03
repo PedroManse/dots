@@ -63,7 +63,7 @@ setup_install
 
 #TODO use rustup and cargo to install bat and eza
 
-apps="neovim unzip golang-go exa curl"
+apps="neovim unzip golang-go curl"
 for app in $apps ; do
 	if [[ $(command -v $app) || $(dpkg -s $app 2> /dev/null) ]] ; then : ; else
 		read -e -p "download $app? [y/N]>" -n 1 usi
@@ -72,6 +72,30 @@ for app in $apps ; do
 		fi
 	fi
 done
+
+if [ ! -d "$HOME/.cargo" ] ; then
+		read -e -p "download rustup? [y/N]>" -n 1 usi
+		if [[ $usi == "y" ]] ; then
+			curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+		fi
+fi
+
+if [ -d "$HOME/.cargo" ] ; then
+	if [ ! -f "$HOME/.cargo/bin/delta" ] ; then
+		cargo install git-delta
+	fi
+
+	cargoapps="eza bat btm"
+	for app in $cargoapps ; do
+		if [ -f "$HOME/.cargo/bin/$app" ] ; then : ; else
+			read -e -p "download $app? [y/N]>" -n 1 usi
+			if [[ $usi == "y" ]] ; then
+				cargo install $app
+			fi
+		fi
+	done
+fi
+
 
 # get bun
 if [[ ! $(command -v bun) ]] ; then
