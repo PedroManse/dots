@@ -55,6 +55,7 @@ nmap <SPACE> <ESC>:noh<CR>:<BS>
 " move the screen
 nmap <C-j> <C-e>
 nmap <C-k> <C-y>
+nmap <C-w>= :echo "screen equalization disabled"
 " move within line-wrap
 nmap j gj
 nmap k gk
