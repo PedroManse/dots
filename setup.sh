@@ -106,12 +106,6 @@ if [[ ! $(command -v bun) ]] ; then
 	fi
 fi
 
-if [ ! -f ~/.local/share/nvim/site/autoload/plug.vim ] ; then
-	# get vim-plug
-	curl -fsSLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	echo "installed vim-plug"
-fi
-
 # setup config
 echo "setup .vimrc symlink"
 ln -sf "$(pwd)/vimrc" ~/.vimrc
@@ -122,12 +116,20 @@ ln -sf "$(pwd)/bashrc" ~/.shrc.sh
 echo "setup .gitconfig symlink"
 ln -sf "$(pwd)/gitconfig" ~/.gitconfig
 
+if [ ! -f ~/.local/share/nvim/site/autoload/plug.vim ] ; then
+	# get vim-plug
+	curl -fsSLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	echo "installed vim-plug"
+fi
+
 read -e -p "download vim-plug plugins? [y/N]>" -n 1 usi
 if [[ $usi == "y" ]] ; then
-	# download plugins
-	nvim -u ~/.vimrc --headless +"PlugUpgrade" +"qa" &> /dev/null
-	nvim -u ~/.vimrc --headless +"PlugUpdate" +"qa" &> /dev/null
-	nvim -u ~/.vimrc --headless +"PlugInstall" +"qa" &> /dev/null
+	echo "upgrade plugin manager"
+	nvim -u "$(pwd)/vimrc" --headless +"PlugUpgrade" +"qa" &> /dev/null
+	echo "update plugins"
+	nvim -u "$(pwd)/vimrc" --headless +"PlugUpdate"  +"qa" &> /dev/null
+	echo "download plugins"
+	nvim -u "$(pwd)/vimrc" --headless +"PlugInstall" +"qa" &> /dev/null
 fi
 
 # clone or update github repo
