@@ -14,6 +14,7 @@ alias _="nvim $HOME/_"
 alias py10="/bin/python3.10"
 alias flog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
 alias sqli="sqlite3 --header --nullvalue '<{nil}>' --column"
+export PSQL_EDITOR="/bin/nvim -n -u $HOME/.vimrc"
 
 alias killJobs="for i in \$(jobs -p | sed 's/[-+]//' | awk '{print \$2}')
 do
