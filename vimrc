@@ -1,11 +1,11 @@
 " Plugins
 call plug#begin()
 	Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-	Plug 'morhetz/gruvbox'
+	"Plug 'morhetz/gruvbox'
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
-	Plug 'tmhedberg/matchit'
-	Plug 'frazrepo/vim-rainbow'
+	"Plug 'tmhedberg/matchit'
+	"Plug 'frazrepo/vim-rainbow'
 	Plug 'airblade/vim-gitgutter'
 	Plug 'mattn/emmet-vim'
 	Plug 'mbbill/undotree'
@@ -14,7 +14,7 @@ call plug#begin()
 call plug#end()
 
 " rgb {[()]}
-let g:rainbow_active = 1
+"let g:rainbow_active = 1
 
 let netrw_banner=0
 let netrw_browse_split=3
@@ -107,7 +107,7 @@ au BufWinEnter * :set tabstop=2
 au BufWinEnter * :set shiftwidth=2
 au BufWinEnter * :set noexpandtab
 au BufWinEnter * ++once syntax enable
-au BufWinEnter * ++once RainbowLoad
+"au BufWinEnter * ++once RainbowLoad
 au TermEnter * ++once syntax enable
 
 " Fancy colors
