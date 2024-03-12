@@ -90,7 +90,7 @@ prompt_command() {
 	dircount=$(echo "$dirlist" | wc -w)
 	stack=$(($dircount-1))
 	comdirs=""
-	for i in $(seq 1 $stack); do
+	for i in $(seq 2 $stack); do
 		d='$'
 		d+="$i"
 		comdirs+=$(echo $dirlist | awk "{printf $d }")
