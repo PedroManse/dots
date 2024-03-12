@@ -8,6 +8,7 @@
 	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/clones/crm/
 [safe]
 	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/clones/crm
+	directory = .
 [credential "https://github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
