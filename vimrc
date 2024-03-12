@@ -106,6 +106,7 @@ iab vlambda λ
 au BufWinEnter * :set tabstop=2
 au BufWinEnter * :set shiftwidth=2
 au BufWinEnter * :set noexpandtab
+au BufWinEnter *.yml :set expandtab
 au BufWinEnter * ++once syntax enable
 "au BufWinEnter * ++once RainbowLoad
 au TermEnter * ++once syntax enable
