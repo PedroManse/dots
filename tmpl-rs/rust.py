@@ -4,13 +4,13 @@ def CMD(cmd):
 	print(f"[CMD]: {cmd}")
 	exec(cmd)
 
-argv.pop(0)
+argv.pop(0) # path of script
 projname = argv.pop(0)
 crates: list[tuple[str, list[str]]] = []
 
 for arg in argv:
 	if arg.startswith('-'):
-		crates[-1][1].append(arg[1:])
+		crates[-1][1].append(arg[1:]) # if this failed; check if you named your project
 	else:
 		crates.append((arg, []))
 
