@@ -13,9 +13,6 @@ call plug#begin()
 	Plug 'prisma/vim-prisma'
 call plug#end()
 
-" rgb {[()]}
-"let g:rainbow_active = 1
-
 let netrw_banner=0
 let netrw_browse_split=3
 
