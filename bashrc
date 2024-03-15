@@ -262,3 +262,6 @@ function frink() {
 	'grep' "results" /tmp/frink | 'sed' "s/<A NAME=results>\\(.*\\)<\\/A>/\\1/"
 }
 
+if [ -f ~/.shenv.sh ] ; then
+	. ~/.shenv.sh
+fi
