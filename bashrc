@@ -62,7 +62,7 @@ alias er='echo -ne $?'
 export GOPATH=$HOME
 export TERM=xterm-256color
 export EDITOR="nvim"
-export VISUAL="less"
+export VISUAL="nvim"
 export PAGER="less"
 
 if [[ $COMPUTER_NAME == "" ]] ; then
