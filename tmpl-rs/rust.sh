@@ -1,3 +1,4 @@
-projname=$1
-#TODO: check for TMPL_RS env var
-python3 $HOME/Templates/tmpl-rs/rust.py $@
+if [ "$TMPLRS_DIR" = "" ] ; then
+	TMPLRS_DIR="$HOME/Templates/tmpl-rs"
+fi
+python3 "$TMPLRS_DIR/rust.py" $@
