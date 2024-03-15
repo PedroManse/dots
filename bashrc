@@ -59,6 +59,12 @@ alias col_blink="echo -ne '\x1b[5m'"
 alias col_reverse="echo -ne '\x1b[7m'"
 alias er='echo -ne $?'
 
+export GOPATH=$HOME
+export TERM=xterm-256color
+export EDITOR="nvim"
+export VISUAL="less"
+export PAGER="less"
+
 if [[ $COMPUTER_NAME == "" ]] ; then
 	if [ -f /etc/hostname ] ; then
 		COMPUTER_NAME=$(cat /etc/hostname)
@@ -66,6 +72,21 @@ if [[ $COMPUTER_NAME == "" ]] ; then
 		COMPUTER_NAME="unnamed computer"
 	fi
 fi
+
+export TTY=$(tty)
+if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]] ; then
+	export INWSL="true"
+	export BROWSER=wslview
+else
+	if [[ "$TTY" =~ .*tty.* ]] ; then
+		export INTTY="true"
+		export BROWSER=w3m
+	else
+		export INTTY=""
+		export BROWSER=firefox
+	fi
+fi
+
 
 PROMPT_COMMAND=prompt_command # Function to generate PS1 after CMDs
 prompt_command() {
@@ -104,17 +125,6 @@ prompt_command() {
 }
 export PS1="λ"
 export PS0=""
-
-
-export GOPATH=$HOME
-
-export BROWSER=wslview
-
-export SCREENDIR=$HOME/.screen
-[ -d $SCREENDIR ] || mkdir -p -m 700 $SCREENDIR
-export TERM=xterm-256color
-
-export EDITOR="nvim"
 
 rcom() {
 	file=$1
@@ -218,17 +228,6 @@ fi
 
 if [ -d "$HOME/.cargo" ] ; then
 	export PATH="$HOME/.cargo/bin:$PATH"
-fi
-
-export TTY=$(tty)
-if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]] ; then
-	export INWSL="true"
-else
-	if [[ "$TTY" =~ .*tty.* ]] ; then
-		export INTTY="true"
-	else
-		export INTTY=""
-	fi
 fi
 
 function blt() {
