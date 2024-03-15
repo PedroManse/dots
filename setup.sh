@@ -116,6 +116,21 @@ ln -sf "$(pwd)/bashrc" ~/.shrc.sh
 echo "setup .gitconfig symlink"
 ln -sf "$(pwd)/gitconfig" ~/.gitconfig
 
+read -e -p "link tmpl-rs files? [y/N]>" -n 1 usi
+if [[ $usi == "y" ]] ; then
+	if [ "$TMPL_RS" = "" ] ; then
+		#TODO: check with user for another dir
+		TMPL_RS="$HOME/Templates/tmpl-rs"
+		if [ ! -d $TMPL_RS ] ; then
+			mkdir -p $TMPL_RS
+		fi
+	fi
+
+	for file in $(ls "tmpl-rs") ; do
+		ln -sf "$(pwd)/tmpl-rs/$file" "$TMPL_RS/$file"
+	done
+fi
+
 if [ ! -f ~/.local/share/nvim/site/autoload/plug.vim ] ; then
 	# get vim-plug
 	curl -fsSLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
