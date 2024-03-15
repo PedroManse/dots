@@ -264,3 +264,46 @@ function frink() {
 if [ -f ~/.shenv.sh ] ; then
 	. ~/.shenv.sh
 fi
+
+function mail() {
+	if
+		[ -z "$EMAIL_SERVER" ] ||
+		[ -z "$EMAIL_SERVER_PORT" ] ||
+		[ -z "$EMAIL_NAME" ] ||
+		[ -z "$EMAIL_SENDER" ] ; then
+		echo "email service not set by dots/setup.sh"
+		echo "missing one or more of [ EMAIL_SERVER, \
+EMAIL_SERVER_PORT, EMAIL_NAME, EMAIL_SENDER ] env vars"
+		return 1
+	fi
+	local RESET=$(  printf "\x1b[0m")
+	local REVERSE=$(printf "\x1b[7m")
+	local YELW=$(printf '\x1b[1;93m')
+	local CYAN=$(printf '\x1b[1;96m')
+
+	if [ "$EMAIL_NOECHO" = "" ] ; then
+		prt=echo
+	else
+		prt=true
+	fi
+
+	export EMAIL_TO=$1
+	export EMAIL_SUBJ=$2
+	if [ "$EMAIL_SUBJ" = "" ] || [ "$EMAIL_TO" = "" ] ; then
+		$prt 'TO ($1) and SUBJ ($2) variables must be set'
+		return 1
+	fi
+
+	if [ "$TEXT" = "" ] ; then
+		$prt "you are logged in as <${CYAN}${EMAIL_SENDER}${RESET}>"
+		$prt "type your message to <${YELW}${EMAIL_TO}${RESET}>"
+		$prt -e "Press ${REVERSE}<C-d>${RESET} to send  ${REVERSE}<C-c>${RESET} to cancel\n"
+		export EMAIL_TEXT=$(cat /dev/stdin)
+		$prt ""
+	else
+		export EMAIL_TEXT=$TEXT
+	fi
+	read -s -e -p "<${CYAN}${EMAIL_SENDER}${RESET}> password: " EMAIl_PASSWORD
+
+	python3 "$DEVAPS/sendmail.py" > /dev/null
+}
