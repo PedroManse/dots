@@ -64,6 +64,9 @@ nmap <A-k>	:m -2<CR><Space>
 nmap <C-l> @q
 nmap U :UndotreeToggle<CR>:UndotreeFocus<CR>
 nmap + :tabfirst<CR>
+nmap <A-h> :bprev<CR>
+nmap <A-l> :bnext<CR>
+nmap <leader>q :b#<bar>bw#<CR>
 
 " iMaps
 " move the screen
