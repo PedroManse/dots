@@ -20,7 +20,7 @@ let netrw_browse_split=3
 let g:netrw_liststyle=3
 
 " ; at $
-autocmd FileType c,cpp,javascript,typescript,sql,css,rust nnoremap <buffer> ; msA;<ESC>`s
+autocmd FileType c,cpp,javascript,typescript,sql,css,rust,zig nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType typescript,javascript iab jsf function
 			\|iab jaf async function
 			\|iab eaf export async function
