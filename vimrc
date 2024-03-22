@@ -44,15 +44,21 @@ set noexpandtab
 set whichwrap+=[,],<,>
 set encoding=UTF-8
 set nowrap
+set lz " lazy redraw on macro execution
+
+au BufWinEnter * :set tabstop=2
+au BufWinEnter * :set shiftwidth=2
+au BufWinEnter * :set noexpandtab
+au BufWinEnter *.yml :set expandtab
+au BufWinEnter * ++once syntax enable
+"au BufWinEnter * ++once RainbowLoad
 
 " nMaps
-" add ; to EOL
-"nmap ; msA;<ESC>`s
 nmap <SPACE> <ESC>:noh<CR>:<BS>
 " move the screen
 nmap <C-j> <C-e>
 nmap <C-k> <C-y>
-nmap <C-w>= :echo "screen equalization disabled"
+nmap <C-w>= :echo "screen equalization disabled"<CR>
 " move within line-wrap
 nmap j gj
 nmap k gk
@@ -102,14 +108,6 @@ iab cosnt const
 " abbreviation
 iab vsqrt √
 iab vlambda λ
-
-au BufWinEnter * :set tabstop=2
-au BufWinEnter * :set shiftwidth=2
-au BufWinEnter * :set noexpandtab
-au BufWinEnter *.yml :set expandtab
-au BufWinEnter * ++once syntax enable
-"au BufWinEnter * ++once RainbowLoad
-au TermEnter * ++once syntax enable
 
 " Fancy colors
 if $INTTY == "true"
