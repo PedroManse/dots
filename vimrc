@@ -1,16 +1,19 @@
+syntax enable
+filetype plugin indent on
+
 " Plugins
 call plug#begin()
-	Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-	"Plug 'morhetz/gruvbox'
-	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline-themes'
-	"Plug 'tmhedberg/matchit'
-	"Plug 'frazrepo/vim-rainbow'
-	Plug 'airblade/vim-gitgutter'
-	Plug 'mattn/emmet-vim'
-	Plug 'mbbill/undotree'
-	Plug 'jnurmine/Zenburn'
-	Plug 'prisma/vim-prisma'
+	Plug 'mg979/vim-visual-multi'         " multi cursor
+	Plug 'airblade/vim-gitgutter'         " show git dif (+,-,~) in edited lines
+	Plug 'mattn/emmet-vim'                " emmet
+	Plug 'mbbill/undotree'                " display vim's change tree
+	Plug 'jnurmine/Zenburn'               " colorscheme
+	Plug 'vim-airline/vim-airline'        " airline
+	Plug 'vim-airline/vim-airline-themes' " zenburn airline
+	Plug 'prisma/vim-prisma'              " prisma syntax
+	Plug 'vim-syntastic/syntastic'        " syntastic for rust
+	Plug 'rust-lang/rust.vim'             " Rust syntax and commands
+	Plug 'leafgarland/typescript-vim'     " TypeScript syntax
 call plug#end()
 
 let netrw_banner=0
@@ -26,6 +29,10 @@ autocmd FileType typescript,javascript iab jsf function
 			\|iab eaf export async function
 			\|iab jef export function
 			\|iab udef undefined
+
+let g:syntastic_rust_checkers = ['cargo']
+autocmd FileType rust nnoremap <buffer> <C-h>h :Crun<CR>a
+autocmd FileType rust nnoremap <buffer> <C-h><C-h> :Ccheck<CR>a
 
 autocmd FileType go nnoremap <buffer> ; msA,<ESC>`s
 autocmd BufWinEnter *.gohtml setfiletype html
@@ -46,10 +53,10 @@ set encoding=UTF-8
 set nowrap
 set lz " lazy redraw on macro execution
 
-au BufWinEnter * :set tabstop=2
-au BufWinEnter * :set shiftwidth=2
-au BufWinEnter * :set noexpandtab
-au BufWinEnter *.yml :set expandtab
+"au BufWinEnter * :set tabstop=2
+"au BufWinEnter * :set shiftwidth=2
+"au BufWinEnter * :set noexpandtab
+"au BufWinEnter *.yml :set expandtab
 au BufWinEnter * ++once syntax enable
 "au BufWinEnter * ++once RainbowLoad
 
