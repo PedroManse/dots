@@ -14,6 +14,7 @@ alias _="nvim $HOME/_"
 alias py10="/bin/python3.10"
 alias flog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
 alias sqli="sqlite3 --header --nullvalue '<{nil}>' --column"
+
 export PSQL_EDITOR="/bin/nvim -n -u $HOME/.vimrc"
 
 alias killJobs="for i in \$(jobs -p | sed 's/[-+]//' | awk '{print \$2}')
@@ -303,7 +304,19 @@ EMAIL_SERVER_PORT, EMAIL_NAME, EMAIL_SENDER ] env vars"
 	else
 		export EMAIL_TEXT=$TEXT
 	fi
-	read -s -e -p "<${CYAN}${EMAIL_SENDER}${RESET}> password: " EMAIl_PASSWORD
+	read -s -e -p "<${CYAN}${EMAIL_SENDER}${RESET}> password: " EMAIL_PASSWORD
 
-	python3 "$DEVAPS/sendmail.py" > /dev/null
+	EMAIL_PASSWORD=$EMAIL_PASSWORD python3 "$DEVAPS/sendmail.py" > /dev/null
+}
+
+function serve() {
+	port=$1
+	dir=$2
+	if [ "$port" = "" ] ; then
+		port="8000"
+	fi
+	if [ "$dir"  = "" ] ; then
+		dir="."
+	fi
+	python3 -m http.server $port -d $dir -p "HTTP/1.1"
 }
