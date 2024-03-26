@@ -13,7 +13,7 @@ call plug#begin()
 	Plug 'prisma/vim-prisma'              " prisma syntax
 	Plug 'vim-syntastic/syntastic'        " syntastic for rust
 	Plug 'rust-lang/rust.vim'             " Rust syntax and commands
-	Plug 'leafgarland/typescript-vim'     " TypeScript syntax
+	Plug 'HerringtonDarkholme/yats.vim'     " TypeScript syntax
 call plug#end()
 
 let netrw_banner=0
