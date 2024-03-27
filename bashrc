@@ -98,12 +98,13 @@ prompt_command() {
 		PS="${PS} [$(col_bold)$(col_underline)$(col_reverse)$(col_red)$e$(col_reset)]"
 	fi
 
+	#TODO: (when project is done) execute gs-rs 2> /dev/null and place aside $PS
 	git rev-parse --is-inside-work-tree > /dev/null 2> /dev/null
 	if [ $? = 0 ] ; then
 		PS="${PS} $($HOME/code/devaps/bin/gs)"
 	fi
 
-	if [[ $COMPUTER_NAME != "-" ]] ; then
+	if [ ! -z $COMPUTER_NAME ] ; then
 		PS="$COMPUTER_NAME: ${PS}"
 	fi
 
