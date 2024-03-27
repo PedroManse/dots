@@ -92,7 +92,7 @@ fi
 PROMPT_COMMAND=prompt_command # Function to generate PS1 after CMDs
 prompt_command() {
 	e=$?
-	PS="$($HOME/code/devaps/bin/fpwd)"
+	PS="$($HOME/code/devaps/bin/pwd-rs)"
 
 	if [[ $e != '0' ]] ; then
 		PS="${PS} [$(col_bold)$(col_underline)$(col_reverse)$(col_red)$e$(col_reset)]"
@@ -107,7 +107,7 @@ prompt_command() {
 		PS="$COMPUTER_NAME: ${PS}"
 	fi
 
-	# TODO: integrate with fpwd
+	# TODO: integrate with fpwd-rs/pwd-rs
 	dirlist=$(dirs -p -l)
 	dircount=$(echo "$dirlist" | wc -w)
 	stack=$(($dircount-1))
