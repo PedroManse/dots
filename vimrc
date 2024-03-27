@@ -1,5 +1,6 @@
 syntax enable
 filetype plugin indent on
+set re=0
 
 " Plugins
 call plug#begin()
