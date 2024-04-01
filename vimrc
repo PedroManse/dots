@@ -14,7 +14,8 @@ call plug#begin()
 	Plug 'prisma/vim-prisma'              " prisma syntax
 	Plug 'vim-syntastic/syntastic'        " syntastic for rust
 	Plug 'rust-lang/rust.vim'             " Rust syntax and commands
-	Plug 'HerringtonDarkholme/yats.vim'     " TypeScript syntax
+	Plug 'HerringtonDarkholme/yats.vim'   " TypeScript syntax
+	Plug 'ap/vim-css-color'               " Show color in .css file
 call plug#end()
 
 let netrw_banner=0
@@ -31,9 +32,12 @@ autocmd FileType typescript,javascript iab jsf function
 			\|iab jef export function
 			\|iab udef undefined
 
+let g:syntastic_check_on_open=1
 let g:syntastic_rust_checkers = ['cargo']
+let g:syntastic_mode_map = { "mode": "passive" }
 autocmd FileType rust nnoremap <buffer> <C-h>h :Crun<CR>a
 autocmd FileType rust nnoremap <buffer> <C-h><C-h> :Ccheck<CR>a
+autocmd FileType rust nnoremap <buffer> <C-h>c :SyntasticCheck<CR>
 
 autocmd FileType go nnoremap <buffer> ; msA,<ESC>`s
 autocmd BufWinEnter *.gohtml setfiletype html
