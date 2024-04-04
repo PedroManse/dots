@@ -15,6 +15,7 @@
 [user]
 	name = Pedro Manse
 	email = pedro.manse@dmk3.com.br
+	signingkey = 1068E41051224FD8A5D6267B6D36FC1E24A19CE7!
 
 [core]
 	editor = nvim
@@ -37,3 +38,7 @@
 
 [diff]
 	colorMoved = false
+[commit]
+	gpgsign = true
+[fetch]
+		prune = true
