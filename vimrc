@@ -1,6 +1,7 @@
 syntax enable
 filetype plugin indent on
 set re=0
+autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
 
 " Plugins
 call plug#begin()
@@ -34,7 +35,7 @@ autocmd FileType typescript,javascript iab jsf function
 
 let g:syntastic_check_on_open=1
 let g:syntastic_rust_checkers = ['cargo']
-let g:syntastic_mode_map = { "mode": "passive" }
+let g:syntastic_mode_map = { "mode": "active" }
 autocmd FileType rust nnoremap <buffer> <C-h>h :Crun<CR>a
 autocmd FileType rust nnoremap <buffer> <C-h><C-h> :Ccheck<CR>a
 autocmd FileType rust nnoremap <buffer> <C-h>c :SyntasticCheck<CR>
