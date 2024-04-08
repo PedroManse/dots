@@ -89,11 +89,13 @@ else
 	fi
 fi
 
-
-PROMPT_COMMAND=prompt_command # Function to generate PS1 after CMDs
+# prompt_command in PS1 instead of PROMPT so <C-l> doesn't remove it
+export PS1=""
+export PS0=""
+PROMPT_COMMAND=prompt_command
 prompt_command() {
 	e=$?
-	PS="$($HOME/code/devaps/bin/pwd-rs)$(col_reset)"
+	PS="$($DEVAPS/bin/pwd-rs)$(col_reset)"
 
 	if [[ $e != '0' ]] ; then
 		PS="${PS} [$(col_bold)$(col_underline)$(col_reverse)$(col_red)$e$(col_reset)]"
@@ -102,32 +104,31 @@ prompt_command() {
 	#TODO: (when project is done) execute gs-rs 2> /dev/null and place aside $PS
 	git rev-parse --is-inside-work-tree > /dev/null 2> /dev/null
 	if [ $? = 0 ] ; then
-		PS="${PS} $($HOME/code/devaps/bin/gs)"
+		PS="${PS} $($DEVAPS/bin/gs)"
 	fi
 
 	if [ ! -z $COMPUTER_NAME ] ; then
 		PS="$COMPUTER_NAME: ${PS}"
 	fi
 
-	# TODO: integrate with fpwd-rs/pwd-rs
-	dirlist=$(dirs -p -l)
+	dirlist=$(dirs)
 	dircount=$(echo "$dirlist" | wc -w)
 	stack=$(($dircount-1))
 	comdirs=""
 	for i in $(seq 2 $stack); do
 		d='$'
 		d+="$i"
-		comdirs+=$(echo $dirlist | awk "{printf $d }")
-		comdirs+=" "
+		thisdir=$(echo $dirlist | awk "{printf $d }")
+		thisdir=$(PWD=$thisdir "$DEVAPS/bin/pwd-rs")
+		comdirs+=$thisdir
+		comdirs+="$(col_reset) | "
 	done
 	if [ ! "$comdirs" = '' ] ; then
-		PS="${PS} (${comdirs}\b)"
+		PS="${PS} (${comdirs% | })"
 	fi
 
-	echo -e $PS
+	export PS1="${PS}\nλ"
 }
-export PS1="λ"
-export PS0=""
 
 rcom() {
 	file=$1
@@ -221,8 +222,8 @@ if [ -d "$HOME/.bun" ] ; then
 	export PATH="$BUN_INSTALL/bin:$PATH"
 fi
 
-if [ -d "$HOME/code/devaps" ] ; then
-	export PATH="$HOME/code/devaps/bin:$PATH"
+if [ -d "$DEVAPS" ] ; then
+	export PATH="$DEVAPS/bin:$PATH"
 fi
 
 if [ -d "$HOME/.zig" ] ; then
