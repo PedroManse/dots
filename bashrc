@@ -89,13 +89,27 @@ else
 	fi
 fi
 
+format_dir() {
+	thisdir=$1
+	if fdir=$(echo $thisdir | socat - UNIX-CONNECT:/tmp/fpwd-rs.sock 2> /dev/null) ; then
+		echo $fdir
+	else
+		if fdir=$(PWD=$thisdir "$DEVAPS/bin/pwd-rs") ; then
+			echo $fdir
+		else
+			echo $thisdir
+		fi
+	fi
+}
+
 # prompt_command in PS1 instead of PROMPT so <C-l> doesn't remove it
 export PS1=""
 export PS0=""
 PROMPT_COMMAND=prompt_command
 prompt_command() {
 	e=$?
-	PS="$($DEVAPS/bin/pwd-rs)$(col_reset)"
+	fdir=$(format_dir $PWD)
+	PS="${fdir}$(col_reset)"
 
 	if [[ $e != '0' ]] ; then
 		PS="${PS} [$(col_bold)$(col_underline)$(col_reverse)$(col_red)$e$(col_reset)]"
@@ -113,13 +127,13 @@ prompt_command() {
 
 	dirlist=$(dirs)
 	dircount=$(echo "$dirlist" | wc -w)
-	stack=$(($dircount-1))
+	stack=$(($dircount))
 	comdirs=""
 	for i in $(seq 2 $stack); do
 		d='$'
 		d+="$i"
 		thisdir=$(echo $dirlist | awk "{printf $d }")
-		thisdir=$(PWD=$thisdir "$DEVAPS/bin/pwd-rs")
+		thisdir=$(format_dir $thisdir)
 		comdirs+=$thisdir
 		comdirs+="$(col_reset) | "
 	done
