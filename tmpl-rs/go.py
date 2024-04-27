@@ -8,13 +8,12 @@ def make_dir(dirname):
     print(f"[INFO]: create directory {dirname}")
     mkdir(dirname)
 
-def make_file(filename, packagename, content=""):
+def make_file(filename, packagename, content=None):
     print(f"[INFO]: create file {filename}")
     if not filename.endswith('.go'):
         filename += ".go"
     file = open(filename, 'w')
-    file.write(f"package {packagename}\n")
-    file.write(content)
+    file.write(content or f"package {packagename}\n")
     file.close()
 
 def make_module(modname: str, files: list[str]):
@@ -41,7 +40,9 @@ chdir(projname)
 import_modules = '\n'.join([
     f"\t//\"{projname}/{module[0]}\"" for module in modules
 ])
-make_file("main.go", "main", """
+make_file("main.go", None, """\
+package main
+
 import (
 \t"fmt"
 %s
@@ -59,3 +60,5 @@ for (mod, files) in modules:
     make_module(mod, files)
 
 CMD("git init")
+with open(".gitignore", 'w') as f: f.write(projname)
+CMD("git add .")
