@@ -1,13 +1,4 @@
-[save]
-	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/
-	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/(
-	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/*
-	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/clone
-	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/clone/crm
-	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/clones/crm
-	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/clones/crm/
 [safe]
-	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/clones/crm
 	directory = .
 [credential "https://github.com"]
 	helper = 
