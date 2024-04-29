@@ -144,15 +144,18 @@ if [[ $usi == "y" ]] ; then
 			TMPLRS_DIR="$HOME/Templates/tmpl-rs"
 		fi
 	fi
-	if [ ! -d $TMPLRS_DIR ] ; then
-		mkdir -p $TMPLRS_DIR
+	if [ -d $TMPLRS_DIR ] ; then
+		echo "D"
+		read -e -p "Replace current tmpl dir? [Y/n]>" -n 1 usi
+		if [[ $usi == "y" ]] ; then
+			rm -r $TMPLRS_DIR
+		else
+			echo exit 1
+		fi
 	fi
-	#TODO add TMPLRS_DIR to .bashrc
 	echo "export TMPLRS_DIR=\"${TMPLRS_DIR}\"" >> ~/.shenv.sh
 
-	for file in $(ls "tmpl-rs") ; do
-		ln -sf "$(pwd)/tmpl-rs/$file" "$TMPLRS_DIR/$file"
-	done
+	ln -sf "$(pwd)/tmpl-rs" "$TMPLRS_DIR"
 fi
 
 if [ ! -f ~/.local/share/nvim/site/autoload/plug.vim ] ; then

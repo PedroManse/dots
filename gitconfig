@@ -1,13 +1,4 @@
-[save]
-	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/
-	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/(
-	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/*
-	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/clone
-	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/clone/crm
-	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/clones/crm
-	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/clones/crm/
 [safe]
-	directory = /mnt/c/Users/Pedro/OneDrive - DMK3 TECNOLOGIA LTDA/Área de Trabalho/mine/clones/crm
 	directory = .
 [credential "https://github.com"]
 	helper = 
@@ -15,7 +6,6 @@
 [user]
 	name = Pedro Manse
 	email = pedro.manse@dmk3.com.br
-	signingkey = 1068E41051224FD8A5D6267B6D36FC1E24A19CE7!
 
 [core]
 	editor = nvim
