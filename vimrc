@@ -16,7 +16,6 @@ call plug#begin()
 	Plug 'vim-syntastic/syntastic'        " syntastic for rust
 	Plug 'rust-lang/rust.vim'             " Rust syntax and commands
 	Plug 'HerringtonDarkholme/yats.vim'   " TypeScript syntax
-	Plug 'ap/vim-css-color'               " Show color in .css file
 call plug#end()
 
 let netrw_banner=0
@@ -86,6 +85,7 @@ nmap + :tabfirst<CR>
 nmap <A-h> :bprev<CR>
 nmap <A-l> :bnext<CR>
 nmap <leader>q :b#<bar>bw#<CR>
+nmap <C-f> V$%:fold<CR>j
 
 " iMaps
 " move the screen
