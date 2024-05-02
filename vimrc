@@ -9,7 +9,8 @@ call plug#begin()
 	Plug 'airblade/vim-gitgutter'         " show git dif (+,-,~) in edited lines
 	Plug 'mattn/emmet-vim'                " emmet
 	Plug 'mbbill/undotree'                " display vim's change tree
-	Plug 'jnurmine/Zenburn'               " colorscheme
+	Plug 'jnurmine/Zenburn'               " zenburn colorscheme
+	Plug 'thimc/gruber-darker.nvim'       " gruber colorscheme (tsoding's)
 	Plug 'vim-airline/vim-airline'        " airline
 	Plug 'vim-airline/vim-airline-themes' " zenburn airline
 	Plug 'prisma/vim-prisma'              " prisma syntax
