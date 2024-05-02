@@ -31,6 +31,9 @@ autocmd FileType typescript,javascript iab jsf function
 			\|iab eaf export async function
 			\|iab jef export function
 			\|iab udef undefined
+			\|iab ec export const
+			\|iab et export type
+			\|iab ceaf export async function(r: HttpReader): Promise<Handler> {}<left><CR><ESC><up>wwwi
 
 let g:syntastic_check_on_open=1
 let g:syntastic_rust_checkers = ['cargo']
