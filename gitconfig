@@ -32,3 +32,6 @@
 	gpgsign = true
 [fetch]
 		prune = true
+[alias]
+		f = fetch --prune
+		c = checkout
