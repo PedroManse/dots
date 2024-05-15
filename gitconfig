@@ -35,5 +35,6 @@
 [alias]
 		f = fetch --prune
 		c = checkout
+		b = branch
 [push]
 	autoSetupRemote = true
