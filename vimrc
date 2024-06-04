@@ -3,6 +3,7 @@ filetype plugin indent on
 set re=0
 autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
 
+
 " Plugins
 call plug#begin()
 	Plug 'mg979/vim-visual-multi'         " multi cursor
@@ -14,9 +15,10 @@ call plug#begin()
 	Plug 'vim-airline/vim-airline'        " airline
 	Plug 'vim-airline/vim-airline-themes' " zenburn airline
 	Plug 'prisma/vim-prisma'              " prisma syntax
-	Plug 'vim-syntastic/syntastic'        " syntastic for rust
-	Plug 'rust-lang/rust.vim'             " Rust syntax and commands
+	Plug 'gleam-lang/gleam.vim'           " gleam syntax
 	Plug 'HerringtonDarkholme/yats.vim'   " TypeScript syntax
+	Plug 'rust-lang/rust.vim'             " Rust syntax and commands
+	Plug 'vim-syntastic/syntastic'        " syntastic for rust
 call plug#end()
 
 let netrw_banner=0
@@ -112,7 +114,7 @@ tnoremap <ESC> <C-\><C-n>
 
 
 " Commands
-command Vmod :tabe ~/.vimrc
+command Vmod :tabe ~/.config/nvim/init.vim
 command Tmod :tabe ~/.shrc.sh
 
 " typos
