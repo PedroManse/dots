@@ -1,10 +1,13 @@
 #! /bin/sh
+if [ -f ~/.shenv.sh ] ; then
+	. ~/.shenv.sh
+fi
 
-alias nvim="/bin/nvim -n -u $HOME/.vimrc"
-alias svi="sudo /bin/nvim -u $HOME/.vimrc"
+alias nvim="nvim -n"
+alias svi="sudo nvim -u $HOME/.config/nvim/init.vim"
 alias tmod="nvim $HOME/.shrc.sh; source $HOME/.shrc.sh"
 alias ref="source $HOME/.shrc.sh"
-alias vmod="nvim $HOME/.vimrc"
+alias vmod="nvim -c 'edit \$MYVIMRC'"
 alias cat="$HOME/.cargo/bin/bat"
 alias ls="$HOME/.cargo/bin/eza -h"
 alias hq="$HOME/.cargo/bin/htmlq"
@@ -22,6 +25,27 @@ alias killJobs="for i in \$(jobs -p | sed 's/[-+]//' | awk '{print \$2}')
 do
 	kill \$i
 done"
+
+if [ -d "$DEVAPS" ] ; then
+	export PATH="$DEVAPS/bin:$PATH"
+fi
+
+if [ -d "$HOME/.zig" ] ; then
+	export PATH="$PATH:$HOME/.zig"
+fi
+
+if [ -d "$HOME/.cargo" ] ; then
+	export PATH="$PATH:$HOME/.cargo/bin"
+fi
+
+if [ -d "$HOME/.deno" ] ; then
+	export DENO_INSTALL="$HOME/.deno"
+	export PATH="$PATH:$DENO_INSTALL/bin"
+fi
+
+if [ -d "/usr/lib/go-1.21/bin" ] ; then
+	export PATH="$PATH:/usr/lib/go-1.21/bin"
+fi
 
 export ZEN="true"
 export BAT_THEME="zenburn"
@@ -48,7 +72,6 @@ alias SetCapPort="sudo setcap CAP_NET_BIND_SERVICE+pei"
 
 alias gs="git status"
 alias gp="git push"
-alias gu="git fetch --prune"
 alias gd="git diff"
 
 alias col_reset="echo -ne '\x1b[0m'"
@@ -94,7 +117,7 @@ format_dir() {
 	if fdir=$(echo $thisdir | socat - UNIX-CONNECT:/tmp/fpwd-rs.sock 2> /dev/null) ; then
 		echo $fdir
 	else
-		if fdir=$(PWD=$thisdir "$DEVAPS/bin/pwd-rs") ; then
+		if fdir=$(PWD=$thisdir "pwd-rs") ; then
 			echo $fdir
 		else
 			echo $thisdir
@@ -115,7 +138,7 @@ prompt_command() {
 		PS="${PS} [$(col_bold)$(col_underline)$(col_reverse)$(col_red)$e$(col_reset)]"
 	fi
 
-	PS="${PS}$($DEVAPS/bin/gs2)"
+	PS="${PS}$(gs2)"
 
 	if [ ! -z $COMPUTER_NAME ] ; then
 		PS="$COMPUTER_NAME: ${PS}"
@@ -229,19 +252,7 @@ if [ -d "$HOME/.bun" ] ; then
 
 	# bun
 	export BUN_INSTALL="$HOME/.bun"
-	export PATH="$BUN_INSTALL/bin:$PATH"
-fi
-
-if [ -d "$DEVAPS" ] ; then
-	export PATH="$DEVAPS/bin:$PATH"
-fi
-
-if [ -d "$HOME/.zig" ] ; then
-	export PATH="$HOME/.zig:$PATH"
-fi
-
-if [ -d "$HOME/.cargo" ] ; then
-	export PATH="$HOME/.cargo/bin:$PATH"
+	export PATH="$PATH:$BUN_INSTALL/bin"
 fi
 
 function blt() {
@@ -274,10 +285,6 @@ function frink() {
 	'curl' -s "http://frinklang.org/fsp/frink.fsp?fromVal=${from}&toVal=${to}" > /tmp/frink
 	'grep' "results" /tmp/frink | 'sed' "s/<A NAME=results>\\(.*\\)<\\/A>/\\1/"
 }
-
-if [ -f ~/.shenv.sh ] ; then
-	. ~/.shenv.sh
-fi
 
 function mail() {
 	if
@@ -319,7 +326,7 @@ EMAIL_SERVER_PORT, EMAIL_NAME, EMAIL_SENDER ] env vars"
 	fi
 	read -s -e -p "<${CYAN}${EMAIL_SENDER}${RESET}> password: " EMAIL_PASSWORD
 
-	EMAIL_PASSWORD=$EMAIL_PASSWORD python3 "$DEVAPS/sendmail.py" > /dev/null
+	EMAIL_PASSWORD=$EMAIL_PASSWORD python3 "$DEVAPS/sendmail.py"
 }
 
 function serve() {
