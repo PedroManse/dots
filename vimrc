@@ -114,7 +114,7 @@ tnoremap <ESC> <C-\><C-n>
 
 
 " Commands
-command Vmod :tabe ~/.config/nvim/init.vim
+command Vmod :tabe $MYVIMRC
 command Tmod :tabe ~/.shrc.sh
 
 " typos
