@@ -3,7 +3,16 @@ if [ -f ~/.shenv.sh ] ; then
 	. ~/.shenv.sh
 fi
 
-alias nvim="nvim -n"
+#alias nvim="nvim -n"
+function nvim() {
+	if [ -n "$NVIM" ] ; then
+		/bin/nvim --server $NVIM --remote-send "<ESC>:e $1<CR>"
+		exit
+	else
+		/bin/nvim --listen "${HOME}/.cache/nvim/$$-server.pipe" $@
+	fi
+}
+
 alias svi="sudo nvim -u $HOME/.config/nvim/init.vim"
 alias tmod="nvim $HOME/.shrc.sh; source $HOME/.shrc.sh"
 alias ref="source $HOME/.shrc.sh"
