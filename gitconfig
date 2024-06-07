@@ -38,3 +38,4 @@
 		b = branch
 [push]
 	autoSetupRemote = true
+	default = current
