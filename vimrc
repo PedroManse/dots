@@ -131,7 +131,7 @@ iab vlambda λ
 " Fancy colors
 if $INTTY == "true"
 	" "in a tty"
-	colorscheme peachpuff
+	colorscheme industry
 	autocmd BufWritePost * GitGutterBufferDisable
 	au BufWinEnter * ++once AirlineTheme base16_bespin
 else
