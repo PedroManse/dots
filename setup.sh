@@ -109,9 +109,8 @@ fi
 # setup config
 mkdir -p ~/.config/nvim
 #echo "setup vimrc symlink"
-#ln -sf "$(pwd)/vimrc" ~/.config/nvim/init.vim
-echo "setup neovim init.lua symlink"
-ln -sf "$(pwd)/vimrc.lua" ~/.config/nvim/init.lua
+echo "setup neovim config symlink"
+ln -sf "$(pwd)/nvim" ~/.config/nvim
 
 echo "setup .screenrc symlink"
 ln -sf "$(pwd)/screenrc" ~/.screenrc
