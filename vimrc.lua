@@ -11,6 +11,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
 -- emmet
 vim.g.user_emmet_leader_key=","
 vim.g.user_emmet_install_global=0
@@ -18,7 +19,8 @@ vim.cmd([[ autocmd FileType html,css EmmetInstall ]])
 
 require("lazy").setup({
 	'mg979/vim-visual-multi',
-	'airblade/vim-gitgutter',
+	--'airblade/vim-gitgutter',
+	'lewis6991/gitsigns.nvim',
 	'mattn/emmet-vim',
 	'mbbill/undotree',
 	'jnurmine/Zenburn',
@@ -31,6 +33,66 @@ require("lazy").setup({
 	'rust-lang/rust.vim',
 	'vim-syntastic/syntastic'
 }, opts)
+
+require('gitsigns').setup()
+
+function map(mode, shortcut, command)
+	vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
+end
+
+function tmap(shortcut, command)
+	map('t', shortcut, command)
+end
+
+function nmap(shortcut, command)
+	map('n', shortcut, command)
+end
+
+function imap(shortcut, command)
+	map('i', shortcut, command)
+end
+
+-- nMaps
+nmap("<C-t>", ":w<CR>:term<CR>a")
+nmap("<SPACE>", "<ESC>:noh<CR>:<BS>")
+
+-- move the screen
+nmap("<C-j>", "<C-e>")
+nmap("<C-k>", "<C-y>")
+nmap("<C-w>=", [[:echo "screen equalization disabled"<CR>]])
+-- move within line-wrap
+nmap("j", "gj")
+nmap("k", "gk")
+-- oposite of J (Join/Split)
+nmap("S", "mar<LINEFEED>`a")
+-- move the line
+nmap("<A-j>", ":m +1<CR><Space>")
+nmap("<A-k>", ":m -2<CR><Space>")
+nmap("<C-l>", "@q")
+nmap("U", ":UndotreeToggle<CR>:UndotreeFocus<CR>")
+nmap("<A-h>", ":bprev<CR>")
+nmap("<A-l>", ":bnext<CR>")
+nmap("<leader>q", ":b#<bar>bw#<CR>")
+nmap("<C-f>", "V$%:fold<CR>j")
+
+-- iMaps
+-- move the screen
+imap("<C-j>", "<C-e>")
+imap("<C-k>", "<C-y>")
+-- move the line
+imap("<A-j>	<ESC>:m", "+1<CR>i")
+imap("<A-k>	<ESC>:m", "-2<CR>i")
+imap("jj", "<ESC>")
+
+imap([[<A-(>]], "()<LEFT>")
+imap([[<A-[>]], "[]<LEFT>")
+imap([[<A-{>]], "{}<LEFT>")
+imap([[<A-">]], [[""<LEFT>]])
+imap([[<A-<>]], "<><LEFT>")
+imap([[<C-l>]], "<ESC>@q")
+
+-- tMaps
+tmap([[<ESC>]], [[<C-\><C-n>]])
 
 -- colorscheme
 vim.g.zenburn_force_dark_Background=1
@@ -57,6 +119,7 @@ vim.g.netrw_liststyle=3
 
 -- the rest
 vim.cmd([[
+
 autocmd FileType c,cpp,javascript,typescript,sql,css,rust,zig nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType typescript,javascript iab jsf function
 			\|iab jaf async function
@@ -76,8 +139,6 @@ autocmd FileType rust nnoremap <buffer> <C-h>c :SyntasticCheck<CR>
 
 autocmd FileType go nnoremap <buffer> ; msA,<ESC>`s
 autocmd BufWinEnter *.gohtml setfiletype html
-
-autocmd BufWritePost * GitGutterBufferEnable
 
 " emmet
 let g:user_emmet_leader_key=','
@@ -100,47 +161,6 @@ set lz " lazy redraw on macro execution
 au BufWinEnter * ++once syntax enable
 "au BufWinEnter * ++once RainbowLoad
 
-" nMaps
-nmap <SPACE> <ESC>:noh<CR>:<BS>
-" move the screen
-nmap <C-j> <C-e>
-nmap <C-k> <C-y>
-nmap <C-w>= :echo "screen equalization disabled"<CR>
-" move within line-wrap
-nmap j gj
-nmap k gk
-" oposite of J (Join/Split)
-nmap S mar<LINEFEED>`a
-" move the line
-nmap <A-j>	:m +1<CR><Space>
-nmap <A-k>	:m -2<CR><Space>
-nmap <C-l> @q
-nmap U :UndotreeToggle<CR>:UndotreeFocus<CR>
-nmap + :tabfirst<CR>
-nmap <A-h> :bprev<CR>
-nmap <A-l> :bnext<CR>
-nmap <leader>q :b#<bar>bw#<CR>
-nmap <C-f> V$%:fold<CR>j
-
-" iMaps
-" move the screen
-imap <C-j> <C-e>
-imap <C-k> <C-y>
-" move the line
-imap <A-j>	<ESC>:m +1<CR>i
-imap <A-k>	<ESC>:m -2<CR>i
-imap jj <ESC>
-
-imap <A-(> ()<LEFT>
-imap <A-[> []<LEFT>
-imap <A-{> {}<LEFT>
-imap <A-"> ""<LEFT>
-imap <A-<> <><LEFT>
-imap <C-l> <ESC>@q
-
-" tMaps
-tnoremap <ESC> <C-\><C-n>
-
 
 " Commands
 command Vmod :tabe $MYVIMRC
@@ -161,11 +181,11 @@ iab vlambda λ
 if $INTTY == "true"
 	" "in a tty"
 	colorscheme industry
-	autocmd BufWritePost * GitGutterBufferDisable
+	" autocmd BufWritePost * GitGutterBufferDisable
 	au BufWinEnter * ++once AirlineTheme base16_bespin
 else
 	" "in pts"
-	autocmd BufWritePost * GitGutterBufferEnable
+	" autocmd BufWritePost * GitGutterBufferEnable
 	au BufWinEnter * ++once AirlineTheme zenburn
 endif
 
