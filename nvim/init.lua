@@ -34,7 +34,16 @@ require("lazy").setup({
 	'vim-syntastic/syntastic'
 }, opts)
 
-require('gitsigns').setup()
+require('gitsigns').setup({
+	signs = {
+		add          = { text = '+' },
+		change       = { text = '~' },
+		delete       = { text = '-' },
+		topdelete    = { text = '‾' },
+		changedelete = { text = '~' },
+		untracked    = { text = '┆' },
+	},
+})
 
 function map(mode, shortcut, command)
 	vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
@@ -66,8 +75,8 @@ nmap("k", "gk")
 -- oposite of J (Join/Split)
 nmap("S", "mar<LINEFEED>`a")
 -- move the line
-nmap("<A-j>", ":m +1<CR><Space>")
-nmap("<A-k>", ":m -2<CR><Space>")
+nmap("<A-j>", ":m+1<CR>")
+nmap("<A-k>", ":m-2<CR>")
 nmap("<C-l>", "@q")
 nmap("U", ":UndotreeToggle<CR>:UndotreeFocus<CR>")
 nmap("<A-h>", ":bprev<CR>")
