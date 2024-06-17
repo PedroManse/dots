@@ -31,7 +31,15 @@ require("lazy").setup({
 	'gleam-lang/gleam.vim',
 	'HerringtonDarkholme/yats.vim',
 	'rust-lang/rust.vim',
-	'vim-syntastic/syntastic'
+	{
+		'dense-analysis/ale',
+		config = function()
+			vim.g.ale_ruby_rubocop_auto_correct_all = 1
+			vim.g.ale_linters = {
+				rust = {'cargo'}
+			}
+		end
+	}
 }, opts)
 
 require('gitsigns').setup({
@@ -63,6 +71,7 @@ end
 
 -- nMaps
 nmap("<C-t>", ":w<CR>:term<CR>a")
+nmap("<A-S-j>", ":ALEGoToDefinition<CR>")
 nmap("<SPACE>", "<ESC>:noh<CR>:<BS>")
 
 -- move the screen
@@ -115,7 +124,6 @@ vim.g.clipboard = false
 
 -- syntastic
 vim.cmd("filetype plugin indent on")
-vim.cmd("autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/")
 vim.g.syntastic_check_on_open=1
 vim.g.syntastic_rust_checkers = {"cargo"}
 vim.g.syntastic_mode_map = { mode= "active" }
