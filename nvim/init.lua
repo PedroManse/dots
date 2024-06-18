@@ -34,9 +34,16 @@ require("lazy").setup({
 	{
 		'dense-analysis/ale',
 		config = function()
-			vim.g.ale_ruby_rubocop_auto_correct_all = 1
+			vim.g.ale_fixers = {
+				javascript = {"eslint"},
+				typescript = {"eslint"},
+				rust = {"rustfmt"},
+				python = {"black"},
+			}
 			vim.g.ale_linters = {
-				rust = {'cargo'}
+				javascript = {"eslint"},
+				typescript = {"eslint", "typecheck"},
+				rust = {"cargo"},
 			}
 		end
 	}
@@ -72,6 +79,9 @@ end
 -- nMaps
 nmap("<C-t>", ":w<CR>:term<CR>a")
 nmap("<A-S-j>", ":ALEGoToDefinition<CR>")
+nmap("<A-S-n>", ":ALENext<CR>")
+nmap("<A-S-k>", ":ALEFix<CR>")
+nmap("<A-S-m>", ":ALEDetail<CR>")
 nmap("<SPACE>", "<ESC>:noh<CR>:<BS>")
 
 -- move the screen
