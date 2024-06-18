@@ -3,7 +3,7 @@ if [ -f ~/.shenv.sh ] ; then
 	. ~/.shenv.sh
 fi
 
-function nvim() {
+nvim() {
 	if [ -n "$NVIM" ] ; then
 		/bin/nvim --server $NVIM --remote-send "<ESC>:e $1<CR>"
 		exit
@@ -12,10 +12,10 @@ function nvim() {
 	fi
 }
 
-alias svi="sudo nvim -u $HOME/.config/nvim/init.vim"
+alias svi="sudo nvim -u $HOME/.config/nvim/init.lua"
 alias tmod="nvim $HOME/.shrc.sh; source $HOME/.shrc.sh"
 alias ref="source $HOME/.shrc.sh"
-alias vmod="nvim -c 'edit \$MYVIMRC'"
+alias vmod="nvim $HOME/.config/nvim/init.lua"
 alias cat="$HOME/.cargo/bin/bat"
 alias ls="$HOME/.cargo/bin/eza -h"
 alias hq="$HOME/.cargo/bin/htmlq"
@@ -263,7 +263,7 @@ if [ -d "$HOME/.bun" ] ; then
 	export PATH="$PATH:$BUN_INSTALL/bin"
 fi
 
-function blt() {
+blt() {
 	dvc=$1
 	case $dvc in
 		30|q30|Q30)
@@ -287,14 +287,14 @@ function blt() {
 	esac
 }
 
-function frink() {
+frink() {
 	from=$('echo' $1 | 'sed' "s/ /+/")
 	to=$('echo' $2 | 'sed' "s/ /+/")
 	'curl' -s "http://frinklang.org/fsp/frink.fsp?fromVal=${from}&toVal=${to}" > /tmp/frink
 	'grep' "results" /tmp/frink | 'sed' "s/<A NAME=results>\\(.*\\)<\\/A>/\\1/"
 }
 
-function mail() {
+mail() {
 	if
 		[ -z "$EMAIL_SERVER" ] ||
 		[ -z "$EMAIL_SERVER_PORT" ] ||
@@ -337,7 +337,7 @@ EMAIL_SERVER_PORT, EMAIL_NAME, EMAIL_SENDER ] env vars"
 	EMAIL_PASSWORD=$EMAIL_PASSWORD python3 "$DEVAPS/sendmail.py"
 }
 
-function serve() {
+serve() {
 	port=$1
 	dir=$2
 	if [ "$port" = "" ] ; then
