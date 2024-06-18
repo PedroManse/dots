@@ -62,8 +62,9 @@ function setup_install() {
 setup_install
 
 #TODO use rustup and cargo to install bat and eza
+#TODO use wget to install nvim 0.10
 
-apps="neovim unzip golang-go curl"
+apps="unzip golang-go curl"
 for app in $apps ; do
 	if [[ $(command -v $app) || $(dpkg -s $app 2> /dev/null) ]] ; then : ; else
 		read -e -p "download $app? [y/N]>" -n 1 usi
