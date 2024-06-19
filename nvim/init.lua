@@ -30,7 +30,22 @@ require("lazy").setup({
 	'gleam-lang/gleam.vim',
 	'HerringtonDarkholme/yats.vim',
 	'rust-lang/rust.vim',
-	'vim-syntastic/syntastic'
+	{
+		'dense-analysis/ale',
+		config = function()
+			vim.g.ale_fixers = {
+				javascript = {"eslint"},
+				typescript = {"eslint"},
+				rust = {"rustfmt"},
+				python = {"black"},
+			}
+			vim.g.ale_linters = {
+				javascript = {"eslint"},
+				typescript = {"eslint", "typecheck"},
+				rust = {"cargo"},
+			}
+		end
+	}
 }, opts)
 
 require('gitsigns').setup()

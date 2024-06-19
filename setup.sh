@@ -22,7 +22,7 @@ function default() {
 	fi
 }
 
-default workdir ~/code
+default workdir "$HOME/code"
 default asroot "sudo"
 
 mkdir -p "$workdir"
@@ -61,9 +61,7 @@ function setup_install() {
 
 setup_install
 
-#TODO use rustup and cargo to install bat and eza
-
-apps="neovim unzip golang-go curl"
+apps="unzip golang-go curl wget doas"
 for app in $apps ; do
 	if [[ $(command -v $app) || $(dpkg -s $app 2> /dev/null) ]] ; then : ; else
 		read -e -p "download $app? [y/N]>" -n 1 usi
@@ -81,6 +79,7 @@ if [ ! -d "$HOME/.cargo" ] ; then
 fi
 
 if [ -d "$HOME/.cargo" ] ; then
+	source $HOME/.cargo/env
 	if [ ! -f "$HOME/.cargo/bin/delta" ] ; then
 		cargo install git-delta
 	fi
@@ -162,22 +161,6 @@ if [[ $usi == "y" ]] ; then
 	echo "export TMPLRS_DIR=\"${TMPLRS_DIR}\"" >> ~/.shenv.sh
 
 	ln -sf "$(pwd)/tmpl-rs" "$TMPLRS_DIR"
-fi
-
-if [ ! -f ~/.local/share/nvim/site/autoload/plug.vim ] ; then
-	# get vim-plug
-	curl -fsSLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	echo "installed vim-plug"
-fi
-
-read -e -p "download vim-plug plugins? [y/N]>" -n 1 usi
-if [[ $usi == "y" ]] ; then
-	echo "upgrade plugin manager"
-	nvim -u "$(pwd)/vimrc" --headless +"PlugUpgrade" +"qa" &> /dev/null
-	echo "update plugins"
-	nvim -u "$(pwd)/vimrc" --headless +"PlugUpdate"  +"qa" &> /dev/null
-	echo "download plugins"
-	nvim -u "$(pwd)/vimrc" --headless +"PlugInstall" +"qa" &> /dev/null
 fi
 
 # clone or update github repo
