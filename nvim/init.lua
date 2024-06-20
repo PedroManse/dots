@@ -48,7 +48,16 @@ require("lazy").setup({
 	}
 }, opts)
 
-require('gitsigns').setup()
-require('maps')
-require('options')
-require('vim')
+require('gitsigns').setup {
+	signs = {
+		add          = { text = '+' },
+		change       = { text = '~' },
+		delete       = { text = '-' },
+		topdelete    = { text = '-' },
+		changedelete = { text = '~' },
+		untracked    = { text = '┆' },
+	}
+}
+require('./maps')
+require('./options')
+require('./vim')
