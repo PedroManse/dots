@@ -20,7 +20,7 @@ nmap("<C-t>", ":w<CR>:term<CR>a")
 nmap("<SPACE>", "<ESC>:noh<CR>:<BS>")
 --- ALE
 nmap("<A-S-j>", ":ALEGoToDefinition<CR>")
-nmap("<A-S-n>", ":ALENext<CR>")
+nmap("<A-S-n>", ":ALENextWrap<CR>")
 nmap("<A-S-k>", ":ALEFix<CR>")
 nmap("<A-S-m>", ":ALEDetail<CR>")
 

@@ -2,7 +2,7 @@
   "Zenburn": { "branch": "master", "commit": "8df765342b2a33c728ce147d6c8e66359378f9d5" },
   "ale": { "branch": "master", "commit": "c7c41e157478fc9d4f65e9f640bfce75fa211fd7" },
   "emmet-vim": { "branch": "master", "commit": "3fb2f63799e1922f7647ed9ff3b32154031a76ee" },
-  "gitsigns.nvim": { "branch": "main", "commit": "7516bac5639a9ce8e7b199066199a02cb3057230" },
+  "gitsigns.nvim": { "branch": "main", "commit": "bcae8395fb1033ed0340dd00d61b3bf050b1bd8e" },
   "gleam.vim": { "branch": "main", "commit": "f9e82b70425dc0726ee173ecddf176ffa364e30d" },
   "gruber-darker.nvim": { "branch": "main", "commit": "1793c0929ca965430410f7ec578272a4af9226ee" },
   "lazy.nvim": { "branch": "main", "commit": "bc620783663ab09d16bff9fdecc07da65b2a1528" },

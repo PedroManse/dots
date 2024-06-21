@@ -17,6 +17,7 @@ alias tmod="nvim $HOME/.shrc.sh; source $HOME/.shrc.sh"
 alias ref="source $HOME/.shrc.sh"
 alias vmod="nvim $HOME/.config/nvim/init.lua"
 alias cat="$HOME/.cargo/bin/bat"
+alias ocat="/bin/cat"
 alias ls="$HOME/.cargo/bin/eza -h"
 alias hq="$HOME/.cargo/bin/htmlq"
 alias ..="cd .."
@@ -25,6 +26,15 @@ alias _="nvim $HOME/_"
 alias py10="/bin/python3.10"
 alias flog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) -%G?- %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
 alias sqli="sqlite3 --header --nullvalue '<{nil}>' --column"
+
+issue() {
+	branch=$(git b | filte +'*' | sed 's/* AAC-\([0-9]*\)/AAC-\1/')
+	if [ $1 ] ; then
+		jira issue view $1 | /bin/cat
+	else 
+		jira issue view $branch | /bin/cat
+	fi
+}
 
 export GPG_TTY=$(tty)
 export PSQL_EDITOR="/bin/nvim -n -u $HOME/.vimrc"
@@ -53,6 +63,12 @@ fi
 
 if [ -d "/usr/lib/go-1.21/bin" ] ; then
 	export PATH="$PATH:/usr/lib/go-1.21/bin"
+fi
+
+if [ -d "$HOME/.nvm" ] ; then
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+	[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
 export ZEN="true"
