@@ -36,6 +36,11 @@ issue() {
 	fi
 }
 
+thispr() {
+	branch=$(git b | filte ^'*' | sed 's/* AAC-\([0-9]*\)/AAC-\1/')
+	gh pr view $branch
+}
+
 export GPG_TTY=$(tty)
 export PSQL_EDITOR="/bin/nvim -n -u $HOME/.vimrc"
 
