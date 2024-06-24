@@ -28,7 +28,7 @@ alias flog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold 
 alias sqli="sqlite3 --header --nullvalue '<{nil}>' --column"
 
 issue() {
-	branch=$(git b | filte +'*' | sed 's/* AAC-\([0-9]*\)/AAC-\1/')
+	branch=$(git b | filte ^'*' | sed 's/* [A-Z]\+-\([0-9]*\).*/\1/')
 	if [ $1 ] ; then
 		jira issue view $1 | /bin/cat
 	else 
@@ -37,7 +37,7 @@ issue() {
 }
 
 thispr() {
-	branch=$(git b | filte ^'*' | sed 's/* AAC-\([0-9]*\)/AAC-\1/')
+	branch=$(git b | filte ^'*' | sed 's/* //')
 	gh pr view $branch
 }
 
