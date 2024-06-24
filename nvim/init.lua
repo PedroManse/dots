@@ -35,7 +35,7 @@ require("lazy").setup({
 		config = function()
 			vim.g.ale_fixers = {
 				javascript = {"eslint"},
-				typescript = {"eslint"},
+				typescript = {"tslint", "eslint"},
 				rust = {"rustfmt"},
 				python = {"black"},
 			}
@@ -58,6 +58,6 @@ require('gitsigns').setup {
 		untracked    = { text = '┆' },
 	}
 }
-require('./maps')
-require('./options')
-require('./vim')
+require('maps') -- ./lua/maps.lua
+require('options') -- ./lua/options.lua
+require('vim') -- ./lua/vim.lua
