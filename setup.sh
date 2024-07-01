@@ -191,10 +191,10 @@ cloneat() {
 }
 
 if [ ! -d "$workdir/devaps" ] ; then
-	read -e -p "download github.com/owseiwastaken/devaps? [y/N]>" -n 1 usi
+	read -e -p "download github.com/pedromanse/devaps? [y/N]>" -n 1 usi
 	if [[ $usi == "y" ]] ; then
 		echo "cloning to $workdir/devaps"
-		cloneat devaps owseiwastaken "$workdir/devaps"
+		cloneat devaps pedromanse "$workdir/devaps"
 		echo "export DEVAPS=\"${workdir}/devaps\"" >> ~/.shenv.sh
 	fi
 else
