@@ -33,6 +33,7 @@ require("lazy").setup({
 		'dense-analysis/ale',
 		config = function()
 			vim.g.ale_fixers = {
+				go = {"gofmt"},
 				sh = {"shfmt"},
 				javascript = {"eslint"},
 				typescript = {"tslint", "eslint"},
