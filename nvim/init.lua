@@ -18,7 +18,6 @@ vim.cmd([[ autocmd FileType html,css EmmetInstall ]])
 
 require("lazy").setup({
 	'mg979/vim-visual-multi',
-	--'airblade/vim-gitgutter',
 	'lewis6991/gitsigns.nvim',
 	'mattn/emmet-vim',
 	'mbbill/undotree',
@@ -34,6 +33,8 @@ require("lazy").setup({
 		'dense-analysis/ale',
 		config = function()
 			vim.g.ale_fixers = {
+				go = {"gofmt"},
+				sh = {"shfmt"},
 				javascript = {"eslint"},
 				typescript = {"tslint", "eslint"},
 				rust = {"rustfmt"},
