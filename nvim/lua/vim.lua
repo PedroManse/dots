@@ -50,4 +50,6 @@ else
 	" autocmd BufWritePost * GitGutterBufferEnable
 	au BufWinEnter * ++once AirlineTheme zenburn
 endif
+
 ]])
+
