@@ -142,11 +142,11 @@ read -e -p "link tmpl-rs files? [y/N]>" -n 1 usi
 if [[ $usi == "y" ]] ; then
 	if [ "$TMPLRS_DIR" = "" ] ; then
 		#TODO: check with user for another dir
-		read -e -p "use $HOME/Templates/tmpl-rs as tmpl-rs template dir? [Y/n]>" -n 1 usi
+		read -e -p "use $PWD/tmpl-rs as tmpl-rs' template dir? [Y/n]>" -n 1 usi
 		if [[ $usi == "n" ]] ; then
 			read -e -p "set tmpl-rs template dir>" TMPLRS_DIR
 		else
-			TMPLRS_DIR="$HOME/Templates/tmpl-rs"
+			TMPLRS_DIR="$PWD/tmpl-rs"
 		fi
 	fi
 	if [ -d $TMPLRS_DIR ] ; then
