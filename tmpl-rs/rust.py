@@ -21,3 +21,6 @@ for (crate, features) in crates:
 		CMD(f"cargo add {crate} --features {' '.join(features)}")
 	else:
 		CMD(f"cargo add {crate}")
+
+with open(".gitignore", "w") as f:
+    f.write("target")
