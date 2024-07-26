@@ -38,6 +38,7 @@ iab cosnt const
 " abbreviation
 iab vsqrt √
 iab vlambda λ
+iab vdelta Δ
 
 " Fancy colors
 if $INTTY == "true"
