@@ -5,7 +5,7 @@ fi
 
 nvim() {
 	if [ -n "$NVIM" ] ; then
-		/bin/nvim --server $NVIM --remote-send "<ESC>:e $1<CR>"
+		/bin/nvim -u $HOME/.config/nvim/init.lua --server $NVIM --remote-send "<ESC>:e $1<CR>"
 		exit
 	else
 		/bin/nvim -n --listen "${HOME}/.cache/nvim/$$-server.pipe" $@
