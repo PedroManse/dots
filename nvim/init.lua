@@ -30,6 +30,14 @@ require("lazy").setup({
 	'HerringtonDarkholme/yats.vim',
 	'rust-lang/rust.vim',
 	{
+		"rbong/vim-flog",
+		lazy = true,
+		cmd = { "Flog", "Flogsplit", "Floggit" },
+		dependencies = {
+			"tpope/vim-fugitive",
+		},
+	},
+	{
 		'dense-analysis/ale',
 		config = function()
 			vim.g.ale_fixers = {
