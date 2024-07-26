@@ -61,7 +61,7 @@ function setup_install() {
 
 setup_install
 
-apps="unzip golang-go curl wget doas"
+apps="unzip golang-go curl wget doas gcc"
 for app in $apps ; do
 	if [[ $(command -v $app) || $(dpkg -s $app 2> /dev/null) ]] ; then : ; else
 		read -e -p "download $app? [y/N]>" -n 1 usi
