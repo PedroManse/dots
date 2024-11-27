@@ -111,6 +111,9 @@ mkdir -p ~/.config/nvim
 echo "setup neovim config symlink"
 ln -sf "$(pwd)/nvim" ~/.config/nvim
 
+echo "setup alacritty config symlink"
+ln -sf "$(pwd)/alacritty.toml" ~/.config/alacritty.toml
+
 echo "setup .screenrc symlink"
 ln -sf "$(pwd)/screenrc" ~/.screenrc
 

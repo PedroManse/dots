@@ -1,0 +1,10 @@
+live_config_reload = true
+
+[window]
+startup_mode="Fullscreen"
+
+[font]
+size = 7.6
+
+[colors]
+primary.background = "#000000"
