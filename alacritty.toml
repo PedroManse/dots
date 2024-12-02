@@ -4,7 +4,11 @@ live_config_reload = true
 startup_mode="Fullscreen"
 
 [font]
-size = 7.6
+size = 6.2
 
 [colors]
 primary.background = "#000000"
+
+[mouse]
+hide_when_typing = true
+
