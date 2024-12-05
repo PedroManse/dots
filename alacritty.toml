@@ -1,10 +1,12 @@
 live_config_reload = true
 
 [window]
+title = "Alacritty"
 startup_mode="Fullscreen"
 
 [font]
-size = 6.2
+size = 6.8
+normal = {family = "mononoki"}
 
 [colors]
 primary.background = "#000000"
