@@ -1,8 +1,11 @@
 #! /bin/sh
+
+# computer-specific config
 if [ -f ~/.shenv.sh ] ; then
 	. ~/.shenv.sh
 fi
 
+# if on neovim terminal, open file in neovim instance
 nvim() {
 	if [ -n "$NVIM" ] ; then
 		/bin/nvim -u $HOME/.config/nvim/init.lua --server $NVIM --remote-send "<ESC>:e $1<CR>"
@@ -12,42 +15,25 @@ nvim() {
 	fi
 }
 
-alias svi="sudo nvim -u $HOME/.config/nvim/init.lua"
-alias tmod="nvim $HOME/.shrc.sh; source $HOME/.shrc.sh"
-alias ref="source $HOME/.shrc.sh"
-alias vmod="nvim $HOME/.config/nvim/init.lua"
-alias cat="$HOME/.cargo/bin/bat"
-alias ocat="/bin/cat"
-alias ls="$HOME/.cargo/bin/eza -h"
-alias hq="$HOME/.cargo/bin/htmlq"
-alias ..="cd .."
-alias ...="cd ../.."
-alias _="nvim $HOME/_"
-alias py10="/bin/python3.10"
-alias flog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) -%G?- %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
-alias sqli="sqlite3 --header --nullvalue '<{nil}>' --column"
-
+# discover jira ticket by git branch
 issue() {
 	branch=$(git b | filte ^'*' | sed 's/* [A-Z]\+-\([0-9]*\).*/\1/')
 	if [ $1 ] ; then
 		jira issue view $1 | /bin/cat
-	else 
+	else
 		jira issue view $branch | /bin/cat
 	fi
 }
 
-thispr() {
-	branch=$(git b | filte ^'*' | sed 's/* //')
-	gh pr view $branch
-}
-
 export GPG_TTY=$(tty)
 export PSQL_EDITOR="/bin/nvim -n -u $HOME/.vimrc"
-
-alias killJobs="for i in \$(jobs -p | sed 's/[-+]//' | awk '{print \$2}')
-do
-	kill \$i
-done"
+export ZEN="true"
+export BAT_THEME="zenburn"
+export GOPATH=$HOME
+export TERM=xterm-256color
+export EDITOR="nvim"
+export VISUAL="nvim"
+export PAGER="less"
 
 if [ -d "$DEVAPS" ] ; then
 	export PATH="$DEVAPS/bin:$PATH"
@@ -66,6 +52,16 @@ if [ -d "$HOME/.deno" ] ; then
 	export PATH="$PATH:$DENO_INSTALL/bin"
 fi
 
+# bun completions
+if [ -d "$HOME/.bun" ] ; then
+	# [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+	# bun
+	export BUN_INSTALL="$HOME/.bun"
+	export PATH="$PATH:$BUN_INSTALL/bin"
+fi
+
+
 if [ -d "/usr/lib/go-1.21/bin" ] ; then
 	export PATH="$PATH:/usr/lib/go-1.21/bin"
 fi
@@ -74,57 +70,6 @@ if [ -d "$HOME/.nvm" ] ; then
 	export NVM_DIR="$HOME/.nvm"
 	[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 	[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
-
-export ZEN="true"
-export BAT_THEME="zenburn"
-
-#lias node="screen -R"
-alias grep="grep --color=always -rn"
-screenat() {
-	back=$(pwd)
-	cd $1
-	if [[ $WINDOW = "" ]]
-	then
-		screen
-		cd $back
-	else
-		echo "already in GNU screen"
-	fi
-}
-
-alias old="screenat $HOME/code/nosso-grupo/PiaCheia/servidor/"
-alias clock="screenat $HOME/working/clock/"
-alias bot="screenat $HOME/working/go-wabot"
-
-alias SetCapPort="sudo setcap CAP_NET_BIND_SERVICE+pei"
-
-alias gs="git status"
-alias gp="git push"
-alias gd="git diff"
-
-alias col_reset="echo -ne '\x1b[0m'"
-alias col_nc="echo -ne '\x1b[38;2;255;255;255m'"
-alias col_red="echo -ne '\x1b[31m'"
-alias col_green="echo -ne '\x1b[32m'"
-alias col_bold="echo -ne '\x1b[1m'"
-alias col_underline="echo -ne '\x1b[4m'"
-alias col_blink="echo -ne '\x1b[5m'"
-alias col_reverse="echo -ne '\x1b[7m'"
-alias er='echo -ne $?'
-
-export GOPATH=$HOME
-export TERM=xterm-256color
-export EDITOR="nvim"
-export VISUAL="nvim"
-export PAGER="less"
-
-if [[ $COMPUTER_NAME == "" ]] ; then
-	if [ -f /etc/hostname ] ; then
-		COMPUTER_NAME=$(cat /etc/hostname)
-	else
-		COMPUTER_NAME="unnamed computer"
-	fi
 fi
 
 export TTY=$(tty)
@@ -137,17 +82,64 @@ else
 		export BROWSER=w3m
 	else
 		export INTTY=""
-		export BROWSER=firefox
+		export BROWSER=open
+	fi
+fi
+
+
+alias SetCapPort="sudo setcap CAP_NET_BIND_SERVICE+pei"
+
+# git/github
+alias gs="git status"
+alias gp="git push"
+alias gd="git diff"
+alias gpr="gh pr create -B"
+alias gbr="git checkout -b"
+
+# colors
+alias col_reset="echo -ne '\x1b[0m'"
+alias col_nc="echo -ne '\x1b[38;2;255;255;255m'"
+alias col_red="echo -ne '\x1b[31m'"
+alias col_green="echo -ne '\x1b[32m'"
+alias col_bold="echo -ne '\x1b[1m'"
+alias col_underline="echo -ne '\x1b[4m'"
+alias col_blink="echo -ne '\x1b[5m'"
+alias col_reverse="echo -ne '\x1b[7m'"
+
+alias killJobs="jobs -p | xargs kill"
+alias svi="sudo nvim -u $HOME/.config/nvim/init.lua"
+alias tmod="nvim $HOME/.shrc.sh; source $HOME/.shrc.sh"
+alias ref="source $HOME/.shrc.sh"
+alias vmod="nvim $HOME/.config/nvim/init.lua"
+alias cat="$HOME/.cargo/bin/bat"
+alias ocat="/bin/cat"
+alias ls="$HOME/.cargo/bin/eza -h"
+alias hq="$HOME/.cargo/bin/htmlq"
+alias ..="cd .."
+alias ...="cd ../.."
+alias _="nvim $HOME/_"
+alias py10="/bin/python3.10"
+alias flog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) -%G?- %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
+alias sqli="sqlite3 --header --nullvalue '<{nil}>' --column"
+
+if [[ $COMPUTER_NAME == "" ]] ; then
+	if [ -f /etc/hostname ] ; then
+		COMPUTER_NAME=$(cat /etc/hostname)
+	else
+		COMPUTER_NAME="unnamed computer"
 	fi
 fi
 
 format_dir() {
 	thisdir=$1
+	# if fpwd-daemon is running, use it
 	if fdir=$(echo $thisdir | socat - UNIX-CONNECT:/tmp/fpwd-rs.sock 2> /dev/null) ; then
 		echo $fdir
 	else
+		# else, try pwd-rs
 		if fdir=$(PWD=$thisdir "pwd-rs") ; then
 			echo $fdir
+		# else, just don't format path
 		else
 			echo $thisdir
 		fi
@@ -160,19 +152,24 @@ export PS0=""
 PROMPT_COMMAND=prompt_command
 prompt_command() {
 	e=$?
+	# print formatted working path
 	fdir=$(format_dir $PWD)
 	PS="${fdir}$(col_reset)"
 
+	# in case of error, show code
 	if [[ $e != '0' ]] ; then
 		PS="${PS} [$(col_bold)$(col_underline)$(col_reverse)$(col_red)$e$(col_reset)]"
 	fi
 
+	# show git status
 	PS="${PS}$(gs2)"
 
-	if [ ! -z $COMPUTER_NAME ] ; then
+	# show computer name if it's not "."
+	if [ -n "$COMPUTER_NAME" -a "$COMPUTER_NAME" != "." ] ; then
 		PS="$COMPUTER_NAME: ${PS}"
 	fi
 
+	# pushd/popd list
 	dirlist=$(dirs)
 	dircount=$(echo "$dirlist" | wc -w)
 	stack=$(($dircount))
@@ -190,32 +187,6 @@ prompt_command() {
 	fi
 
 	export PS1="${PS}\nλ"
-}
-
-rcom() {
-	file=$1
-	out=$2
-
-	if ! [[ "$file" =~ ^.*\.rs$ ]] ; then
-		file="$file.rs"
-	fi
-
-	if [ "$out" = "" ] ; then
-		out=${file%.rs}
-	fi
-
-	t1=$(date +%s.%N)
-	rustc -v -C opt-level=2 -C prefer-dynamic $file -o $out
-	if [ $? = 0 ] ; then
-		t2=$(date +%s.%N)
-		elapsed=$(python -c "
-e = ($t2-$t1)
-if e > 1:
-	print(f'{round(e, 3)}s')
-else:
-	print(f'{int(e*1000)}ms')")
-		echo "Compiled $file -> $(col_green)*$out$(col_reset) in ${elapsed}"
-	fi
 }
 
 ccom() {
@@ -275,27 +246,15 @@ cloneat() {
 	git clone "https://github.com/$author/$repo" "$todir"
 }
 
-# bun completions
-if [ -d "$HOME/.bun" ] ; then
-	# [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-	# bun
-	export BUN_INSTALL="$HOME/.bun"
-	export PATH="$PATH:$BUN_INSTALL/bin"
-fi
-
 blt() {
 	dvc=$1
 	case $dvc in
 		30|q30|Q30)
 			dvc="E8:EE:CC:6F:35:FE"
 		;;
-		uwu)
-			dvc="5D:E2:D1:57:82:0A"
-		;;
 		bug)
 			dvc="9C:19:C2:16:86:55"
-			;;
+		;;
 	esac
 	act=$2
 	case $act in
