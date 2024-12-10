@@ -52,10 +52,11 @@ imap("<A-j>	<ESC>:m", "+1<CR>i")
 imap("<A-k>	<ESC>:m", "-2<CR>i")
 imap("jj", "<ESC>")
 
-imap([[<A-(>]], "()<LEFT>")
-imap([[<A-[>]], "[]<LEFT>")
-imap([[<A-{>]], "{}<LEFT>")
-imap([[<A-">]], [[""<LEFT>]])
+-- handled by nvim-autopairs
+--imap([[<A-(>]], "()<LEFT>")
+--imap([[<A-[>]], "[]<LEFT>")
+--imap([[<A-{>]], "{}<LEFT>")
+--imap([[<A-">]], [[""<LEFT>]])
 imap([[<A-<>]], "<><LEFT>")
 imap([[<C-l>]], "<ESC>@q")
 
