@@ -54,6 +54,23 @@ require("lazy").setup({
 				rust = {"cargo"},
 			}
 		end
+	},
+	{
+		'windwp/nvim-autopairs',
+		config = true,
+		opts = {
+			enable_afterquote = false,
+			map_bs = false
+		}
+	},
+	{
+		"utilyre/sentiment.nvim",
+		version = "*",
+		opts = { },
+		init = function()
+			-- `matchparen.vim` needs to be disabled manually in case of lazy loading
+			vim.g.loaded_matchparen = 1
+		end,
 	}
 }, opts)
 
