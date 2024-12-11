@@ -56,21 +56,26 @@ require("lazy").setup({
 		end
 	},
 	{
-		'windwp/nvim-autopairs',
-		config = true,
-		opts = {
-			enable_afterquote = false,
-			map_bs = false
-		}
-	},
-	{
 		"utilyre/sentiment.nvim",
 		version = "*",
-		opts = { },
+		event = "VeryLazy", -- keep for lazy loading
+		opts = {
+			-- config
+		},
 		init = function()
 			-- `matchparen.vim` needs to be disabled manually in case of lazy loading
 			vim.g.loaded_matchparen = 1
 		end,
+	},
+	{
+		'windwp/nvim-autopairs',
+		event = "InsertEnter",
+		config = true,
+		opts = {
+			enable_bracket_in_quote = true,
+			 -- removed %.
+			ignored_next_char = [=[[%w%%%'%[%"%`%$]]=]
+		}
 	}
 }, opts)
 
