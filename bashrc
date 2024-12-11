@@ -133,7 +133,8 @@ fi
 format_dir() {
 	thisdir=$1
 	# if fpwd-daemon is running, use it
-	if fdir=$(echo $thisdir | socat - UNIX-CONNECT:/tmp/fpwd-rs.sock 2> /dev/null) ; then
+	fdir=$(echo $thisdir | socat - UNIX-CONNECT:/tmp/fpwd-rs.sock 2> /dev/null)
+	if [ $? = 0 ] ; then
 		echo $fdir
 	else
 		# else, try pwd-rs
