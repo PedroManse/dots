@@ -1,5 +1,6 @@
 vim.cmd([[
-autocmd FileType c,cpp,javascript,typescript,sql,css,rust,zig nnoremap <buffer> ; msA;<ESC>`s
+autocmd FileType rust let g:ale_enabled = 0
+autocmd FileType c,cpp,javascript,typescript,sql,css,nix,rust,zig nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType typescript,javascript iab jsf function
 			\|iab jaf async function
 			\|iab eaf export async function
@@ -11,7 +12,6 @@ autocmd FileType typescript,javascript iab jsf function
 
 autocmd FileType rust nnoremap <buffer> <C-h>h :Crun<CR>a
 autocmd FileType rust nnoremap <buffer> <C-h><C-h> :Ccheck<CR>a
-autocmd FileType rust nnoremap <buffer> <C-h>c :SyntasticCheck<CR>
 
 autocmd FileType go nnoremap <buffer> ; msA,<ESC>`s
 autocmd BufWinEnter *.gohtml setfiletype html

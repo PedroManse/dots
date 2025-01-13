@@ -28,3 +28,23 @@ vim.opt.whichwrap='[,],<,>'
 vim.opt.encoding='UTF-8'
 vim.opt.wrap = false
 vim.opt.lz=true -- lazy redraw on macro execution
+
+-- ALE
+vim.g.ale_linters_explicit=1
+
+-- git signs
+require('gitsigns').setup {
+	signs = {
+		add		  = { text = '+' },
+		change	   = { text = '~' },
+		delete	   = { text = '-' },
+		topdelete	= { text = '-' },
+		changedelete = { text = '~' },
+		untracked	= { text = '┆' },
+	}
+}
+
+-- emmet
+vim.g.user_emmet_leader_key=","
+vim.g.user_emmet_install_global=0
+vim.cmd([[ autocmd FileType html,css EmmetInstall ]])

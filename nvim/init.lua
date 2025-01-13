@@ -11,11 +11,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- emmet
-vim.g.user_emmet_leader_key=","
-vim.g.user_emmet_install_global=0
-vim.cmd([[ autocmd FileType html,css EmmetInstall ]])
-
 require("lazy").setup({
 	'hrsh7th/nvim-cmp',
 	'hrsh7th/cmp-nvim-lsp',
@@ -48,13 +43,11 @@ require("lazy").setup({
 				sh = {"shfmt"},
 				javascript = {"eslint"},
 				typescript = {"tslint", "eslint"},
-				rust = {},
 				python = {"black"},
 			}
 			vim.g.ale_linters = {
 				javascript = {"eslint"},
 				typescript = {"eslint", "typecheck"},
-				rust = {},
 			}
 		end
 	},
@@ -82,18 +75,7 @@ require("lazy").setup({
 	"github/copilot.vim"
 }, opts)
 
-vim.cmd([[Copilot disable]])
-
-require('gitsigns').setup {
-	signs = {
-		add		  = { text = '+' },
-		change	   = { text = '~' },
-		delete	   = { text = '-' },
-		topdelete	= { text = '-' },
-		changedelete = { text = '~' },
-		untracked	= { text = '┆' },
-	}
-}
+vim.api.nvim_command("Copilot disable")
 
 require("lsp") -- ./lua/lsp.lua
 require('maps') -- ./lua/maps.lua
