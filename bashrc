@@ -1,5 +1,13 @@
 #! /bin/sh
 
+if [ -z "$COMPUTER_NAME" ] ; then
+	if [ -f /etc/hostname ] ; then
+		COMPUTER_NAME=$(cat /etc/hostname)
+	else
+		COMPUTER_NAME="unnamed computer"
+	fi
+fi
+
 # computer-specific config
 if [ -f ~/.shenv.sh ] ; then
 	. ~/.shenv.sh
@@ -46,6 +54,11 @@ fi
 if [ -d "$HOME/.cargo" ] ; then
 	export PATH="$PATH:$HOME/.cargo/bin"
 fi
+
+if [ -d "$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/" ] ; then
+	export PATH="$PATH:$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin"
+fi
+
 
 if [ -d "$HOME/.deno" ] ; then
 	export DENO_INSTALL="$HOME/.deno"
@@ -121,14 +134,6 @@ alias _="nvim $HOME/_"
 alias py10="/bin/python3.10"
 alias flog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) -%G?- %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
 alias sqli="sqlite3 --header --nullvalue '<{nil}>' --column"
-
-if [[ $COMPUTER_NAME == "" ]] ; then
-	if [ -f /etc/hostname ] ; then
-		COMPUTER_NAME=$(cat /etc/hostname)
-	else
-		COMPUTER_NAME="unnamed computer"
-	fi
-fi
 
 format_dir() {
 	thisdir=$1
@@ -329,3 +334,6 @@ serve() {
 	fi
 	python3 -m http.server $port -d $dir -p "HTTP/1.1"
 }
+
+complete -cf doas
+complete -F _command doas
