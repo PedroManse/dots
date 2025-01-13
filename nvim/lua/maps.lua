@@ -18,11 +18,15 @@ end
 -- nMaps
 nmap("<C-t>", ":w<CR>:term<CR>a")
 nmap("<SPACE>", "<ESC>:noh<CR>:<BS>")
+
 --- ALE
 nmap("<A-S-j>", ":ALEGoToDefinition<CR>")
 nmap("<A-S-n>", ":ALENextWrap<CR>")
 nmap("<A-S-k>", ":ALEFix<CR>")
 nmap("<A-S-m>", ":ALEDetail<CR>")
+
+-- copilot
+nmap("<C-w>c", ":Copilot panel<CR>")
 
 -- move the screen
 nmap("<C-j>", "<C-e>")
@@ -52,6 +56,7 @@ imap("<A-j>	<ESC>:m", "+1<CR>i")
 imap("<A-k>	<ESC>:m", "-2<CR>i")
 imap("jj", "<ESC>")
 
+imap([[A-<]], "<><ESC><left>")
 imap([[<C-l>]], "<ESC>@q")
 
 -- tMaps

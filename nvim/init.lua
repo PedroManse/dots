@@ -17,6 +17,9 @@ vim.g.user_emmet_install_global=0
 vim.cmd([[ autocmd FileType html,css EmmetInstall ]])
 
 require("lazy").setup({
+	'hrsh7th/nvim-cmp',
+	'hrsh7th/cmp-nvim-lsp',
+	'neovim/nvim-lspconfig',
 	'mg979/vim-visual-multi',
 	'lewis6991/gitsigns.nvim',
 	'mattn/emmet-vim',
@@ -45,20 +48,19 @@ require("lazy").setup({
 				sh = {"shfmt"},
 				javascript = {"eslint"},
 				typescript = {"tslint", "eslint"},
-				rust = {"rustfmt"},
+				rust = {},
 				python = {"black"},
 			}
 			vim.g.ale_linters = {
 				javascript = {"eslint"},
 				typescript = {"eslint", "typecheck"},
-				rust = {"cargo"},
+				rust = {},
 			}
 		end
 	},
 	{
 		"utilyre/sentiment.nvim",
 		version = "*",
-		event = "VeryLazy", -- keep for lazy loading
 		opts = {
 			-- config
 		},
@@ -73,22 +75,27 @@ require("lazy").setup({
 		config = true,
 		opts = {
 			enable_bracket_in_quote = true,
-			 -- removed %.
+			-- removed %.
 			ignored_next_char = [=[[%w%%%'%[%"%`%$]]=]
 		}
-	}
+	},
+	"github/copilot.vim"
 }, opts)
+
+vim.cmd([[Copilot disable]])
 
 require('gitsigns').setup {
 	signs = {
-		add          = { text = '+' },
-		change       = { text = '~' },
-		delete       = { text = '-' },
-		topdelete    = { text = '-' },
+		add		  = { text = '+' },
+		change	   = { text = '~' },
+		delete	   = { text = '-' },
+		topdelete	= { text = '-' },
 		changedelete = { text = '~' },
-		untracked    = { text = '┆' },
+		untracked	= { text = '┆' },
 	}
 }
+
+require("lsp") -- ./lua/lsp.lua
 require('maps') -- ./lua/maps.lua
 require('options') -- ./lua/options.lua
 require('vim') -- ./lua/vim.lua
