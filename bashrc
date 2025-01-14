@@ -13,13 +13,24 @@ if [ -f ~/.shenv.sh ] ; then
 	. ~/.shenv.sh
 fi
 
+[ ! -f /bin/bash ]
+export FHS=$?
+
+bin () {
+	if [ $FHS = 1 ] ; then
+		"/bin/$1" ${@:2}
+	else
+		"/run/current-system/sw/bin/$1" ${@:2}
+	fi
+}
+
 # if on neovim terminal, open file in neovim instance
 nvim() {
 	if [ -n "$NVIM" ] ; then
-		/bin/nvim -u $HOME/.config/nvim/init.lua --server $NVIM --remote-send "<ESC>:e $1<CR>"
+		bin nvim -u $HOME/.config/nvim/init.lua --server $NVIM --remote-send "<ESC>:e $1<CR>"
 		exit
 	else
-		/bin/nvim -n --listen "${HOME}/.cache/nvim/$$-server.pipe" $@
+		bin nvim -n --listen "${HOME}/.cache/nvim/$$-server.pipe" $@
 	fi
 }
 
@@ -27,14 +38,14 @@ nvim() {
 issue() {
 	branch=$(git b | filte ^'*' | sed 's/* [A-Z]\+-\([0-9]*\).*/\1/')
 	if [ $1 ] ; then
-		jira issue view $1 | /bin/cat
+		jira issue view $1 | bin cat
 	else
-		jira issue view $branch | /bin/cat
+		jira issue view $branch | bin cat
 	fi
 }
 
 export GPG_TTY=$(tty)
-export PSQL_EDITOR="/bin/nvim -n -u $HOME/.vimrc"
+export PSQL_EDITOR="bin nvim -n -u $HOME/.vimrc"
 export ZEN="true"
 export BAT_THEME="zenburn"
 export GOPATH=$HOME
@@ -125,13 +136,13 @@ alias tmod="nvim $HOME/.shrc.sh; source $HOME/.shrc.sh"
 alias ref="source $HOME/.shrc.sh"
 alias vmod="nvim $HOME/.config/nvim/init.lua"
 alias cat="$HOME/.cargo/bin/bat"
-alias ocat="/bin/cat"
+alias ocat="bin cat"
 alias ls="$HOME/.cargo/bin/eza -h"
 alias hq="$HOME/.cargo/bin/htmlq"
 alias ..="cd .."
 alias ...="cd ../.."
 alias _="nvim $HOME/_"
-alias py10="/bin/python3.10"
+alias py10="bin python3.10"
 alias flog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) -%G?- %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
 alias sqli="sqlite3 --header --nullvalue '<{nil}>' --column"
 
