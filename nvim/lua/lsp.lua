@@ -52,3 +52,4 @@ lspconfig.rust_analyzer.setup({
 	}
 })
 
+lspconfig.ts_ls.setup{}
