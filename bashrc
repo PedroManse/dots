@@ -16,6 +16,7 @@ fi
 [ ! -f /bin/bash ]
 export FHS=$?
 
+#TODO check $HOME/.nix-profile/bin
 bin () {
 	if [ $FHS = 1 ] ; then
 		"/bin/$1" ${@:2}
@@ -121,7 +122,7 @@ nix-clean() {
 	sudo nix-collect-garbage -d
 }
 alias nix-ehome="$EDITOR $HOME/.config/nixpkgs/home.nix"
-alias nix-esys="sudo $EDITOR /etc/nixos/configuration.nix"
+alias nix-esys="$EDITOR /etc/nixos/configuration.nix"
 
 # git/github
 alias gs="git status"
