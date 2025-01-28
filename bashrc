@@ -44,6 +44,11 @@ issue() {
 	fi
 }
 
+nixclean() {
+	nix-collect-garbage --delete-old
+	sudo nix-collect-garbage -d
+}
+
 export GPG_TTY=$(tty)
 export PSQL_EDITOR="bin nvim -n -u $HOME/.vimrc"
 export ZEN="true"
