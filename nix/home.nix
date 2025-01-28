@@ -27,12 +27,6 @@ in
 		];
 		/* Here goes the rest of your home-manager config, e.g. home.packages = [ pkgs.foo ]; */
 
-		#TODO: make gpg-agent find pinEntry pkg
-		#services.gpg-agent = {
-		#	enable = true;
-		#	pinentryPackage = pkgs.pinentry-curses;
-		#};
-		#programs.gpg.enable = true;
 		programs = {
 			waybar.enable = true;
 			wofi.enable = true;
@@ -62,7 +56,7 @@ in
 						directory = ".";
 					};
 					commit = {
-						gpgsign = false;
+						gpgsign = true;
 					};
 					merge = {
 						conflictstyle = "diff3";
@@ -77,6 +71,8 @@ in
 					diff = {
 						colorMoved = false;
 					};
+					# defined in ~/.gitconfig; not here
+					#user = { signingkey = ""; };
 					push = {
 						autoSetupRemote = true;
 						default = "current";
