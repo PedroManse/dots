@@ -12,6 +12,9 @@ in
 		nixpkgs.config.allowUnfree = true;
 		home.stateVersion = "24.11";
 		home.packages = with pkgs; [
+			delta
+			bat
+			eza
 			typescript-language-server
 			dbeaver-bin
 			bitwarden-desktop
@@ -87,7 +90,7 @@ in
 			bash = {
 				enable = true;
 				bashrcExtra = ''
-					. ~/.shrc.sh
+					. ~/dots/bashrc
 				'';
 			};
 		};
