@@ -44,10 +44,6 @@ issue() {
 	fi
 }
 
-nixclean() {
-	nix-collect-garbage --delete-old
-	sudo nix-collect-garbage -d
-}
 
 export GPG_TTY=$(tty)
 export PSQL_EDITOR="bin nvim -n -u $HOME/.vimrc"
@@ -117,6 +113,15 @@ fi
 
 
 alias SetCapPort="sudo setcap CAP_NET_BIND_SERVICE+pei"
+
+#nix
+alias nix-switch="sudo nixos-rebuild switch"
+nix-clean() {
+	nix-collect-garbage --delete-old
+	sudo nix-collect-garbage -d
+}
+alias nix-ehome="$EDITOR $HOME/.config/nixpkgs/home.nix"
+alias nix-esys="sudo $EDITOR /etc/nixos/configuration.nix"
 
 # git/github
 alias gs="git status"
