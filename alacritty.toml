@@ -1,12 +1,8 @@
 [general]
 live_config_reload = true
 
-[window]
-title = "Alacritty"
-startup_mode="Fullscreen"
-
 [font]
-size = 6.8
+size = 9
 normal = {family = "mononoki"}
 
 [colors]
