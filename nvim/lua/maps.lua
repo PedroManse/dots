@@ -21,7 +21,8 @@ nmap("<SPACE>", "<ESC>:noh<CR>:<BS>")
 
 --- ALE
 nmap("<A-S-j>", ":ALEGoToDefinition<CR>")
-nmap("<A-S-n>", ":ALENextWrap<CR>")
+-- nmap("<A-S-n>", ":ALENextWrap<CR>")
+nmap("<A-S-n>", ":lua= vim.diagnostic.goto_next{wrap = true}<CR>")
 nmap("<A-S-k>", ":ALEFix<CR>")
 nmap("<A-S-m>", ":ALEDetail<CR>")
 
