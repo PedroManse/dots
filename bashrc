@@ -37,7 +37,7 @@ nvim() {
 
 # discover jira ticket by git branch
 issue() {
-	branch=$(git b | filte ^'*' | sed 's/* [A-Z]\+-\([0-9]*\).*/\1/')
+	branch=$(git branch | filte ^'*' | sed 's/* [A-Z]\+-\([0-9]*\).*/\1/')
 	if [ $1 ] ; then
 		jira issue view $1 | bin cat
 	else
@@ -127,6 +127,7 @@ alias nix-esys="$EDITOR /etc/nixos/configuration.nix"
 # git/github
 alias gs="git status"
 alias gp="git push"
+alias ghp="gh repo create --public --push -s ."
 alias gd="git diff"
 alias gpr="gh pr create -B"
 alias gbr="git checkout -b"
