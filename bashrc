@@ -175,7 +175,7 @@ alias sqli="sqlite3 --header --nullvalue '<{nil}>' --column"
 format_dir() {
 	thisdir=$1
 	# if fpwd-daemon is running, use it
-	fdir=$(echo $thisdir | socat - UNIX-CONNECT:/tmp/fpwd-rs.sock 2> /dev/null)
+	fdir=$(echo $thisdir | socat - UNIX-CONNECT:/run/fpwd-rs.sock 2> /dev/null)
 	if [ $? = 0 ] ; then
 		echo $fdir
 	else
