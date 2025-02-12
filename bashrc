@@ -25,13 +25,27 @@ bin () {
 	fi
 }
 
+# TODO search all components from path
+get_bin_path() {
+	if [ $FHS = 1 ] ; then
+		echo "/bin/$1" ${@:2}
+	else
+		echo "/run/current-system/sw/bin/$1" ${@:2}
+	fi
+}
+
 # if on neovim terminal, open file in neovim instance
 nvim() {
+	nvim_bin=$(get_bin_path "nvim")
+	# if terminal is running inside nvim, send command to host
 	if [ -n "$NVIM" ] ; then
-		bin nvim -u $HOME/.config/nvim/init.lua --server $NVIM --remote-send "<ESC>:e $1<CR>"
+		# get absolute path and replace " " with "\ "
+		abs_path=$(readlink --canonicalize $1 | sed s'/ /\\ /'g)
+		$nvim_bin --server $NVIM --remote-send "<ESC>:edit $abs_path<CR>"
 		exit
+	# otherwise, initialize a server
 	else
-		bin nvim -n --listen "${HOME}/.cache/nvim/$$-server.pipe" $@
+		$nvim_bin -n --listen "${HOME}/.cache/nvim/$$-server.pipe" $@
 	fi
 }
 
