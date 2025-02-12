@@ -3,6 +3,7 @@ proj_name=$1
 
 cargo new --bin $proj_name
 cd $proj_name
+echo "target" > .gitignore
 
 log=$(mktemp)
 crate_name=""
