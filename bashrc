@@ -16,36 +16,36 @@ fi
 [ ! -f /bin/bash ]
 export FHS=$?
 
-#TODO check $HOME/.nix-profile/bin
-bin () {
-	if [ $FHS = 1 ] ; then
-		"/bin/$1" ${@:2}
-	else
-		"/run/current-system/sw/bin/$1" ${@:2}
-	fi
-}
-
-# TODO search all components from path
+# $1 = program to find
+# $2 optional = ':' separated dirs for PATH
 get_bin_path() {
-	if [ $FHS = 1 ] ; then
-		echo "/bin/$1" ${@:2}
-	else
-		echo "/run/current-system/sw/bin/$1" ${@:2}
-	fi
+	paths=${2:-$PATH}
+	for dr in $(echo $paths | tr ':' '\n') ; do
+		if [ -f "$dr/$1" ] ; then
+			echo "$dr/$1"
+			return 0
+		fi
+	done
+	return 1
+}
+# mfw i just remade whereis -_-
+
+bin() {
+	$(get_bin_path $1 $PATH) ${@:2}
 }
 
 # if on neovim terminal, open file in neovim instance
 nvim() {
-	nvim_bin=$(get_bin_path "nvim")
+	nvim_path=$(get_bin_path "nvim")
 	# if terminal is running inside nvim, send command to host
 	if [ -n "$NVIM" ] ; then
 		# get absolute path and replace " " with "\ "
 		abs_path=$(readlink --canonicalize $1 | sed s'/ /\\ /'g)
-		$nvim_bin --server $NVIM --remote-send "<ESC>:edit $abs_path<CR>"
+		$nvim_path --server $NVIM --remote-send "<ESC>:edit $abs_path<CR>"
 		exit
 	# otherwise, initialize a server
 	else
-		$nvim_bin -n --listen "${HOME}/.cache/nvim/$$-server.pipe" $@
+		$nvim_path -n --listen "${HOME}/.cache/nvim/$$-server.pipe" $@
 	fi
 }
 
