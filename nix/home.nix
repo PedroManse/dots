@@ -11,7 +11,6 @@ in
 		nixpkgs.config.allowUnfree = true;
 		home.stateVersion = "24.11";
 		home.packages = with pkgs; [
-			delta
 			typescript-language-server
 			dbeaver-bin
 			bitwarden-desktop
@@ -59,6 +58,9 @@ in
 					c = "checkout";
 					b = "branch";
 				};
+				delta = {
+					enable = true;
+				};
 				extraConfig = {
 					safe = {
 						directory = ".";
@@ -71,10 +73,6 @@ in
 					};
 					core = {
 						editor = "nvim";
-						pager = "delta";
-					};
-					interactive = {
-						diffFilter = "delta --color-only";
 					};
 					diff = {
 						colorMoved = false;
