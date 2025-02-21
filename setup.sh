@@ -20,11 +20,11 @@ mkdir -p "$workdir"
 
 # setup config
 mkdir -p ~/.config/nvim
-ln -sf "$(pwd)/nvim" ~/.config/nvim
+ln -sf "$PWD/nvim" ~/.config/nvim
 
 echo "setup alacritty config"
 mkdir "$HOME/.config/alacritty"
-ln -sf "$(pwd)/alacritty.toml" ~/.config/alacritty/commonconfig.toml
+ln -sf "$PWD/alacritty.toml" ~/.config/alacritty/commonconfig.toml
 alacritty_majro_version=$(alacritty --version | cut -d' ' -f2 | cut -d. -f2)
 if [ $alacritty_majro_version -ge "14" ] ; then
 	echo "[general]" > ~/.config/alacritty/alacritty.toml
@@ -35,7 +35,7 @@ echo "live_config_reload = true" >> ~/.config/alacritty/alacritty.toml
 echo "import = [ '~/.config/alacritty/commonconfig.toml' ]" >> ~/.config/alacritty/alacritty.toml
 
 echo "setup shrc.sh symlink"
-ln -sf "$(pwd)/bashrc" ~/.shrc.sh
+ln -sf "$PWD/bashrc" ~/.shrc.sh
 
 echo "setup shenv.sh file"
 echo "# this computer's env file" > ~/.shenv.sh
@@ -63,7 +63,7 @@ if [[ $usi == "y" ]] ; then
 	fi
 	echo "export TMPLRS_DIR=\"${TMPLRS_DIR}\"" >> ~/.shenv.sh
 
-	ln -sf "$(pwd)/tmpl-rs" "$TMPLRS_DIR"
+	ln -sf "$PWD/tmpl-rs" "$TMPLRS_DIR"
 fi
 
 # clone or update github repo
