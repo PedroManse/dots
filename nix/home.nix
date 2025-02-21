@@ -106,7 +106,6 @@ input {
 }
 
 exec-once=waybar
-exec-once=hyprpaper
 
 			'';
 

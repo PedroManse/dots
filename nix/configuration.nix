@@ -122,7 +122,6 @@ keep-derivations = true
 		gcc14
 		hyprshot
 		hyprlock
-		hyprpaper
 		neovim
 	];
 
