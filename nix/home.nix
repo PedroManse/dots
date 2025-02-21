@@ -8,12 +8,10 @@ in
 	];
 
 	home-manager.users.manse = {pkgs, ...}: {
-		/* The home.stateVersion option does not have a default and must be set */
 		nixpkgs.config.allowUnfree = true;
 		home.stateVersion = "24.11";
 		home.packages = with pkgs; [
 			delta
-			bat
 			eza
 			typescript-language-server
 			dbeaver-bin
@@ -26,9 +24,9 @@ in
 			sqlite
 			vlc
 		];
-		/* Here goes the rest of your home-manager config, e.g. home.packages = [ pkgs.foo ]; */
 
 		programs = {
+			bat.enable = true;
 			waybar.enable = true;
 			wofi = {
 				enable = true;
@@ -37,7 +35,6 @@ in
 					key_expand="Right";
 				};
 			};
-			kitty.enable = true;
 			direnv = {
 				enable = true;
 				enableBashIntegration = true;
