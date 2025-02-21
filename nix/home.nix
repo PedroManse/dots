@@ -16,7 +16,6 @@ in
 			qbittorrent
 			rustup
 			discord
-			alacritty
 			vlc
 		];
 
@@ -28,6 +27,9 @@ in
 				git = true;
 			};
 			gh.enable = true;
+			alacritty = {
+				enable = true;
+			};
 			waybar.enable = true;
 			wofi = {
 				enable = true;
