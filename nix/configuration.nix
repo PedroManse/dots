@@ -93,7 +93,6 @@
 
 	# Install system-wide
 	programs = {
-		openvpn3.enable = true;
 		hyprland.enable = true;
 		firefox.enable = true;
 		kdeconnect.enable = true;
