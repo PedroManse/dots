@@ -22,8 +22,17 @@ mkdir -p "$workdir"
 mkdir -p ~/.config/nvim
 ln -sf "$(pwd)/nvim" ~/.config/nvim
 
-echo "setup alacritty config symlink"
-ln -sf "$(pwd)/alacritty.toml" ~/.config/alacritty.toml
+echo "setup alacritty config"
+mkdir "$HOME/.config/alacritty"
+ln -sf "$(pwd)/alacritty.toml" ~/.config/alacritty/commonconfig.toml
+alacritty_majro_version=$(alacritty --version | cut -d' ' -f2 | cut -d. -f2)
+if [ $alacritty_majro_version -ge "14" ] ; then
+	echo "[general]" > ~/.config/alacritty/alacritty.toml
+else
+	:> ~/.config/alacritty/alacritty.toml
+fi
+echo "live_config_reload = true" >> ~/.config/alacritty/alacritty.toml
+echo "import = [ '~/.config/alacritty/commonconfig.toml' ]" >> ~/.config/alacritty/alacritty.toml
 
 echo "setup shrc.sh symlink"
 ln -sf "$(pwd)/bashrc" ~/.shrc.sh

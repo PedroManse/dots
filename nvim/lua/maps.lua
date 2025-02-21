@@ -1,4 +1,6 @@
--- imported from ../init.lua
+--- imported from ../init.lua
+
+-- vim-like maps
 function map(mode, shortcut, command)
 	vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
@@ -19,12 +21,12 @@ end
 nmap("<C-t>", ":w<CR>:term<CR>a")
 nmap("<SPACE>", "<ESC>:noh<CR>:<BS>")
 
---- ALE
-nmap("<A-S-j>", ":ALEGoToDefinition<CR>")
--- nmap("<A-S-n>", ":ALENextWrap<CR>")
+--- LSP
+-- lsp config in ./lsp.lua
 nmap("<A-S-n>", ":lua= vim.diagnostic.goto_next{wrap = true}<CR>")
-nmap("<A-S-k>", ":ALEFix<CR>")
-nmap("<A-S-m>", ":ALEDetail<CR>")
+nmap("<A-S-j>", ":lua= vim.lsp.buf.definition()<CR>")
+nmap("<A-S-k>", ":lua= vim.lsp.buf.implementation()<CR>")
+nmap("<A-S-m>", ":lua= vim.lsp.buf.format()<CR>")
 
 -- copilot
 nmap("<C-w>c", ":Copilot panel<CR>")

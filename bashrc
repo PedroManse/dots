@@ -17,28 +17,42 @@ fi
 [ ! -f /bin/bash ]
 export FHS=$?
 
-#TODO check $HOME/.nix-profile/bin
-bin () {
-	if [ $FHS = 1 ] ; then
-		"/bin/$1" ${@:2}
-	else
-		"/run/current-system/sw/bin/$1" ${@:2}
-	fi
+# $1 = program to find
+# $2 optional = ':' separated dirs for PATH
+get_bin_path() {
+	paths=${2:-$PATH}
+	for dr in $(echo $paths | tr ':' '\n') ; do
+		if [ -f "$dr/$1" ] ; then
+			echo "$dr/$1"
+			return 0
+		fi
+	done
+	return 1
+}
+# mfw i just remade whereis -_-
+
+bin() {
+	$(get_bin_path $1 $PATH) ${@:2}
 }
 
 # if on neovim terminal, open file in neovim instance
 nvim() {
+	nvim_path=$(get_bin_path "nvim")
+	# if terminal is running inside nvim, send command to host
 	if [ -n "$NVIM" ] ; then
-		bin nvim -u $HOME/.config/nvim/init.lua --server $NVIM --remote-send "<ESC>:e $1<CR>"
+		# get absolute path and replace " " with "\ "
+		abs_path=$(readlink --canonicalize $1 | sed s'/ /\\ /'g)
+		$nvim_path --server $NVIM --remote-send "<ESC>:edit $abs_path<CR>"
 		exit
+	# otherwise, initialize a server
 	else
-		bin nvim -n --listen "${HOME}/.cache/nvim/$$-server.pipe" $@
+		$nvim_path -n --listen "${HOME}/.cache/nvim/$$-server.pipe" $@
 	fi
 }
 
 # discover jira ticket by git branch
 issue() {
-	branch=$(git b | filte ^'*' | sed 's/* [A-Z]\+-\([0-9]*\).*/\1/')
+	branch=$(git branch | filte ^'*' | sed 's/* [A-Z]\+-\([0-9]*\).*/\1/')
 	if [ $1 ] ; then
 		jira issue view $1 | bin cat
 	else
@@ -128,6 +142,7 @@ alias nix-esys="$EDITOR /etc/nixos/configuration.nix"
 # git/github
 alias gs="git status"
 alias gp="git push"
+alias ghp="gh repo create --public --push -s ."
 alias gd="git diff"
 alias gpr="gh pr create -B"
 alias gbr="git checkout -b"
@@ -161,7 +176,7 @@ alias sqli="sqlite3 --header --nullvalue '<{nil}>' --column"
 format_dir() {
 	thisdir=$1
 	# if fpwd-daemon is running, use it
-	fdir=$(echo $thisdir | socat - UNIX-CONNECT:/tmp/fpwd-rs.sock 2> /dev/null)
+	fdir=$(echo $thisdir | socat - UNIX-CONNECT:/run/fpwd-rs.sock 2> /dev/null)
 	if [ $? = 0 ] ; then
 		echo $fdir
 	else

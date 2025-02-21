@@ -8,6 +8,8 @@ lspconfig_defaults.capabilities = vim.tbl_deep_extend(
   require('cmp_nvim_lsp').default_capabilities()
 )
 
+-- lsp related maps in ./maps.lua
+
 for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
 	local default_diagnostic_handler = vim.lsp.handlers[method]
 	vim.lsp.handlers[method] = function(err, result, context, config)
