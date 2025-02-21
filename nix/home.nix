@@ -147,6 +147,15 @@ exec-once=waybar
 					", F11, fullscreen"
 					"CTRL ALT, l, movewindow, r"
 					"SUPER SHIFT CTRL, l, exec, hyprlock"
+					"SUPER, 1, workspace, 1"
+					"SUPER, 2, workspace, 2"
+					"SUPER, 3, workspace, 3"
+					"SUPER, 4, workspace, 4"
+					"SUPER, 5, workspace, 5"
+					"SUPER, 6, workspace, 6"
+					"SUPER, 7, workspace, 7"
+					"SUPER, 8, workspace, 8"
+					"SUPER, 9, workspace, 9"
 				];
 			};
 		};
