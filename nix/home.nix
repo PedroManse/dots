@@ -29,7 +29,13 @@ in
 
 		programs = {
 			waybar.enable = true;
-			wofi.enable = true;
+			wofi = {
+				enable = true;
+				settings = {
+					allow_images=true;
+					key_expand="Right";
+				};
+			};
 			kitty.enable = true;
 			direnv = {
 				enable = true;
@@ -116,7 +122,7 @@ exec-once=hyprpaper
 				];
 				bind =
 				[
-					"ALT, space, exec, $menu"
+					"ALT, space, exec, pkill wofi ; $menu"
 					"SUPER, return, exec, $terminal"
 					"SUPER, bracketright, exec, $browser"
 					"SUPER, h, workspace, r-1"
