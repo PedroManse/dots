@@ -1,5 +1,6 @@
 #! /bin/sh
 
+eval "$(direnv hook bash)"
 if [ -z "$COMPUTER_NAME" ] ; then
 	if [ -f /etc/hostname ] ; then
 		COMPUTER_NAME=$(cat /etc/hostname)
