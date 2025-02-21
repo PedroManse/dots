@@ -24,6 +24,7 @@ in
 			alacritty
 			gh
 			sqlite
+			vlc
 		];
 		/* Here goes the rest of your home-manager config, e.g. home.packages = [ pkgs.foo ]; */
 
