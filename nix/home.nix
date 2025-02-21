@@ -12,14 +12,12 @@ in
 		home.stateVersion = "24.11";
 		home.packages = with pkgs; [
 			typescript-language-server
-			dbeaver-bin
 			bitwarden-desktop
 			qbittorrent
 			rustup
 			discord
 			alacritty
 			gh
-			sqlite
 			vlc
 		];
 
