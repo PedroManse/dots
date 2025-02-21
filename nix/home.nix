@@ -12,7 +12,6 @@ in
 		home.stateVersion = "24.11";
 		home.packages = with pkgs; [
 			delta
-			eza
 			typescript-language-server
 			dbeaver-bin
 			bitwarden-desktop
@@ -27,6 +26,11 @@ in
 
 		programs = {
 			bat.enable = true;
+			eza = {
+				enable = true;
+				colors = "always";
+				git = true;
+			};
 			waybar.enable = true;
 			wofi = {
 				enable = true;
