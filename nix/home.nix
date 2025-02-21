@@ -146,6 +146,7 @@ exec-once=waybar
 					"CTRL ALT, k, movewindow, u"
 					", F11, fullscreen"
 					"CTRL ALT, l, movewindow, r"
+					"SUPER SHIFT CTRL, l, exec, hyprlock"
 				];
 			};
 		};
