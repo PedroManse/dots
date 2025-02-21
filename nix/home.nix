@@ -144,6 +144,7 @@ exec-once=waybar
 					"CTRL ALT, h, movewindow, l"
 					"CTRL ALT, j, movewindow, d"
 					"CTRL ALT, k, movewindow, u"
+					", F11, fullscreen"
 					"CTRL ALT, l, movewindow, r"
 				];
 			};
