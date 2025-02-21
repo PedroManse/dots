@@ -17,7 +17,6 @@ in
 			rustup
 			discord
 			alacritty
-			gh
 			vlc
 		];
 
@@ -28,6 +27,7 @@ in
 				colors = "always";
 				git = true;
 			};
+			gh.enable = true;
 			waybar.enable = true;
 			wofi = {
 				enable = true;
