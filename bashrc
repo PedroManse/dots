@@ -136,8 +136,8 @@ nix-clean() {
 	nix-collect-garbage --delete-old
 	sudo nix-collect-garbage -d
 }
-alias nix-ehome="$EDITOR $HOME/.config/nixpkgs/home.nix"
-alias nix-esys="$EDITOR /etc/nixos/configuration.nix"
+alias nix-ehome="$EDITOR $HOME/dots/nix/home.nix"
+alias nix-esys="$EDITOR $HOME/dots/nix/configuration.nix"
 
 # git/github
 alias gs="git status"
@@ -159,8 +159,8 @@ alias col_reverse="echo -ne '\x1b[7m'"
 
 alias killJobs="jobs -p | xargs kill"
 alias svi="sudo nvim -u $HOME/.config/nvim/init.lua"
-alias tmod="nvim $HOME/.shrc.sh; source $HOME/.shrc.sh"
-alias ref="source $HOME/.shrc.sh"
+alias tmod="nvim $HOME/dots/bashrc; source $HOME/dots/bashrc"
+alias ref="source $HOME/dots/bashrc"
 alias vmod="nvim $HOME/.config/nvim/init.lua"
 alias cat="bin bat"
 alias ocat="bin cat"
