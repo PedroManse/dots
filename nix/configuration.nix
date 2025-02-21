@@ -91,11 +91,11 @@
 		extraGroups = [ "networkmanager" "wheel" ];
 	};
 
+	# no need for steam to be system-wide
 	# Install system-wide
 	programs = {
 		hyprland.enable = true;
 		firefox.enable = true;
-		kdeconnect.enable = true;
 		steam.enable = true;
 		nix-ld = {
 			enable = true;
@@ -113,15 +113,12 @@ keep-outputs = true
 keep-derivations = true
 	'';
 
-	# List packages installed in system profile. To search, run:
-	# $ nix search wget
 	environment.systemPackages = with pkgs; [
 		pinentry-curses
 		pavucontrol
 		gcc14
 		hyprshot
 		hyprlock
-		neovim
 	];
 
 	# original NixOS version; DO *NOT* ALTER
