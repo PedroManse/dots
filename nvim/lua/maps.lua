@@ -18,7 +18,7 @@ function imap(shortcut, command)
 end
 
 -- nMaps
-nmap("<C-t>", ":w<CR>:term<CR>a")
+nmap("<C-t>", ":terminal<CR>a")
 nmap("<SPACE>", "<ESC>:noh<CR>:<BS>")
 
 --- LSP
