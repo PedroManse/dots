@@ -64,9 +64,9 @@
 	# gpg agent + pin entry
 	services.pcscd.enable = true;
 	programs.gnupg.agent = {
-	 enable = true;
-	 pinentryPackage = pkgs.pinentry-curses;
-	 enableSSHSupport = true;
+		enable = true;
+		pinentryPackage = pkgs.pinentry-curses;
+		enableSSHSupport = true;
 	};
 
 	# Configure console keymap
