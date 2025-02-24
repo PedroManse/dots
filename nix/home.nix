@@ -8,29 +8,47 @@ in
 	];
 
 	home-manager.users.manse = {pkgs, ...}: {
-		/* The home.stateVersion option does not have a default and must be set */
 		nixpkgs.config.allowUnfree = true;
 		home.stateVersion = "24.11";
 		home.packages = with pkgs; [
-			delta
-			bat
-			eza
 			typescript-language-server
-			dbeaver-bin
 			bitwarden-desktop
 			qbittorrent
 			rustup
 			discord
-			alacritty
-			gh
-			sqlite
+			vlc
 		];
-		/* Here goes the rest of your home-manager config, e.g. home.packages = [ pkgs.foo ]; */
 
 		programs = {
+			bat.enable = true;
+			eza = {
+				enable = true;
+				colors = "always";
+				git = true;
+			};
+			gh.enable = true;
+
+			alacritty = {
+				enable = true;
+				settings = {
+					font = {
+						normal.family = "mononoki";
+						size = 9.6;
+					};
+					colors.primary.background = "#000000";
+					mouse.hide_when_typing = true;
+					general.live_config_reload = true;
+				};
+			};
+
 			waybar.enable = true;
-			wofi.enable = true;
-			kitty.enable = true;
+			wofi = {
+				enable = true;
+				settings = {
+					allow_images=true;
+					key_expand="Right";
+				};
+			};
 			direnv = {
 				enable = true;
 				enableBashIntegration = true;
@@ -51,6 +69,9 @@ in
 					c = "checkout";
 					b = "branch";
 				};
+				delta = {
+					enable = true;
+				};
 				extraConfig = {
 					safe = {
 						directory = ".";
@@ -63,10 +84,6 @@ in
 					};
 					core = {
 						editor = "nvim";
-						pager = "delta";
-					};
-					interactive = {
-						diffFilter = "delta --color-only";
 					};
 					diff = {
 						colorMoved = false;
@@ -100,7 +117,6 @@ input {
 }
 
 exec-once=waybar
-exec-once=hyprpaper
 
 			'';
 
@@ -116,7 +132,7 @@ exec-once=hyprpaper
 				];
 				bind =
 				[
-					"ALT, space, exec, $menu"
+					"ALT, space, exec, pkill wofi ; $menu"
 					"SUPER, return, exec, $terminal"
 					"SUPER, bracketright, exec, $browser"
 					"SUPER, h, workspace, r-1"
@@ -138,7 +154,18 @@ exec-once=hyprpaper
 					"CTRL ALT, h, movewindow, l"
 					"CTRL ALT, j, movewindow, d"
 					"CTRL ALT, k, movewindow, u"
+					", F11, fullscreen"
 					"CTRL ALT, l, movewindow, r"
+					"SUPER SHIFT CTRL, l, exec, hyprlock"
+					"SUPER, 1, workspace, 1"
+					"SUPER, 2, workspace, 2"
+					"SUPER, 3, workspace, 3"
+					"SUPER, 4, workspace, 4"
+					"SUPER, 5, workspace, 5"
+					"SUPER, 6, workspace, 6"
+					"SUPER, 7, workspace, 7"
+					"SUPER, 8, workspace, 8"
+					"SUPER, 9, workspace, 9"
 				];
 			};
 		};
