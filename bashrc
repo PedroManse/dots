@@ -141,7 +141,7 @@ alias nix-esys="$EDITOR /etc/nixos/configuration.nix"
 # git/github
 alias gs="git status"
 alias gp="git push"
-alias ghp="gh repo create --public --push -s ."
+alias ghp="gh repo create --public --push --source . --remote origin"
 alias gd="git diff"
 alias gpr="gh pr create -B"
 alias gbr="git checkout -b"
