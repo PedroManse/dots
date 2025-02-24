@@ -1,19 +1,10 @@
 #! /bin/bash
 set -e
 
-# go to folder
-back=$(pwd)
-cd $(dirname "$(realpath $0)")
-
-function default() {
-	if [[ ${!1} == "" ]]; then
-		export "$1=$2"
-	fi
-}
-
-default workdir "$HOME/code"
+workdir="$HOME/code"
 mkdir -p "$workdir"
 
+# couldn't import the config with home-manager
 # nvim setup config
 mkdir -p ~/.config/nvim
 ln -sf "$PWD/nvim" ~/.config/nvim
@@ -36,4 +27,6 @@ else
 	echo "export DEVAPS=\"${workdir}/devaps\"" >> ~/.shenv.sh
 fi
 
-cd $back
+
+set -xe
+sudo ln -sf "$PWD/nix/configuration.nix" /etc/nixos/configuration.nix

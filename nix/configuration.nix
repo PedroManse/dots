@@ -8,7 +8,7 @@
 	imports =
 		[ # Include the results of the hardware scan.
 			/etc/nixos/hardware-configuration.nix
-			/home/manse/.config/nixpkgs/home.nix
+			/home/manse/dots/nix/home.nix
 		];
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
