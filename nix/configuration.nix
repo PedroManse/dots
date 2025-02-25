@@ -1,15 +1,10 @@
-# Edit this configuration file to define what should be installed on
-# your system.	Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
-{
-	imports =
-		[ # Include the results of the hardware scan.
-			/etc/nixos/hardware-configuration.nix
-			/home/manse/dots/nix/home.nix
-		];
+{ config, pkgs, ... }: {
+	imports = [
+		# Include the results of the hardware scan.
+		/etc/nixos/hardware-configuration.nix
+		# Include home-manager
+		/home/manse/dots/nix/home.nix
+	];
 
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 	# Bootloader.
@@ -17,11 +12,6 @@
 	boot.loader.efi.canTouchEfiVariables = true;
 
 	networking.hostName = "manse-nix"; # Define your hostname.
-	# networking.wireless.enable = true;	# Enables wireless support via wpa_supplicant.
-
-	# Configure network proxy if necessary
-	# networking.proxy.default = "http://user:password@proxy:port/";
-	# networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
 	# Enable networking
 	networking.networkmanager.enable = true;
@@ -44,18 +34,14 @@
 		LC_TIME = "pt_BR.UTF-8";
 	};
 
-	# Enable the X11 windowing system.
-	# You can disable this if you're only using the Wayland session.
-	#services.xserver.enable = true;
-
 	# postgres
 	services.postgresql.enable = true;
 
-	# Enable the KDE Plasma Desktop Environment.
-	services.displayManager.sddm.enable = true;
+	#services.displayManager.sddm.enable = true;
+	#services.displayManager.sddm.wayland.enable = true;
 	services.desktopManager.plasma6.enable = true;
+	services.displayManager.ly.enable = true;
 
-	# Configure keymap in X11
 	services.xserver.xkb = {
 		layout = "br";
 		variant = "";
@@ -73,7 +59,7 @@
 	console.keyMap = "br-abnt2";
 
 	# Enable CUPS to print documents.
-	services.printing.enable = true;
+	# services.printing.enable = true;
 
 	# Enable sound with pipewire.
 	hardware.pulseaudio.enable = false;
@@ -91,8 +77,6 @@
 		extraGroups = [ "networkmanager" "wheel" ];
 	};
 
-	# no need for steam to be system-wide
-	# Install system-wide
 	programs = {
 		hyprland.enable = true;
 		firefox.enable = true;
