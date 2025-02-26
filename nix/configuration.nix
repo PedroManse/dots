@@ -37,9 +37,7 @@
 	# postgres
 	services.postgresql.enable = true;
 
-	#services.displayManager.sddm.enable = true;
-	#services.displayManager.sddm.wayland.enable = true;
-	services.desktopManager.plasma6.enable = true;
+	# login/display manager
 	services.displayManager.ly.enable = true;
 
 	services.xserver.xkb = {
@@ -89,8 +87,7 @@
 		};
 	};
 
-
-	# Allow unfree packages
+# Allow unfree packages
 	nixpkgs.config.allowUnfree = true;
 	nix.extraOptions = ''
 keep-outputs = true
@@ -98,11 +95,15 @@ keep-derivations = true
 	'';
 
 	environment.systemPackages = with pkgs; [
+		pulseaudio
+		man-pages
+		man-pages-posix
 		pinentry-curses
 		pavucontrol
 		gcc14
 		hyprshot
 		hyprlock
+		hyprcursor
 	];
 
 	# original NixOS version; DO *NOT* ALTER
