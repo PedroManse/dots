@@ -20,7 +20,10 @@ exec-once=waybar
 			"SUPER, mouse:272, movewindow"
 			"SUPER, mouse:273, resizewindow"
 		];
-		bind =
+		bind = let
+			inherit (builtins) map concatLists;
+			flatMap = f: xs: concatLists (map f xs);
+		in
 		[
 			"ALT, space, exec, pkill wofi ; $menu"
 			"SUPER, return, exec, $terminal"
@@ -37,25 +40,21 @@ exec-once=waybar
 			"SHIFT, XF86AudioRaiseVolume, exec, pactl set-sink-volume $(pactl get-default-sink) +1%"
 			"CTRL, XF86AudioRaiseVolume, exec, bash /home/manse/code/umind/PA-sink-rotation.sh 1"
 			"CTRL, XF86AudioLowerVolume, exec, bash /home/manse/code/umind/PA-sink-rotation.sh -1"
-			"SHIFT ALT, h, movefocus, l"
-			"SHIFT ALT, j, movefocus, d"
-			"SHIFT ALT, k, movefocus, u"
-			"SHIFT ALT, l, movefocus, r"
-			"CTRL ALT, h, movewindow, l"
-			"CTRL ALT, j, movewindow, d"
-			"CTRL ALT, k, movewindow, u"
 			", F11, fullscreen"
-			"CTRL ALT, l, movewindow, r"
+
+
 			"SUPER SHIFT CTRL, l, exec, hyprlock"
-			"SUPER, 1, workspace, 1"
-			"SUPER, 2, workspace, 2"
-			"SUPER, 3, workspace, 3"
-			"SUPER, 4, workspace, 4"
-			"SUPER, 5, workspace, 5"
-			"SUPER, 6, workspace, 6"
-			"SUPER, 7, workspace, 7"
-			"SUPER, 8, workspace, 8"
-			"SUPER, 9, workspace, 9"
-		];
+		]
+			++ map (n: "SUPER, ${toString n}, workspace, ${toString n}") ( genList (n: n+1) 9 )
+			++ flatMap ({key, direction}: [
+				"CRTL ALT, ${key}, movewindow, ${direction}"
+				"SHIFT ALT, ${key}, movefocus, ${direction}"
+			]) [
+				{key = "h"; direction="left";}
+				{key = "j"; direction="down";}
+				{key = "k"; direction="up";}
+				{key = "l"; direction="right";}
+			]
+		;
 	};
 }
