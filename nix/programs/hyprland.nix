@@ -7,10 +7,6 @@ input {
 	sensitivity=-0.65
 }
 
-env = HYPRCURSOR_THEME,rose-pine-hyprcursor
-env = HYPRCURSOR_SIZE,24
-env = XCURSOR_THEME,rose-pine-xcursor
-env = XCURSOR_SIZE,24
 exec-once=waybar
 	'';
 

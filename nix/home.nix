@@ -10,15 +10,29 @@ in
 
 	home-manager.users.manse = {pkgs, ...}: {
 		nixpkgs.config.allowUnfree = true;
-		home.stateVersion = "24.11";
-		home.packages = with pkgs; [
-			typescript-language-server
-			bitwarden-desktop
-			qbittorrent
-			rustup
-			discord
-			vlc
-		];
+		home = {
+			pointerCursor = {
+				name = "rose-pine-cursor";
+				size = 24;
+				x11.enable = true;
+				gtk.enable = true;
+				package = pkgs.rose-pine-cursor;
+			};
+			stateVersion = "24.11";
+			packages = with pkgs; [
+				typescript-language-server
+				bitwarden-desktop
+				qbittorrent
+				rustup
+				vlc
+			];
+		};
+
+		gtk = {
+			gtk3 = {
+				extraConfig.gtk-application-prefer-dark-theme = true;
+			};
+		};
 
 		wayland.windowManager.hyprland = p.hyprland {};
 
