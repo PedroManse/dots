@@ -17,7 +17,12 @@ require("lazy").setup({
 	'neovim/nvim-lspconfig',
 	'mg979/vim-visual-multi',
 	'lewis6991/gitsigns.nvim',
-	'mattn/emmet-vim',
+	{
+		"olrtg/nvim-emmet",
+		--config = function()
+		--	vim.keymap.set({ "i" }, ',', require('nvim-emmet').wrap_with_abbreviation)
+		--end,
+	},
 	'mbbill/undotree',
 	'jnurmine/Zenburn',
 	'thimc/gruber-darker.nvim',
