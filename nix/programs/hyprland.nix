@@ -7,8 +7,13 @@ input {
 	sensitivity=-0.65
 }
 
+env = HYPRCURSOR_THEME,rose-pine-hyprcursor
+env = HYPRCURSOR_SIZE,24
+env = XCURSOR_THEME,rose-pine-xcursor
+env = XCURSOR_SIZE,24
 exec-once=waybar
 	'';
+
 
 	settings = {
 		"$mod" = "SUPER";
@@ -21,7 +26,7 @@ exec-once=waybar
 			"SUPER, mouse:273, resizewindow"
 		];
 		bind = let
-			inherit (builtins) map concatLists;
+			inherit (builtins) map concatLists genList;
 			flatMap = f: xs: concatLists (map f xs);
 		in
 		[
@@ -42,19 +47,18 @@ exec-once=waybar
 			"CTRL, XF86AudioLowerVolume, exec, bash /home/manse/code/umind/PA-sink-rotation.sh -1"
 			", F11, fullscreen"
 
+			"SHIFT ALT, h, movefocus, l"
+			"SHIFT ALT, j, movefocus, d"
+			"SHIFT ALT, k, movefocus, u"
+			"SHIFT ALT, l, movefocus, r"
+			"CTRL ALT, h, movewindow, l"
+			"CTRL ALT, j, movewindow, d"
+			"CTRL ALT, k, movewindow, u"
+			"CTRL ALT, l, movewindow, r"
 
 			"SUPER SHIFT CTRL, l, exec, hyprlock"
 		]
 			++ map (n: "SUPER, ${toString n}, workspace, ${toString n}") ( genList (n: n+1) 9 )
-			++ flatMap ({key, direction}: [
-				"CRTL ALT, ${key}, movewindow, ${direction}"
-				"SHIFT ALT, ${key}, movefocus, ${direction}"
-			]) [
-				{key = "h"; direction="left";}
-				{key = "j"; direction="down";}
-				{key = "k"; direction="up";}
-				{key = "l"; direction="right";}
-			]
 		;
 	};
 }
