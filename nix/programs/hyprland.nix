@@ -8,6 +8,7 @@ input {
 }
 
 exec-once=waybar
+exec-once=wpaperd
 	'';
 
 

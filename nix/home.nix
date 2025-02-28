@@ -43,6 +43,7 @@ in
 			wofi = p.wofi {};
 			direnv = p.direnv {};
 			neovim = p.neovim {};
+			wpaperd = p.wpaperd {};
 
 			bat.enable = true;
 			gh.enable = true;
