@@ -43,6 +43,7 @@ exec-once=wpaperd
 			"CTRL, XF86AudioRaiseVolume, exec, bash /home/manse/code/umind/PA-sink-rotation.sh 1"
 			"CTRL, XF86AudioLowerVolume, exec, bash /home/manse/code/umind/PA-sink-rotation.sh -1"
 			", F11, fullscreen"
+			"ALT, tab, workspace, previous"
 
 			"SHIFT ALT, h, movefocus, l"
 			"SHIFT ALT, j, movefocus, d"
