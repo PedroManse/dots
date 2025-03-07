@@ -25,6 +25,7 @@ in
 				qbittorrent
 				rustup
 				vlc
+				discord
 			];
 		};
 
