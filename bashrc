@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /usr/bin/env bash
 
 eval "$(direnv hook bash)"
 if [ -z "$COMPUTER_NAME" ] ; then
@@ -14,9 +14,6 @@ if [ -f ~/.shenv.sh ] ; then
 	. ~/.shenv.sh
 fi
 
-[ ! -f /bin/bash ]
-export FHS=$?
-
 # $1 = program to find
 # $2 optional = ':' separated dirs for PATH
 get_bin_path() {
@@ -31,38 +28,32 @@ get_bin_path() {
 }
 # mfw i just remade whereis -_-
 
-bin() {
-	$(get_bin_path $1 $PATH) ${@:2}
+_nvim_con() {
+	abs_path=$(readlink --canonicalize "$@" | sed s'| |\\ |'g)
+	$(get_bin_path nvim) --server $NVIM --remote-send "<ESC>:edit $abs_path<CR>"
+	exit
 }
 
-# if on neovim terminal, open file in neovim instance
-nvim() {
-	nvim_path=$(get_bin_path "nvim")
-	# if terminal is running inside nvim, send command to host
-	if [ -n "$NVIM" ] ; then
-		# get absolute path and replace " " with "\ "
-		abs_path=$(readlink --canonicalize $1 | sed s'/ /\\ /'g)
-		$nvim_path --server $NVIM --remote-send "<ESC>:edit $abs_path<CR>"
-		exit
-	# otherwise, initialize a server
-	else
-		$nvim_path -n --listen "${HOME}/.cache/nvim/$$-server.pipe" $@
-	fi
-}
+if [ -n "$NVIM" ] ; then
+	alias nvim="_nvim_con"
+else
+	alias nvim="$(get_bin_path nvim) --listen $HOME/.cache/nvim/$$-server.pipe"
+fi
+
 
 # discover jira ticket by git branch
 issue() {
 	branch=$(git branch | filte ^'*' | sed 's/* [A-Z]\+-\([0-9]*\).*/\1/')
 	if [ $1 ] ; then
-		jira issue view $1 | bin cat
+		jira issue view $1 | $(get_bin_path cat)
 	else
-		jira issue view $branch | bin cat
+		jira issue view $branch | $(get_bin_path cat)
 	fi
 }
 
 
 export GPG_TTY=$(tty)
-export PSQL_EDITOR="bin nvim -n -u $HOME/.vimrc"
+export PSQL_EDITOR="$(get_bin nvim) -n -u $HOME/.vimrc"
 export ZEN="true"
 export BAT_THEME="zenburn"
 export GOPATH=$HOME
@@ -162,14 +153,13 @@ alias svi="sudo nvim -u $HOME/.config/nvim/init.lua"
 alias tmod="nvim $HOME/dots/bashrc; source $HOME/dots/bashrc"
 alias ref="source $HOME/dots/bashrc"
 alias vmod="nvim $HOME/.config/nvim/init.lua"
-alias cat="bin bat"
-alias ocat="bin cat"
+alias cat="$(get_bin_path bat)"
+alias ocat="$(get_bin_path cat)"
 alias ls="$HOME/.cargo/bin/eza -h"
 alias hq="$HOME/.cargo/bin/htmlq"
 alias ..="cd .."
 alias ...="cd ../.."
 alias _="nvim $HOME/_"
-alias py10="bin python3.10"
 alias flog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) -%G?- %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
 alias sqli="sqlite3 --header --nullvalue '<{nil}>' --column"
 
