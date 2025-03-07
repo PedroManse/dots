@@ -3,7 +3,16 @@ proj_name=$1
 
 cargo new --bin $proj_name
 cd $proj_name
-echo "target" > .gitignore
+echo "target" >> .gitignore
+echo ".direnv" >> .gitignore
+
+echo """
+{ pkgs ? import <nixpkgs> {} }:
+pkgs.mkShellNoCC {
+    nativeBuildInputs = with pkgs.buildPackages; [ hello ];
+}
+""" > shell.nix
+echo "use nix" > .envrc
 
 log=$(mktemp)
 crate_name=""
