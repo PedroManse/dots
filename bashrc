@@ -14,9 +14,6 @@ if [ -f ~/.shenv.sh ] ; then
 	. ~/.shenv.sh
 fi
 
-[ ! -f /bin/bash ]
-export FHS=$?
-
 # $1 = program to find
 # $2 optional = ':' separated dirs for PATH
 get_bin_path() {
