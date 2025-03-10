@@ -53,7 +53,7 @@ issue() {
 
 
 export GPG_TTY=$(tty)
-export PSQL_EDITOR="$(get_bin nvim) -n -u $HOME/.vimrc"
+export PSQL_EDITOR="$(get_bin_path nvim) -n -u $HOME/.vimrc"
 export ZEN="true"
 export BAT_THEME="zenburn"
 export GOPATH=$HOME
