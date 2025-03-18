@@ -54,7 +54,9 @@ in
 			bash = {
 				enable = true;
 				bashrcExtra = ''
-					. ~/dots/bashrc
+					pushd /home/manse/dots/bash
+					. bashrc
+					popd
 				'';
 			};
 		};

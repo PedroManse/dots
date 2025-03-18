@@ -1,0 +1,56 @@
+eval "$(direnv hook bash)"
+
+if [ -z "$COMPUTER_NAME" ] ; then
+	if [ -f /etc/hostname ] ; then
+		COMPUTER_NAME=$(cat /etc/hostname)
+	else
+		COMPUTER_NAME="unnamed computer"
+	fi
+fi
+
+if [ -f ~/.shenv.sh ] ; then
+	. ~/.shenv.sh
+fi
+
+get_bin_path() {
+	paths=${2:-$PATH}
+	for dr in $(echo $paths | tr ':' '\n') ; do
+		if [ -f "$dr/$1" ] ; then
+			echo "$dr/$1"
+			return 0
+		fi
+	done
+	return 1
+}
+
+if [ -d "$DEVAPS" ] ; then
+	export PATH="$DEVAPS/bin:$PATH"
+fi
+
+export GPG_TTY=$(tty)
+export PSQL_EDITOR="$(get_bin_path nvim) -n -u $HOME/.vimrc"
+export ZEN="true"
+export BAT_THEME="zenburn"
+export GOPATH=$HOME
+export TERM=xterm-256color
+export EDITOR="nvim"
+export VISUAL="nvim"
+export PAGER="less"
+
+pushd ~/dots/bash
+source colors.bash
+source complete.bash
+source tty.bash
+
+source pwd.bash
+source bluetooth.bash
+source git.bash
+source nvim.bash
+source cargo.bash
+source node.bash
+source nix.bash
+source go.bash
+source zig.bash
+source c.bash
+popd
+clear
