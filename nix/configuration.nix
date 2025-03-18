@@ -11,6 +11,9 @@
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
 
+	# docker
+	#virtualisation.docker.enable = true;
+
 	networking.hostName = "manse-nix"; # Define your hostname.
 
 	# Enable networking
@@ -72,6 +75,7 @@
 	users.users.manse = {
 		isNormalUser = true;
 		description = "pedro manse";
+		# extraGroups = [ "networkmanager" "wheel" "docker" ]; # network, sudo, docker
 		extraGroups = [ "networkmanager" "wheel" ];
 	};
 
