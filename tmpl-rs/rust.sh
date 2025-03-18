@@ -6,10 +6,9 @@ cd $proj_name
 echo "target" >> .gitignore
 echo ".direnv" >> .gitignore
 
-echo """
-{ pkgs ? import <nixpkgs> {} }:
+echo """{ pkgs ? import <nixpkgs> {} }:
 pkgs.mkShellNoCC {
-    nativeBuildInputs = with pkgs.buildPackages; [ hello ];
+    nativeBuildInputs = with pkgs.buildPackages; [ ];
 }
 """ > shell.nix
 echo "use nix" > .envrc
