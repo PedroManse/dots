@@ -16,11 +16,6 @@ autocmd FileType rust nnoremap <buffer> <C-h><C-h> :Ccheck<CR>a
 autocmd FileType go nnoremap <buffer> ; msA,<ESC>`s
 autocmd BufWinEnter *.gohtml setfiletype html
 
-" emmet
-let g:user_emmet_leader_key=','
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
-
 autocmd BufWinEnter * ++once syntax enable
 
 

@@ -16,18 +16,19 @@ vim.g.syntastic_rust_checkers = {"cargo"}
 vim.g.syntastic_mode_map = { mode= "active" }
 vim.g.re=0
 
--- netrw
-vim.g.netrw_banner=0
-vim.g.netrw_browse_split=3
-vim.g.netrw_liststyle=3
+-- net rw
+vim.g.netrw_banner = 0
+vim.g.netrw_browse_split = 3
+vim.g.netrw_liststyle = 3
 
-vim.opt.tabstop=2
-vim.opt.shiftwidth=2
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.expandtab = false
-vim.opt.whichwrap='[,],<,>'
-vim.opt.encoding='UTF-8'
+vim.opt.whichwrap = '[,],<,>'
+vim.opt.encoding = 'UTF-8'
 vim.opt.wrap = false
-vim.opt.lz=true -- lazy redraw on macro execution
+vim.opt.lz = true -- lazy redraw on macro execution
+vim.opt.swapfile = false
 
 -- ALE
 vim.g.ale_linters_explicit=1
@@ -48,3 +49,4 @@ require('gitsigns').setup {
 vim.g.user_emmet_leader_key=","
 vim.g.user_emmet_install_global=0
 vim.cmd([[ autocmd FileType html,css EmmetInstall ]])
+
