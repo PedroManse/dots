@@ -20,6 +20,7 @@ in
 			};
 			stateVersion = "24.11";
 			packages = with pkgs; [
+        nixfmt-rfc-style
 				typescript-language-server
 				bitwarden-desktop
 				qbittorrent
@@ -54,9 +55,7 @@ in
 			bash = {
 				enable = true;
 				bashrcExtra = ''
-					pushd /home/manse/dots/bash
-					. bashrc
-					popd
+					. /home/manse/dots/bash/bashrc
 				'';
 			};
 		};
