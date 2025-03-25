@@ -37,20 +37,16 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="less"
 
-pushd ~/dots/bash
-source colors.bash
-source complete.bash
-source tty.bash
-
-source pwd.bash
-source bluetooth.bash
-source git.bash
-source nvim.bash
-source cargo.bash
-source node.bash
-source nix.bash
-source go.bash
-source zig.bash
-source c.bash
-popd
-clear
+source $HOME/dots/bash/colors.bash
+source $HOME/dots/bash/tty.bash
+source $HOME/dots/bash/pwd.bash
+source $HOME/dots/bash/bluetooth.bash
+source $HOME/dots/bash/git.bash
+source $HOME/dots/bash/nvim.bash
+source $HOME/dots/bash/cargo.bash
+source $HOME/dots/bash/node.bash
+source $HOME/dots/bash/nix.bash
+source $HOME/dots/bash/go.bash
+source $HOME/dots/bash/zig.bash
+source $HOME/dots/bash/c.bash
+source $HOME/dots/bash/alias.bash
