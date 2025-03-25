@@ -29,6 +29,7 @@ in
           rustup
           vlc
           discord
+          shellcheck
         ];
       };
 
