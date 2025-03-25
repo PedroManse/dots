@@ -1,24 +1,27 @@
+#! /usr/bin/env bash
+
 set -e
 proj_name=$1
 
-cargo new --bin $proj_name
-cd $proj_name
-echo "target" >> .gitignore
-echo ".direnv" >> .gitignore
+cargo new --bin "$proj_name"
+cd "$proj_name"
+echo "target
+.direnv
+" >> .gitignore
 
-echo """{ pkgs ? import <nixpkgs> {} }:
+echo "{ pkgs ? import <nixpkgs> {} }:
 pkgs.mkShellNoCC {
     nativeBuildInputs = with pkgs.buildPackages; [ ];
 }
-""" > shell.nix
+" > shell.nix
 echo "use nix" > .envrc
 
 log=$(mktemp)
 crate_name=""
-echo "create project $proj_name" > $log
+echo "create project $proj_name" > "$log"
 features=""
 for arg in "${@:2}" "" ; do
-	if [[ "$arg" =~ "-" ]] then
+	if [[ "$arg" =~ "-" ]] ; then
 		features="$features${arg#-} "
 	elif [ -z "$crate_name" ] ; then
 		# first crate
@@ -26,16 +29,16 @@ for arg in "${@:2}" "" ; do
 		crate_name=$arg
 	else
 		if [ -z "$features" ] ; then
-			echo "add $crate_name with default features" >> $log
-			cargo add $crate_name
+			echo "add $crate_name with default features" >> "$log"
+			cargo add "$crate_name"
 		else
-			echo "add $crate_name with [ $features]" >> $log
-			cargo add $crate_name --features $features
+			echo "add $crate_name with [ $features]" >> "$log"
+			cargo add "$crate_name" --features "$features"
 		fi
 		features=""
 		crate_name=$arg
 	fi
 done
 
-cat $log
-rm $log
+cat "$log"
+rm "$log"

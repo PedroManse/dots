@@ -1,7 +1,12 @@
-echo """
-{ pkgs ? import <nixpkgs> {} }:
+#! /usr/bin/env bash
+
+echo "{
+  pkgs ? import <nixpkgs> { },
+}:
 pkgs.mkShellNoCC {
-    nativeBuildInputs = with pkgs.buildPackages; [ hello ];
+  name = \"dev-shell\";
+  packages = with pkgs; [ $* ];
 }
-""" > shell.nix
+" > shell.nix
 echo "use nix" > .envrc
+nixfmt shell.nix
