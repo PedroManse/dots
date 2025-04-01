@@ -35,7 +35,7 @@ echo "live_config_reload = true" >> ~/.config/alacritty/alacritty.toml
 echo "import = [ '~/.config/alacritty/commonconfig.toml' ]" >> ~/.config/alacritty/alacritty.toml
 
 echo "setup shrc.sh symlink"
-ln -sf "$PWD/bashrc" ~/.shrc.sh
+ln -sf "$PWD/bash/bashrc" ~/.shrc.sh
 
 echo "setup shenv.sh file"
 echo "# this computer's env file" > ~/.shenv.sh
