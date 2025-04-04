@@ -115,6 +115,7 @@
     hyprshot
     hyprlock
     hyprcursor
+    teams-for-linux
   ];
 
   # original NixOS version; DO *NOT* ALTER
