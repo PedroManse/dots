@@ -23,3 +23,6 @@ nix-edit() {
 alias nix-ehome="$EDITOR $HOME/dots/nix/home.nix"
 alias nix-esys="$EDITOR $HOME/dots/nix/configuration.nix"
 
+nixp() {
+	nix-shell -p "$1" --run "$@"
+}
