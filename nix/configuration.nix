@@ -20,10 +20,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # docker
-  #virtualisation.docker.enable = true;
-
-  networking.hostName = "manse-nix"; # Define your hostname.
+  virtualisation = {
+    #docker.enable = true;
+    #vmware.host.enable = true;
+    virtualbox.host.enable = true;
+  };
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -84,10 +85,11 @@
   users.users.manse = {
     isNormalUser = true;
     description = "pedro manse";
-    # extraGroups = [ "networkmanager" "wheel" "docker" ]; # network, sudo, docker
     extraGroups = [
       "networkmanager"
+      # "docker"
       "wheel"
+      "vboxusers"
     ];
   };
 
@@ -105,10 +107,6 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nix.extraOptions = ''
-    keep-outputs = true
-    keep-derivations = true
-    	'';
 
   environment.systemPackages = with pkgs; [
     pulseaudio
