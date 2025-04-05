@@ -15,8 +15,10 @@ autocmd FileType rust nnoremap <buffer> <C-h><C-h> :Ccheck<CR>a
 
 autocmd FileType nix nnoremap <buffer> <C-h><C-h> :!nixfmt %<CR><CR>
 autocmd FileType nix set expandtab
+autocmd FileType haskell set expandtab
 
 autocmd FileType go nnoremap <buffer> ; msA,<ESC>`s
+autocmd BufWinEnter *.stt setfiletype bash
 autocmd BufWinEnter *.gohtml setfiletype html
 
 autocmd BufWinEnter * ++once syntax enable
