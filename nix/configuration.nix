@@ -7,10 +7,15 @@
     /home/manse/dots/nix/home.nix
   ];
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    keep-outputs = true;
+    keep-derivations = true;
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
