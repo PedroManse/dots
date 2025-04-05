@@ -10,17 +10,13 @@ dist
 node_modules
 " > .gitignore
 
-echo '
-{
+echo '{
   "compilerOptions": {
     "target": "es2023",
-    "lib": ["DOM", "es2023"],
-    "jsx": "react",
-    "jsxFactory": "El",
-    "module": "es6",
+    "lib": ["es2023"],
+    "module": "commonjs",
     "rootDir": "./src",
     "moduleResolution": "node",
-    "allowArbitraryExtensions": true,
     "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
