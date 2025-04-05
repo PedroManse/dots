@@ -23,7 +23,7 @@ vim.g.netrw_liststyle = 3
 
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
-vim.opt.expandtab = false
+--vim.opt.expandtab = false
 vim.opt.whichwrap = '[,],<,>'
 vim.opt.encoding = 'UTF-8'
 vim.opt.wrap = false
