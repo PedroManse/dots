@@ -1,4 +1,5 @@
 alias nix-switch="sudo nixos-rebuild switch"
+alias nix-build="nixos-rebuild build"
 nix-clean() {
 	nix-collect-garbage --delete-old
 	sudo nix-collect-garbage -d
@@ -20,9 +21,6 @@ nix-edit() {
 		;;
 	esac
 }
-alias nix-ehome="$EDITOR $HOME/dots/nix/home.nix"
-alias nix-esys="$EDITOR $HOME/dots/nix/configuration.nix"
+alias nix-ehome="\$EDITOR \$HOME/dots/nix/home.nix"
+alias nix-esys="\$EDITOR \$HOME/dots/nix/configuration.nix"
 
-nixp() {
-	nix-shell -p "$1" --run "$@"
-}
