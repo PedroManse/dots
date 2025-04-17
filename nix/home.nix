@@ -30,6 +30,7 @@ in
           vlc
           discord
           shellcheck
+          wf-recorder
         ];
       };
 
