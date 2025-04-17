@@ -90,9 +90,10 @@
     description = "pedro manse";
     extraGroups = [
       "networkmanager"
-      # "docker"
+      "docker"
       "wheel"
       "vboxusers"
+      "vboxsf" # vbox shared folder
     ];
   };
 
