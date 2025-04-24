@@ -123,6 +123,7 @@
     hyprlock
     hyprcursor
     teams-for-linux
+    heroic
   ];
 
   # original NixOS version; DO *NOT* ALTER
