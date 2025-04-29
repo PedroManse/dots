@@ -8,7 +8,7 @@ cd "$proj_name"
 echo "target
 .direnv
 " >> .gitignore
-:> "lib.rs"
+:> "src/lib.rs"
 
 echo "{ pkgs ? import <nixpkgs> {} }:
 pkgs.mkShellNoCC {
