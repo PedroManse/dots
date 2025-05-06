@@ -6,7 +6,7 @@ nix-clean() {
 }
 nix-edit() {
 	case $1 in
-	"prog")
+	"progs" | "prog")
 		if [ -z "$2" ] ; then
 			$EDITOR "$HOME/dots/nix/programs/" "$HOME/dots/nix/home.nix"
 		else
@@ -18,6 +18,13 @@ nix-edit() {
 		;;
 	"sys")
 			$EDITOR "$HOME/dots/nix/configuration.nix"
+		;;
+	* )
+		echo "
+commands:
+	prog [program]
+	home
+	sys"
 		;;
 	esac
 }
