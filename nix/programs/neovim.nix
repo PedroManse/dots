@@ -1,4 +1,7 @@
-{enable?true}: {
-	inherit enable;
-	defaultEditor = true;
+{
+  enable ? true,
+}:
+{
+  inherit enable;
+  defaultEditor = true;
 }

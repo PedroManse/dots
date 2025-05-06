@@ -1,5 +1,8 @@
-{enable?true}: {
-	inherit enable;
-	colors = "always";
-	git = true;
+{
+  enable ? true,
+}:
+{
+  inherit enable;
+  colors = "always";
+  git = true;
 }
