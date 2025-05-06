@@ -30,7 +30,9 @@ prompt_command() {
 	fi
 
 	# show git status
-	PS="${PS}$(gs2)"
+	if [ -z "$PS1_SKIP_GS2" ] ; then
+		PS="${PS}$(gs2)"
+	fi
 
 	# show computer name if it's not "."
 	if [ -n "$COMPUTER_NAME" -a "$COMPUTER_NAME" != "." ] ; then
