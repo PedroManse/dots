@@ -33,9 +33,9 @@ export ZEN="true"
 export BAT_THEME="zenburn"
 export GOPATH=$HOME
 export TERM=xterm-256color
-export EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="less"
+# EDITOR defined in nvim.bash
 
 source $HOME/dots/bash/colors.bash
 source $HOME/dots/bash/tty.bash

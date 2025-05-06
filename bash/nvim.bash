@@ -5,7 +5,8 @@ _nvim_con() {
 }
 
 if [ -n "$NVIM" ] ; then
-	alias nvim="_nvim_con"
+	export EDITOR="_nvim_con"
 else
-	alias nvim="$(get_bin_path nvim) --listen $HOME/.cache/nvim/$$-server.pipe"
+	export EDITOR="$(get_bin_path nvim) --listen $HOME/.cache/nvim/$$-server.pipe"
 fi
+alias nvim="$EDITOR"
