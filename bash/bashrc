@@ -37,6 +37,7 @@ export VISUAL="nvim"
 export PAGER="less"
 # EDITOR defined in nvim.bash
 
+source $HOME/dots/bash/readline.bash
 source $HOME/dots/bash/colors.bash
 source $HOME/dots/bash/tty.bash
 source $HOME/dots/bash/pwd.bash
