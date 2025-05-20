@@ -50,15 +50,26 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
-  # postgres
-  services.postgresql.enable = true;
+  # services
+  services = {
+    # postgres
+    postgresql.enable = true;
 
-  # login/display manager
-  services.displayManager.ly.enable = true;
+    # mysql (with mariadb)
+    mysql = {
+      enable = true;
+      package = pkgs.mariadb;
+    };
 
-  services.xserver.xkb = {
-    layout = "br";
-    variant = "";
+    # login/display manager
+    displayManager.ly.enable = true;
+
+    # x keyboard
+    xserver.xkb = {
+      layout = "br";
+      variant = "";
+    };
+
   };
 
   # gpg agent + pin entry
@@ -103,9 +114,7 @@
     steam.enable = true;
     nix-ld = {
       enable = true;
-      libraries = with pkgs; [
-        libgcc
-      ];
+      libraries = [ pkgs.libgcc ];
     };
   };
 
@@ -124,6 +133,11 @@
     hyprcursor
     teams-for-linux
     heroic
+    (nerdfonts.override { fonts = [ "Mononoki" ]; })
+  ];
+
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "Mononoki" ]; })
   ];
 
   # original NixOS version; DO *NOT* ALTER
