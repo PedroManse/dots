@@ -1,5 +1,4 @@
 alias nix-switch="sudo nixos-rebuild switch"
-alias nix-build="nixos-rebuild build"
 nix-clean() {
 	nix-collect-garbage --delete-old
 	sudo nix-collect-garbage -d
