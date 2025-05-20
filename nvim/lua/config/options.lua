@@ -16,6 +16,9 @@ vim.g.syntastic_rust_checkers = {"cargo"}
 vim.g.syntastic_mode_map = { mode= "active" }
 vim.g.re=0
 
+-- airline
+vim.g["airline#extensions#branch#enabled"] = 1
+
 -- net rw
 vim.g.netrw_banner = 0
 vim.g.netrw_browse_split = 3
