@@ -1,4 +1,3 @@
-alias killJobs="jobs -p | xargs kill"
 alias svi="sudo nvim -u $HOME/.config/nvim/init.lua"
 alias tmod="nvim $HOME/dots/bash; source $HOME/dots/bash/bashrc"
 alias ref="source $HOME/dots/bash/bashrc"
@@ -9,7 +8,6 @@ alias ls="$(get_bin_path eza)"
 alias hq="$(get_bin_path htmlq)"
 alias ..="cd .."
 alias ...="cd ../.."
-alias _="nvim $HOME/_"
 alias flog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) -%G?- %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
 alias sqli="sqlite3 --header --nullvalue '<{nil}>' --column"
 
