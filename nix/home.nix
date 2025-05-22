@@ -43,6 +43,7 @@ in
       wayland.windowManager.hyprland = p.hyprland { };
 
       programs = {
+        tiny = p.tiny { };
         eza = p.eza { };
         alacritty = p.alacritty { };
         git = p.git { };
@@ -58,8 +59,8 @@ in
         bash = {
           enable = true;
           bashrcExtra = ''
-            					. /home/manse/dots/bash/bashrc
-            				'';
+            . /home/manse/dots/bash/bashrc
+          '';
         };
       };
     };

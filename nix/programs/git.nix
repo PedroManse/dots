@@ -31,6 +31,11 @@
     };
     diff = {
       colorMoved = false;
+      # add "secret.* diff=sopsdiffer" to .gitattributes
+      # to enable sops-based viewing
+      sopsdiffer = {
+        textconv = "sops decrypt";
+      };
     };
     # defined in ~/.gitconfig; not here
     #user = { signingkey = ""; };
