@@ -109,6 +109,7 @@
   };
 
   programs = {
+    neovim.enable = true;
     hyprland.enable = true;
     firefox.enable = true;
     steam.enable = true;
@@ -119,7 +120,12 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "electron-33.4.11"
+    ];
+  };
 
   environment.systemPackages = with pkgs; [
     pulseaudio
