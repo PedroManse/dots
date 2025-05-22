@@ -1,15 +1,15 @@
 eval "$(direnv hook bash)"
 
+if [ -f ~/.shenv.sh ] ; then
+	. ~/.shenv.sh
+fi
+
 if [ -z "$COMPUTER_NAME" ] ; then
 	if [ -f /etc/hostname ] ; then
 		COMPUTER_NAME=$(cat /etc/hostname)
 	else
 		COMPUTER_NAME="unnamed computer"
 	fi
-fi
-
-if [ -f ~/.shenv.sh ] ; then
-	. ~/.shenv.sh
 fi
 
 get_bin_path() {
@@ -31,23 +31,12 @@ export GPG_TTY=$(tty)
 export PSQL_EDITOR="$(get_bin_path nvim) -n -u $HOME/.vimrc"
 export ZEN="true"
 export BAT_THEME="zenburn"
-export GOPATH=$HOME
+export GOPATH=$HOME/.go
 export TERM=xterm-256color
 export VISUAL="nvim"
 export PAGER="less"
 # EDITOR defined in nvim.bash
 
-source $HOME/dots/bash/readline.bash
-source $HOME/dots/bash/colors.bash
-source $HOME/dots/bash/tty.bash
-source $HOME/dots/bash/pwd.bash
-source $HOME/dots/bash/bluetooth.bash
-source $HOME/dots/bash/git.bash
-source $HOME/dots/bash/nvim.bash
-source $HOME/dots/bash/cargo.bash
-source $HOME/dots/bash/node.bash
-source $HOME/dots/bash/nix.bash
-source $HOME/dots/bash/go.bash
-source $HOME/dots/bash/zig.bash
-source $HOME/dots/bash/c.bash
-source $HOME/dots/bash/alias.bash
+for module in $HOME/dots/bash/*.bash; do
+	source $module
+done
