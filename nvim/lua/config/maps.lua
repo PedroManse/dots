@@ -25,8 +25,9 @@ nmap("<SPACE>", "<ESC>:noh<CR>:<BS>")
 -- lsp config in ./lsp.lua
 nmap("<A-S-n>", ":lua= vim.diagnostic.goto_next{wrap = true}<CR>")
 nmap("<A-S-j>", ":lua= vim.lsp.buf.definition()<CR>")
-nmap("<A-S-k>", ":lua= vim.lsp.buf.implementation()<CR>")
+nmap("<A-S-k>", ":lua= vim.lsp.buf.references()<CR>")
 nmap("<A-S-m>", ":lua= vim.lsp.buf.format()<CR>")
+nmap("<A-S-d>", ":lua= vim.lsp.buf.definition()<CR>")
 
 -- copilot
 nmap("<C-w>c", ":Copilot panel<CR>")
