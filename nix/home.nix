@@ -22,6 +22,7 @@ in
         };
         stateVersion = "24.11";
         packages = with pkgs; [
+          sops
           nixfmt-rfc-style
           typescript-language-server
           bitwarden-desktop
@@ -51,8 +52,8 @@ in
         direnv = p.direnv { };
         neovim = p.neovim { };
         wpaperd = p.wpaperd { };
+        bat = p.bat { };
 
-        bat.enable = true;
         gh.enable = true;
         waybar.enable = true;
 
