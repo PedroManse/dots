@@ -32,6 +32,7 @@ in
           discord
           shellcheck
           wf-recorder
+          bat-extras.batman
         ];
       };
 
