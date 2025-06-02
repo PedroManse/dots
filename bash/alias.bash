@@ -10,6 +10,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias flog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) -%G?- %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
 alias sqli="sqlite3 --header --nullvalue '<{nil}>' --column"
+alias man="batman"
 
 serve() {
 	port=$1
