@@ -29,7 +29,7 @@ in
           qbittorrent
           rustup
           vlc
-          discord
+          vesktop
           shellcheck
           wf-recorder
           bat-extras.batman
