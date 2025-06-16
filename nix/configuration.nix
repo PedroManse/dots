@@ -1,11 +1,21 @@
+# Edit this configuration file to define what should be installed on
+# your system. Help is available in the configuration.nix(5) man page, on
+# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
+
+# NixOS-WSL specific options are documented on the NixOS-WSL repository:
+# https://github.com/nix-community/NixOS-WSL
+
 { config, pkgs, ... }:
+
 {
   imports = [
-    # Include the results of the hardware scan.
-    /etc/nixos/hardware-configuration.nix
-    # Include home-manager
-    /home/manse/dots/nix/home.nix
+    # include NixOS-WSL modules
+    <nixos-wsl/modules>
+    /home/nixos/dots/nix/home.nix
   ];
+
+  wsl.enable = true;
+  wsl.defaultUser = "nixos";
 
   nix.settings = {
     keep-outputs = true;
@@ -16,38 +26,10 @@
     ];
   };
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  virtualisation = {
-    #docker.enable = true;
-    #vmware.host.enable = true;
-    virtualbox.host.enable = true;
-  };
-
   # Enable networking
   networking = {
     hostName = "manse-nix"; # Define your hostname.
     networkmanager.enable = true;
-  };
-
-  # Set your time zone.
-  time.timeZone = "America/Sao_Paulo";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "pt_BR.UTF-8";
-    LC_IDENTIFICATION = "pt_BR.UTF-8";
-    LC_MEASUREMENT = "pt_BR.UTF-8";
-    LC_MONETARY = "pt_BR.UTF-8";
-    LC_NAME = "pt_BR.UTF-8";
-    LC_NUMERIC = "pt_BR.UTF-8";
-    LC_PAPER = "pt_BR.UTF-8";
-    LC_TELEPHONE = "pt_BR.UTF-8";
-    LC_TIME = "pt_BR.UTF-8";
   };
 
   # services
@@ -63,13 +45,6 @@
 
     # login/display manager
     displayManager.ly.enable = true;
-
-    # x keyboard
-    xserver.xkb = {
-      layout = "br";
-      variant = "";
-    };
-
   };
 
   # gpg agent + pin entry
@@ -89,16 +64,10 @@
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
-  users.users.manse = {
+  users.users.nixos = {
     isNormalUser = true;
-    description = "pedro manse";
+    description = "manse";
     extraGroups = [
       "networkmanager"
       "docker"
@@ -110,9 +79,6 @@
 
   programs = {
     neovim.enable = true;
-    hyprland.enable = true;
-    firefox.enable = true;
-    steam.enable = true;
     nix-ld = {
       enable = true;
       libraries = [ pkgs.libgcc ];
@@ -128,22 +94,10 @@
   };
 
   environment.systemPackages = with pkgs; [
-    pulseaudio
     man-pages
     man-pages-posix
     pinentry-curses
-    pavucontrol
     gcc14
-    hyprshot
-    hyprlock
-    hyprcursor
-    teams-for-linux
-    heroic
-    (nerdfonts.override { fonts = [ "Mononoki" ]; })
-  ];
-
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "Mononoki" ]; })
   ];
 
   # original NixOS version; DO *NOT* ALTER

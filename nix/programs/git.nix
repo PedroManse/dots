@@ -21,7 +21,7 @@
       directory = ".";
     };
     commit = {
-      gpgsign = true;
+      gpgsign = false;
     };
     merge = {
       conflictstyle = "zdiff3";

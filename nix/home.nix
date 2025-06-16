@@ -8,7 +8,7 @@ in
     (import "${home-manager}/nixos")
   ];
 
-  home-manager.users.manse =
+  home-manager.users.nixos =
     { pkgs, ... }:
     {
       nixpkgs.config.allowUnfree = true;
@@ -36,13 +36,6 @@ in
         ];
       };
 
-      gtk = {
-        gtk3 = {
-          extraConfig.gtk-application-prefer-dark-theme = true;
-        };
-      };
-
-      wayland.windowManager.hyprland = p.hyprland { };
 
       programs = {
         tiny = p.tiny { };
@@ -52,7 +45,6 @@ in
         wofi = p.wofi { };
         direnv = p.direnv { };
         neovim = p.neovim { };
-        wpaperd = p.wpaperd { };
         bat = p.bat { };
 
         gh.enable = true;
@@ -61,7 +53,7 @@ in
         bash = {
           enable = true;
           bashrcExtra = ''
-            . /home/manse/dots/bash/bashrc
+            . /home/nixos/dots/bash/bashrc
           '';
         };
       };
