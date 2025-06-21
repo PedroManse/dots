@@ -17,6 +17,53 @@ pkgs.mkShellNoCC {
 " > shell.nix
 echo "use nix" > .envrc
 
+
+echo '#! /usr/bin/env bash
+if [ "$1" = "--allow-dirty" ] || [ "$2" = "--allow-dirty" ] ; then allow_dirty="--allow-dirty" ; fi
+if [ "$1" = "--fix" ] || [ "$2" = "--fix" ] ; then fix="--fix" ; fi
+
+set -ex
+cargo build
+cargo fmt
+cargo clippy $fix $allow_dirty --all-targets --all-features -- \
+	-Dclippy::perf \
+	-Dclippy::style \
+	-Wclippy::pedantic \
+	-Aclippy::unnested_or_patterns \
+	-Aclippy::wildcard_imports \
+	-Aclippy::enum_glob_use \
+	-Aclippy::too_many_lines \
+	-Aclippy::match_same_arms \
+	-Aclippy::unnecessary_wraps \
+	-Aclippy::missing_errors_doc
+cargo test' > ci.sh
+
+mkdir -p .github/workflows
+echo '
+name: Rust
+
+on:
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build
+      run: cargo build
+    - name: Format
+      run: cargo fmt --check
+    - name: Lint
+      run: "cargo clippy --all-targets --all-features -- -Dclippy::perf -Dclippy::style -Wclippy::pedantic -Aclippy::unnested_or_patterns -Aclippy::wildcard_imports -Aclippy::enum_glob_use -Aclippy::too_many_lines -Aclippy::match_same_arms -Aclippy::unnecessary_wraps -Aclippy::missing_errors_doc"
+    - name: Test
+      run: cargo test
+' > .github/workflows/rust.yml
+
 log=$(mktemp)
 crate_name=""
 echo "create project $proj_name" > "$log"
