@@ -12,7 +12,9 @@
 
     exec-once=waybar
     exec-once=wpaperd
-    	'';
+    monitor=DP-2, 1920x1080, 0x0, 1
+    monitor=HDMI-A-1, preferred, auto, 1, mirror, DP-2
+  '';
 
   settings = {
     "$mod" = "SUPER";

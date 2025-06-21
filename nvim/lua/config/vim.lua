@@ -1,4 +1,6 @@
 vim.cmd([[
+autocmd BufWinEnter * ++once syntax enable
+
 autocmd FileType rust let g:ale_enabled = 0
 autocmd FileType c,cpp,javascript,typescript,sql,css,nix,rust,zig nnoremap <buffer> ; msA;<ESC>`s
 autocmd FileType typescript,javascript iab jsf function
@@ -18,10 +20,12 @@ autocmd FileType nix set expandtab
 autocmd FileType haskell set expandtab
 
 autocmd FileType go nnoremap <buffer> ; msA,<ESC>`s
-autocmd BufWinEnter *.stt setfiletype bash
+autocmd BufWinEnter *.stt set filetype=stt
+                      \| source /home/manse/code/stck/stck.vim
+autocmd BufWinEnter *.stck set filetype=stck
+                      \| source /home/manse/code/stck/stck.vim
 autocmd BufWinEnter *.gohtml setfiletype html
 
-autocmd BufWinEnter * ++once syntax enable
 
 
 " Commands
