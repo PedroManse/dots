@@ -34,4 +34,5 @@ _open() {
 	fi
 }
 
+export VISUAL="$EDITOR"
 alias nvim="_open"

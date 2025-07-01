@@ -33,9 +33,7 @@ export ZEN="true"
 export BAT_THEME="zenburn"
 export GOPATH=$HOME/.go
 export TERM=xterm-256color
-export VISUAL="nvim"
 export PAGER="less"
-# EDITOR defined in nvim.bash
 
 for module in $HOME/dots/bash/*.bash; do
 	source $module
