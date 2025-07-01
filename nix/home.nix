@@ -33,6 +33,7 @@ in
           shellcheck
           wf-recorder
           bat-extras.batman
+          gimp
         ];
       };
 
