@@ -26,9 +26,6 @@
     merge = {
       conflictstyle = "zdiff3";
     };
-    core = {
-      editor = "nvim";
-    };
     diff = {
       colorMoved = false;
       # add "secret.* diff=sopsdiffer" to .gitattributes

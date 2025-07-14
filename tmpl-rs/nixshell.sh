@@ -24,6 +24,7 @@ fi
 
 echo "use nix" > .envrc
 if [ git status &> /dev/null ] ; then
+	echo ".envrc" >> .gitignore
 	echo ".direnv" >> .gitignore
 fi
 

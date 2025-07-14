@@ -23,7 +23,7 @@
   virtualisation = {
     #docker.enable = true;
     #vmware.host.enable = true;
-    virtualbox.host.enable = true;
+    #virtualbox.host.enable = true;
   };
 
   # Enable networking
