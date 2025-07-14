@@ -5,27 +5,31 @@ proj_name=$1
 
 cargo new --bin "$proj_name"
 cd "$proj_name"
-echo "target
+cat >> .gitignore << EOF
+target
 .direnv
-" >> .gitignore
+.envrc
+EOF
 :> "src/lib.rs"
 
+cat > shell.nix << EOF
 echo "{ pkgs ? import <nixpkgs> {} }:
 pkgs.mkShellNoCC {
     nativeBuildInputs = with pkgs.buildPackages; [ ];
 }
-" > shell.nix
+EOF
 echo "use nix" > .envrc
 
 
-echo '#! /usr/bin/env bash
-if [ "$1" = "--allow-dirty" ] || [ "$2" = "--allow-dirty" ] ; then allow_dirty="--allow-dirty" ; fi
-if [ "$1" = "--fix" ] || [ "$2" = "--fix" ] ; then fix="--fix" ; fi
+cat > ci.sh << EOF
+#! /usr/bin/env bash
+if [ "\$1" = "--allow-dirty" ] || [ "\$2" = "--allow-dirty" ] ; then allow_dirty="--allow-dirty" ; fi
+if [ "\$1" = "--fix" ] || [ "\$2" = "--fix" ] ; then fix="--fix" ; fi
 
 set -ex
 cargo build
 cargo fmt
-cargo clippy $fix $allow_dirty --all-targets --all-features -- \
+cargo clippy \$fix \$allow_dirty --all-targets --all-features -- \
 	-Dclippy::perf \
 	-Dclippy::style \
 	-Wclippy::pedantic \
@@ -36,10 +40,11 @@ cargo clippy $fix $allow_dirty --all-targets --all-features -- \
 	-Aclippy::match_same_arms \
 	-Aclippy::unnecessary_wraps \
 	-Aclippy::missing_errors_doc
-cargo test' > ci.sh
+cargo test
+EOF
 
 mkdir -p .github/workflows
-echo '
+cat > .github/rust.yml << EOF
 name: Rust
 
 on:
@@ -62,7 +67,7 @@ jobs:
       run: "cargo clippy --all-targets --all-features -- -Dclippy::perf -Dclippy::style -Wclippy::pedantic -Aclippy::unnested_or_patterns -Aclippy::wildcard_imports -Aclippy::enum_glob_use -Aclippy::too_many_lines -Aclippy::match_same_arms -Aclippy::unnecessary_wraps -Aclippy::missing_errors_doc"
     - name: Test
       run: cargo test
-' > .github/workflows/rust.yml
+EOF
 
 log=$(mktemp)
 crate_name=""
