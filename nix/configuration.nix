@@ -139,6 +139,7 @@
     hyprcursor
     teams-for-linux
     heroic
+    obs-studio
     (nerdfonts.override { fonts = [ "Mononoki" ]; })
   ];
 

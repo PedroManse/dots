@@ -5,6 +5,8 @@ alias gd="git diff"
 alias gpr="gh pr create -B"
 alias gbr="git checkout -b"
 
+export VISUAL="nvim"
+
 cloneat() {
 	repo=$1
 	author=$2
