@@ -70,19 +70,6 @@
       variant = "";
     };
 
-    mpd = {
-      enable = true;
-      musicDirectory = "/var/music";
-      extraConfig = ''
-        audio_output {
-          type "pipewire"
-          name "mpd pipewire"
-        }
-
-      '';
-
-    };
-
   };
 
   # gpg agent + pin entry
