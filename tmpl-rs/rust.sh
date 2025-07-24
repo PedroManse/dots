@@ -13,11 +13,12 @@ EOF
 :> "src/lib.rs"
 
 cat > shell.nix << EOF
-echo "{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> {} }:
 pkgs.mkShellNoCC {
     nativeBuildInputs = with pkgs.buildPackages; [ ];
 }
 EOF
+
 echo "use nix" > .envrc
 
 
