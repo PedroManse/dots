@@ -87,7 +87,7 @@
   # services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -138,13 +138,12 @@
     hyprlock
     hyprcursor
     teams-for-linux
-    heroic
     obs-studio
-    (nerdfonts.override { fonts = [ "Mononoki" ]; })
+    nerd-fonts.mononoki
   ];
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "Mononoki" ]; })
+    nerd-fonts.mononoki
   ];
 
   # original NixOS version; DO *NOT* ALTER

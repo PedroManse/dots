@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
   p = import ./autoprogs.nix ./programs;
 in
 {
@@ -45,6 +45,10 @@ in
 
       wayland.windowManager.hyprland = p.hyprland { };
 
+      services = {
+        wpaperd = p.wpaperd { };
+      };
+
       programs = {
         tiny = p.tiny { };
         eza = p.eza { };
@@ -53,7 +57,6 @@ in
         wofi = p.wofi { };
         direnv = p.direnv { };
         neovim = p.neovim { };
-        wpaperd = p.wpaperd { };
         bat = p.bat { };
 
         gh.enable = true;
