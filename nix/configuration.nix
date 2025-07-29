@@ -70,6 +70,14 @@
       variant = "";
     };
 
+    openvpn = {
+      servers = {
+        officeVPN = {
+          config  = ''config /usr/local/share/itesp.ovpn '';
+          updateResolvConf = true;
+        };
+      };
+    };
   };
 
   # gpg agent + pin entry
