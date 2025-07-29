@@ -1,7 +1,11 @@
 # open file on host vim
 _nvim_con() {
-	abs_path=$(readlink --canonicalize "$@" | sed s'| |\\ |'g)
-	$(get_bin_path nvim) --server $NVIM --remote-send "<ESC>:edit $abs_path<CR>"
+	if [ ! $# = 0 ] ; then
+		abs_path=$(readlink --canonicalize "$@" | sed s'| |\\ |'g)
+		$(get_bin_path nvim) --server $NVIM --remote-send "<ESC>:edit $abs_path<CR>"
+	else
+		$(get_bin_path nvim) --server $NVIM --remote-send "<ESC>:enew<CR>"
+	fi
 	exit
 }
 
@@ -17,9 +21,11 @@ else
 fi
 
 _open() {
-	path_parts=$(readlink --canonicalize "$@" | sed s'| |\\ |'g | sed 's/:/\t/' )
-	file=$(echo "$path_parts" | awk ' { print $1 }' )
-	line=$(echo "$path_parts" | awk ' { print $2 }' )
+	if [ ! $# = 0 ] ; then
+		path_parts=$(readlink --canonicalize "$@" | sed s'| |\\ |'g | sed 's/:/\t/' )
+		file=$(echo "$path_parts" | awk ' { print $1 }' )
+		line=$(echo "$path_parts" | awk ' { print $2 }' )
+	fi
 
 	if [ -n "$line" ] ; then
 		# has line number
