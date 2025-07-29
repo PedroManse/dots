@@ -53,13 +53,13 @@
   # services
   services = {
     # postgres
-    postgresql.enable = true;
+    #postgresql.enable = true;
 
     # mysql (with mariadb)
-    mysql = {
-      enable = true;
-      package = pkgs.mariadb;
-    };
+    #mysql = {
+    #  enable = true;
+    #  package = pkgs.mariadb;
+    #};
 
     # login/display manager
     displayManager.ly.enable = true;
