@@ -7,19 +7,8 @@ cargo new --bin "$proj_name"
 cd "$proj_name"
 cat >> .gitignore << EOF
 target
-.direnv
-.envrc
 EOF
 :> "src/lib.rs"
-
-cat > shell.nix << EOF
-{ pkgs ? import <nixpkgs> {} }:
-pkgs.mkShellNoCC {
-    nativeBuildInputs = with pkgs.buildPackages; [ ];
-}
-EOF
-
-echo "use nix" > .envrc
 
 
 cat > ci.sh << EOF
