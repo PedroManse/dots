@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
   p = import ./autoprogs.nix ./programs;
@@ -34,6 +34,8 @@ in
           wf-recorder
           bat-extras.batman
           gimp
+          nixd
+          lua-language-server
         ];
       };
 
