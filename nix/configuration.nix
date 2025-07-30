@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     # Include the results of the hardware scan.
@@ -73,6 +73,7 @@
     openvpn = {
       servers = {
         officeVPN = {
+          autoStart = false;
           config  = ''config /usr/local/share/itesp.ovpn '';
           updateResolvConf = true;
         };
