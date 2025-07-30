@@ -51,6 +51,9 @@ nmap("<A-l>", ":bnext<CR>")
 nmap("<leader>q", ":b#<bar>bw#<CR>")
 nmap("<C-f>", "V$%:fold<CR>j")
 
+nmap("gn", ':cn<CR>')
+nmap("gp", ':cp<CR>')
+
 -- iMaps
 -- move the screen
 imap("<C-j>", "<C-e>")
