@@ -2,6 +2,7 @@
 vim.g.zenburn_force_dark_Background=1
 vim.g.zenburn_transparent=1
 vim.opt.syntax="enable"
+vim.o.winborder = 'rounded'
 vim.cmd.colorscheme("zenburn")
 
 -- disable mouse
