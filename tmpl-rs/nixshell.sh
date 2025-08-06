@@ -5,7 +5,7 @@ write_custom_shell() {
 		pkgs ? import <nixpkgs> { },
 	}:
 	pkgs.mkShellNoCC {
-		name = \"dev-shell\";
+		COMPUTER_NAME = \"dev-shell\";
 		packages = with pkgs; [ $* ];
 	}
 	" > shell.nix
@@ -22,7 +22,6 @@ else
 	write_custom_shell $@
 fi
 
-echo "use nix" > .envrc
 if [ git status &> /dev/null ] ; then
 	echo ".envrc" >> .gitignore
 	echo ".direnv" >> .gitignore
