@@ -1,0 +1,6 @@
+{
+  enable ? true,
+}:
+{
+  inherit enable;
+}

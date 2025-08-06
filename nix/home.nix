@@ -42,6 +42,7 @@ in
         neovim = p.neovim { };
         bat = p.bat.bat { };
         bash = p.bash { configFile = /home/manse/dots/bash/bashrc; };
+        lazygit = p.lazygit { };
 
         gh.enable = true;
         waybar.enable = true;
