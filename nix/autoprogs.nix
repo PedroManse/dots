@@ -1,12 +1,11 @@
-dir:
+{ dir, pkgs }:
 with builtins;
 let
-  files_names = attrNames (readDir dir);
-  # filter (fl: nixpkgs.lib.strings.hasSuffix ".nix")
-  progs_names = filter (fl: true) (files_names);
+  files = attrNames (readDir dir);
+  progs_names = filter (fl: pkgs.lib.strings.hasSuffix ".nix" fl) files;
   progs_vals = map (fl: {
     name = replaceStrings [ ".nix" ] [ "" ] fl;
     value = import (dir + ("/" + fl));
-  }) (progs_names);
+  }) progs_names;
 in
 listToAttrs progs_vals

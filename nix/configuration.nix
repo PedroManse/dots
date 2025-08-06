@@ -50,10 +50,9 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
-  # services
+  # systemd services
   services = {
-    # postgres
-    #postgresql.enable = true;
+    # postgresql.enable = true;
 
     # mysql (with mariadb)
     #mysql = {
@@ -74,10 +73,18 @@
       servers = {
         officeVPN = {
           autoStart = false;
-          config  = ''config /usr/local/share/itesp.ovpn '';
+          config = ''config /usr/local/share/itesp.ovpn'';
           updateResolvConf = true;
         };
       };
+    };
+
+    pulseaudio.enable = false;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
     };
   };
 
@@ -92,18 +99,8 @@
   # Configure console keymap
   console.keyMap = "br-abnt2";
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
+  # Enable sound with pipewire. (see .services.pipewire)
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   users.users.manse = {
     isNormalUser = true;
@@ -113,7 +110,6 @@
       "docker"
       "wheel"
       "vboxusers"
-      "vboxsf" # vbox shared folder
     ];
   };
 
@@ -129,12 +125,7 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config = {
-    allowUnfree = true;
-    permittedInsecurePackages = [
-      "electron-33.4.11"
-    ];
-  };
+  nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
     pulseaudio

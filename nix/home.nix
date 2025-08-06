@@ -1,7 +1,10 @@
-{ ... }:
+pkgs:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
-  p = import ./autoprogs.nix ./programs;
+  p = import ./autoprogs.nix {
+    inherit pkgs;
+    dir = ./programs;
+  };
 in
 {
   imports = [
@@ -12,47 +15,29 @@ in
     { pkgs, ... }:
     {
       nixpkgs.config.allowUnfree = true;
-      home = {
-        pointerCursor = {
-          name = "rose-pine-cursor";
-          size = 24;
-          x11.enable = true;
-          gtk.enable = true;
-          package = pkgs.rose-pine-cursor;
-        };
-        stateVersion = "24.11";
-        packages = with pkgs; [
-          sops
+
+      home.packages =
+        with pkgs;
+        [
           nixfmt-rfc-style
-          typescript-language-server
           bitwarden-desktop
           qbittorrent
-          rustup
           vlc
           vesktop
-          shellcheck
           wf-recorder
           bat-extras.batman
           gimp
-          nixd
-          lua-language-server
-        ];
-      };
 
-      gtk = {
-        gtk3 = {
-          extraConfig.gtk-application-prefer-dark-theme = true;
-        };
-      };
+          shellcheck
+          rustup
+        ]
+        ++ p.lsp pkgs;
 
+      gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
       wayland.windowManager.hyprland = p.hyprland { };
-
-      services = {
-        wpaperd = p.wpaperd { };
-      };
+      services.wpaperd = p.wpaperd { };
 
       programs = {
-        tiny = p.tiny { };
         eza = p.eza { };
         alacritty = p.alacritty { };
         git = p.git { };
@@ -60,16 +45,14 @@ in
         direnv = p.direnv { };
         neovim = p.neovim { };
         bat = p.bat { };
+        bash = p.bash { configFile = /home/manse/dots/bash/bashrc; };
 
         gh.enable = true;
         waybar.enable = true;
-
-        bash = {
-          enable = true;
-          bashrcExtra = ''
-            . /home/manse/dots/bash/bashrc
-          '';
-        };
+      };
+      home = {
+        pointerCursor = p.pointer pkgs.rose-pine-hyprcursor;
+        stateVersion = "24.11";
       };
     };
 }
