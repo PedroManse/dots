@@ -139,6 +139,7 @@
     teams-for-linux
     obs-studio
     nerd-fonts.mononoki
+    dbeaver-bin
   ];
 
   fonts.packages = [
