@@ -99,7 +99,6 @@
   # Configure console keymap
   console.keyMap = "br-abnt2";
 
-  # Enable sound with pipewire. (see .services.pipewire)
   security.rtkit.enable = true;
 
   users.users.manse = {
@@ -142,8 +141,8 @@
     nerd-fonts.mononoki
   ];
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.mononoki
+  fonts.packages = [
+    pkgs.nerd-fonts.mononoki
   ];
 
   # original NixOS version; DO *NOT* ALTER

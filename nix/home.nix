@@ -19,19 +19,15 @@ in
       home.packages =
         with pkgs;
         [
-          nixfmt-rfc-style
           bitwarden-desktop
           qbittorrent
           vlc
           vesktop
           wf-recorder
-          bat-extras.batman
           gimp
-
-          shellcheck
-          rustup
         ]
-        ++ p.lsp pkgs;
+        ++ (p.bat.extras pkgs)
+        ++ (p.coding pkgs);
 
       gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
       wayland.windowManager.hyprland = p.hyprland { };
@@ -44,7 +40,7 @@ in
         wofi = p.wofi { };
         direnv = p.direnv { };
         neovim = p.neovim { };
-        bat = p.bat { };
+        bat = p.bat.bat { };
         bash = p.bash { configFile = /home/manse/dots/bash/bashrc; };
 
         gh.enable = true;

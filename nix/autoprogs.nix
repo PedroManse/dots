@@ -2,7 +2,7 @@
 with builtins;
 let
   files = attrNames (readDir dir);
-  progs_names = filter (fl: pkgs.lib.strings.hasSuffix ".nix" fl) files;
+  progs_names = filter (pkgs.lib.strings.hasSuffix ".nix") files;
   progs_vals = map (fl: {
     name = replaceStrings [ ".nix" ] [ "" ] fl;
     value = import (dir + ("/" + fl));
