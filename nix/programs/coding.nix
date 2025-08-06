@@ -5,4 +5,5 @@ pkgs: with pkgs; [
   nixfmt-rfc-style
   shellcheck
   rustup
+  emmet-language-server
 ]
