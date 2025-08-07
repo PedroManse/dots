@@ -2,6 +2,7 @@ alias gs="git status"
 alias gp="git push"
 alias ghp="gh repo create --public --push --source . --remote origin"
 alias gd="git diff"
+alias gds="git diff --staged"
 alias gpr="gh pr create -B"
 alias gbr="git checkout -b"
 

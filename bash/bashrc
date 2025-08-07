@@ -31,9 +31,8 @@ export GPG_TTY=$(tty)
 export PSQL_EDITOR="$(get_bin_path nvim) -n -u $HOME/.vimrc"
 export ZEN="true"
 export BAT_THEME="zenburn"
-export GOPATH=$HOME
+export GOPATH=$HOME/.go
 export TERM=xterm-256color
-export EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="less"
 

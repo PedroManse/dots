@@ -1,5 +1,7 @@
 #! /bin/bash
 set -e
+echo "Need to adapt <posix> setup.sh to use <nix> configs"
+exit 1
 
 # go to folder
 back=$(pwd)
@@ -19,11 +21,10 @@ default asroot "sudo"
 mkdir -p "$workdir"
 
 # setup config
-mkdir -p ~/.config/nvim
 ln -sf "$PWD/nvim" ~/.config/nvim
 
 echo "setup alacritty config"
-mkdir "$HOME/.config/alacritty"
+mkdir -p "$HOME/.config/alacritty"
 ln -sf "$PWD/alacritty.toml" ~/.config/alacritty/commonconfig.toml
 alacritty_majro_version=$(alacritty --version | cut -d' ' -f2 | cut -d. -f2)
 if [ $alacritty_majro_version -ge "14" ] ; then
@@ -52,17 +53,8 @@ if [[ $usi == "y" ]] ; then
 			TMPLRS_DIR="$PWD/tmpl-rs"
 		fi
 	fi
-	if [ -d $TMPLRS_DIR ] ; then
-		echo "D"
-		read -e -p "Replace current tmpl dir? [Y/n]>" -n 1 usi
-		if [[ $usi == "y" ]] ; then
-			rm -r $TMPLRS_DIR
-		else
-			echo exit 1
-		fi
-	fi
+	mkdir -p "$TMPLRS_DIR"
 	echo "export TMPLRS_DIR=\"${TMPLRS_DIR}\"" >> ~/.shenv.sh
-
 	ln -sf "$PWD/tmpl-rs" "$TMPLRS_DIR"
 fi
 
@@ -77,8 +69,7 @@ cloneat() {
 		cd $back
 		return
 	else
-		echo "no such directory $todir"
-		exit 1
+		mkdir "$todir"
 	fi
 
 	if [[ $todir = "" ]]; then
