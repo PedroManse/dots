@@ -1,6 +1,6 @@
 alias svi="sudo nvim -u $HOME/.config/nvim/init.lua"
-alias tmod="nvim $HOME/dots/bash; source $HOME/dots/bash/bashrc"
-alias ref="source $HOME/dots/bash/bashrc"
+alias tmod="bash-edit"
+alias ref="source $DOTS/bash/bashrc"
 alias vmod="nvim $HOME/.config/nvim/init.lua"
 alias cat="$(get_bin_path bat)"
 alias ocat="$(get_bin_path cat)"
