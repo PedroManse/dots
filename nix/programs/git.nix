@@ -3,7 +3,7 @@
 }:
 {
   inherit enable;
-  userName = "Pedro Manse";
+  userName = "Manse";
   userEmail = "pedro.manse@dmk3.com.br";
   aliases = {
     f = "fetch --prune";

@@ -25,10 +25,11 @@ nmap("git", ":LazyGit<CR>")
 --- LSP
 -- lsp config in ./lsp.lua
 nmap("<A-S-n>", ":lua= vim.diagnostic.goto_next{wrap = true}<CR>")
-nmap("<A-S-j>", ":lua= vim.lsp.buf.definition()<CR>")
-nmap("<A-S-k>", ":lua= vim.lsp.buf.references()<CR>")
+nmap("grt", ":lua= vim.lsp.buf.definition()<CR>")
 nmap("<A-S-m>", ":lua= vim.lsp.buf.format()<CR>")
-nmap("<A-S-d>", ":lua= vim.lsp.buf.definition()<CR>")
+-- grt -> def
+-- gri -> impl
+-- grr -> refs
 
 -- copilot
 nmap("<C-w>c", ":Copilot panel<CR>")

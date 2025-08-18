@@ -1,11 +1,11 @@
 local lspconfig = require("lspconfig")
-local cmp = require'cmp'
+local cmp = require 'cmp'
 
 local lspconfig_defaults = require('lspconfig').util.default_config
 lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-  'force',
-  lspconfig_defaults.capabilities,
-  require('cmp_nvim_lsp').default_capabilities()
+	'force',
+	lspconfig_defaults.capabilities,
+	require('cmp_nvim_lsp').default_capabilities()
 )
 
 -- lsp related maps in ./maps.lua
@@ -21,9 +21,9 @@ for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) d
 end
 
 cmp.setup {
-  sources = cmp.config.sources({
-	{ name = 'nvim_lsp' }
-  }, {
+	sources = cmp.config.sources({
+		{ name = 'nvim_lsp' }
+	}, {
 		{ name = 'buffer' }
 	}),
 	mapping = cmp.mapping.preset.insert({
@@ -37,7 +37,7 @@ cmp.setup {
 }
 
 local on_attach = function(client)
-	require'completion'.on_attach(client)
+	require 'completion'.on_attach(client)
 end
 
 lspconfig.rust_analyzer.setup({
@@ -64,7 +64,15 @@ lspconfig.rust_analyzer.setup({
 	}
 })
 
-lspconfig.ts_ls.setup{}
-lspconfig.nixd.setup{}
-lspconfig.lua_ls.setup{}
-lspconfig.emmet_language_server.setup{}
+lspconfig.ts_ls.setup {}
+lspconfig.nixd.setup {}
+vim.lsp.config("lua_ls", {
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { "vim" } }
+		}
+	}
+})
+lspconfig.emmet_language_server.setup {}
+lspconfig.bashls.setup {}

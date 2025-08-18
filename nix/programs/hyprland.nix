@@ -61,11 +61,12 @@
       "SHIFT, XF86AudioRaiseVolume, exec, pactl set-sink-volume $(pactl get-default-sink) +1%"
       "CTRL, XF86AudioRaiseVolume, exec, bash /home/manse/code/umind/PA-sink-rotation.sh 1"
       "CTRL, XF86AudioLowerVolume, exec, bash /home/manse/code/umind/PA-sink-rotation.sh -1"
+      "ALT, q, workspace, previous"
 
       # f11 -> toggle fullscreen
       ", F11, fullscreen"
     ]
     # Sup+N -> workspace N [0;9]
-    ++ map (n: "SUPER, ${toString n}, workspace, ${toString n}") (builtins.genList (n: n + 1) 9);
+    ++ builtins.genList (n: "SUPER, ${toString (n + 1)}, workspace, ${toString (n + 1)}") 9;
   };
 }

@@ -140,6 +140,7 @@
     obs-studio
     nerd-fonts.mononoki
     dbeaver-bin
+    xorg.xset
   ];
 
   fonts.packages = [
