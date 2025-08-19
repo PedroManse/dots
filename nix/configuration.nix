@@ -71,7 +71,7 @@
 
     openvpn = {
       servers = {
-        officeVPN = {
+        office = {
           autoStart = false;
           config = ''config /usr/local/share/itesp.ovpn'';
           updateResolvConf = true;
@@ -99,6 +99,31 @@
   # Configure console keymap
   console.keyMap = "br-abnt2";
 
+  security.sudo = {
+    enable = true;
+    extraRules = [
+      # Allow execution of any command by all users in group sudo, requiring a password.
+      {
+        groups = [ "sudo" "wheel" ];
+        commands = [ "ALL" ];
+      }
+
+      # Allow execution of "/home/root/secret.sh" by user `backup`, `database`
+      # and the group with GID `1006` without a password.
+      {
+        users = [ "manse" ];
+        commands = [
+          {
+            command = "/home/manse/dots/waybar/vpn.sh";
+            options = [
+              "SETENV"
+              "NOPASSWD"
+            ];
+          }
+        ];
+      }
+    ];
+  };
   security.rtkit.enable = true;
 
   users.users.manse = {
