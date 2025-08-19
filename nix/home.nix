@@ -42,10 +42,10 @@ in
         neovim = p.neovim { };
         bat = p.bat.bat { };
         bash = p.bash { configFile = /home/manse/dots/bash/bashrc; };
+        waybar = p.waybar {};
         lazygit = p.lazygit { };
 
         gh.enable = true;
-        waybar.enable = true;
       };
       home = {
         pointerCursor = p.pointer pkgs.rose-pine-hyprcursor;
