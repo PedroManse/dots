@@ -55,6 +55,7 @@
       "SUPER, F2, exec, hyprshot --mode region --output-folder /tmp --silent"
 
       # Audio stuff
+      ", XF86AudioPlay, exec, playerctl --all-players play-pause"
       ", XF86AudioLowerVolume, exec, pactl set-sink-volume $(pactl get-default-sink) -5%"
       ", XF86AudioRaiseVolume, exec, pactl set-sink-volume $(pactl get-default-sink) +5%"
       "SHIFT, XF86AudioLowerVolume, exec, pactl set-sink-volume $(pactl get-default-sink) -1%"
