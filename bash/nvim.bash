@@ -44,13 +44,13 @@ vim-edit() {
 	case $1 in
 		"plug" | "plugin" | "lazy" )
 			if [ -z "$2" ] ; then
-				$EDITOR "$HOME/dots/nvim/lua/plugins/"
+				$EDITOR "$DOTS/nvim/lua/plugins/"
 			else
-				$EDITOR "$HOME/dots/nvim/lua/plugins/$2.lua"
+				$EDITOR "$DOTS/nvim/lua/plugins/$2.lua"
 			fi
 		;;
 		* )
-			$EDITOR "$HOME/dots/nvim/lua/config/$1.lua"
+			$EDITOR "$DOTS/nvim/lua/config/$1.lua"
 		;;
 	esac
 }

@@ -7,16 +7,16 @@ nix-edit() {
 	case $1 in
 	"progs" | "prog")
 		if [ -z "$2" ] ; then
-			$EDITOR "$HOME/dots/nix/programs/" "$HOME/dots/nix/home.nix"
+			$EDITOR "$DOTS/nix/programs/" "$DOTS/nix/home.nix"
 		else
-			$EDITOR "$HOME/dots/nix/programs/$2.nix"
+			$EDITOR "$DOTS/nix/programs/$2.nix"
 		fi
 		;;
 	"home")
-			$EDITOR "$HOME/dots/nix/home.nix"
+			$EDITOR "$DOTS/nix/home.nix"
 		;;
 	"sys")
-			$EDITOR "$HOME/dots/nix/configuration.nix"
+			$EDITOR "$DOTS/nix/configuration.nix"
 		;;
 	* )
 		echo "
@@ -27,6 +27,6 @@ commands:
 		;;
 	esac
 }
-alias nix-ehome="\$EDITOR \$HOME/dots/nix/home.nix"
-alias nix-esys="\$EDITOR \$HOME/dots/nix/configuration.nix"
+alias nix-ehome="\$EDITOR \$DOTS/nix/home.nix"
+alias nix-esys="\$EDITOR \$DOTS/nix/configuration.nix"
 

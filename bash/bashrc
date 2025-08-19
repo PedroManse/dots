@@ -27,6 +27,11 @@ if [ -d "$DEVAPS" ] ; then
 	export PATH="$DEVAPS/bin:$PATH"
 fi
 
+bash-edit() {
+	$EDITOR $DOTS/bash/$1
+	source $DOTS/bash/bashrc
+}
+
 export GPG_TTY=$(tty)
 export PSQL_EDITOR="$(get_bin_path nvim) -n -u $HOME/.vimrc"
 export ZEN="true"
@@ -34,6 +39,6 @@ export BAT_THEME="zenburn"
 export TERM=xterm-256color
 export PAGER="less"
 
-for module in $HOME/dots/bash/*.bash; do
+for module in $DOTS/bash/*.bash; do
 	source $module
 done
