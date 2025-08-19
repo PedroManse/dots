@@ -43,7 +43,9 @@ in
         neovim = p.neovim { };
         bat = p.bat.bat { };
         bash = p.bash { configFile = dots-directory + ../bash/bashrc; };
-        waybar = p.waybar { style = dots-directory + ../waybar/style.css; };
+        waybar = p.waybar {
+          style = dots-directory + ../waybar/style.css;
+        };
         lazygit = p.lazygit { };
 
         gh.enable = true;
