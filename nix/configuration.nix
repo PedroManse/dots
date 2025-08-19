@@ -141,6 +141,7 @@
     nerd-fonts.mononoki
     dbeaver-bin
     xorg.xset
+    playerctl
   ];
 
   fonts.packages = [
