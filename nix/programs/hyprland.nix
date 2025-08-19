@@ -60,8 +60,8 @@
       ", XF86AudioRaiseVolume, exec, pactl set-sink-volume $(pactl get-default-sink) +5%"
       "SHIFT, XF86AudioLowerVolume, exec, pactl set-sink-volume $(pactl get-default-sink) -1%"
       "SHIFT, XF86AudioRaiseVolume, exec, pactl set-sink-volume $(pactl get-default-sink) +1%"
-      "CTRL, XF86AudioRaiseVolume, exec, bash /home/manse/code/umind/PA-sink-rotation.sh 1"
-      "CTRL, XF86AudioLowerVolume, exec, bash /home/manse/code/umind/PA-sink-rotation.sh -1"
+      "CTRL, XF86AudioRaiseVolume, exec, bash /home/manse/dots/scripts/change-sink.sh 1"
+      "CTRL, XF86AudioLowerVolume, exec, bash /home/manse/dots/scripts/change-sink.sh -1"
       "ALT, q, workspace, previous"
 
       # f11 -> toggle fullscreen

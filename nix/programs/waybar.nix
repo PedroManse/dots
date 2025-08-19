@@ -11,19 +11,19 @@ let
       tooltip = true;
     };
     "custom/vpn" = {
-      exec = "bash ~/dots/waybar/vpn.sh";
+      exec = "bash ~/dots/scripts/vpn.sh";
       return-type = "json";
       # executes directly to run as root
       # > see at security.sudo on configuration.nix
       interval = 15;
-      on-click = "sudo ~/dots/waybar/vpn.sh --toggle";
+      on-click = "sudo ~/dots/scripts/vpn.sh --toggle";
     };
     "pulseaudio" = {
       format-icons = {
         headphone = "";
         speaker = "󰜟";
       };
-      on-click = "bash ~/dots/waybar/change-sink.sh 1";
+      on-click = "bash ~/dots/scripts/change-sink.sh 1";
       format = {
         format = "{icon} {volume}";
       };
