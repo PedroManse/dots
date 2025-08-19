@@ -1,5 +1,6 @@
 pkgs:
 let
+  dots-directory = /. + builtins.getEnv "DOTS";
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
   p = import ./autoprogs.nix {
     inherit pkgs;
@@ -41,8 +42,8 @@ in
         direnv = p.direnv { };
         neovim = p.neovim { };
         bat = p.bat.bat { };
-        bash = p.bash { configFile = /home/manse/dots/bash/bashrc; };
-        waybar = p.waybar {};
+        bash = p.bash { configFile = dots-directory + ../bash/bashrc; };
+        waybar = p.waybar { style = dots-directory + ../waybar/style.css; };
         lazygit = p.lazygit { };
 
         gh.enable = true;

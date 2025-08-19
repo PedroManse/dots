@@ -36,12 +36,13 @@ let
     format = ''{used:0.1f} / {total:0.1f}'';
   };
 in
+
 {
+  style,
   enable ? true,
 }:
 {
-  inherit enable;
-  style = /home/manse/dots/waybar/style.css;
+  inherit enable style;
   settings = {
     mainBar = {
       "layer" = "top";
