@@ -114,7 +114,7 @@
         users = [ "manse" ];
         commands = [
           {
-            command = "/home/manse/dots/waybar/vpn.sh";
+            command = "${/home/manse/dots/scripts/vpn.sh}";
             options = [
               "SETENV"
               "NOPASSWD"

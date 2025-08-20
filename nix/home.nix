@@ -44,7 +44,7 @@ in
         bat = p.bat.bat { };
         bash = p.bash { configFile = dots-directory + ../bash/bashrc; };
         waybar = p.waybar {
-          style = dots-directory + ../waybar/style.css;
+          style = "${dots-directory + ../waybar/style.css}";
         };
         lazygit = p.lazygit { };
 

@@ -11,19 +11,19 @@ let
       tooltip = true;
     };
     "custom/vpn" = {
-      exec = "bash ~/dots/scripts/vpn.sh";
+      exec = "bash ${/home/manse/dots/scripts/vpn.sh}";
       return-type = "json";
       # executes directly to run as root
       # > see at security.sudo on configuration.nix
       interval = 15;
-      on-click = "sudo ~/dots/scripts/vpn.sh --toggle";
+      on-click = "sudo ${/home/manse/dots/scripts/vpn.sh} --toggle";
     };
     "pulseaudio" = {
       format-icons = {
         headphone = "";
         speaker = "󰜟";
       };
-      on-click = "bash ~/dots/scripts/change-sink.sh 1";
+      on-click = "bash ${/home/manse/dots/scripts/change-sink.sh} 1";
       format = {
         format = "{icon} {volume}";
       };
@@ -51,6 +51,7 @@ in
       "layer" = "top";
 
       "modules-left" = [
+        "custom/player"
         "cpu"
         "memory"
       ];
@@ -63,6 +64,7 @@ in
         "tray"
         "clock"
       ];
-    } // modules;
+    }
+    // modules;
   };
 }
