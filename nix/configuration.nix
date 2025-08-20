@@ -73,7 +73,7 @@
       servers = {
         office = {
           autoStart = false;
-          config = ''config /usr/local/share/itesp.ovpn'';
+          config = ''config ${/usr/local/share/itesp.ovpn}'';
           updateResolvConf = true;
         };
       };
