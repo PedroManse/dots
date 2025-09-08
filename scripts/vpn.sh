@@ -3,9 +3,6 @@
 status=$(systemctl is-active openvpn-office.service)
 vpn_name="Office"
 
-# list all vpn services
-#systemctl list-units | cut -d' ' -f3 | filte and[ ^'openvpn' $'.service' ]
-
 gen_json() {
 	text="$1"
 	alt="$2"
@@ -16,7 +13,7 @@ gen_json() {
 
 gather() {
 	if [ "$status" = "active" ] ; then
-		gen_json "󰖂  active" "$vpn_name VPN Active" "" "$vpn_name VPN"
+		gen_json "󰖂  Office" "$vpn_name VPN Active" "" "$vpn_name VPN"
 	else
 		gen_json "󰖂  inactive" "$vpn_name VPN Inactive" "" "$vpn_name VPN"
 	fi
@@ -24,12 +21,6 @@ gather() {
 
 if [[ "$1" == "--details" ]]; then
 	systemctl status openvpn-office.service
-elif [[ "$1" == "--toggle" ]] ; then
-	if [ "$status" = "active" ] ; then
-		sudo systemctl stop openvpn-office.service
-	else
-		sudo systemctl start openvpn-office.service
-	fi
 else
 	gather
 fi
