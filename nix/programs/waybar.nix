@@ -4,6 +4,18 @@
 }:
 let
   modules = {
+    "custom/power" = {
+      format = "⏻ ";
+      tooltip = false;
+      menu = "on-click";
+      menu-file = /home/manse/dots/waybar/power.xml;
+      menu-actions = {
+        suspend = "systemctl suspend";
+        hibernate = "systemctl hibernate";
+        shutdown = "shutdown";
+        reboot = "reboot";
+      };
+    };
     "custom/player" = {
       exec = "playerctl metadata -f '{{emoji(status)}} {{title}}'";
       interval = 5;
@@ -16,7 +28,7 @@ let
       # executes directly to run as root
       # > see at security.sudo on configuration.nix
       interval = 15;
-      on-click = "sudo ${/home/manse/dots/scripts/vpn.sh} --toggle";
+      on-click = "sudo ${/home/manse/dots/scripts/toggle-vpn.sh}";
     };
     "pulseaudio" = {
       format-icons = {
@@ -63,6 +75,7 @@ in
         "pulseaudio"
         "tray"
         "clock"
+        "custom/power"
       ];
     }
     // modules;
