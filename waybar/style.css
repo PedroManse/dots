@@ -4,6 +4,10 @@
 	background-color: rgb(0, 0, 200);
 }
 
+#custom-power {
+  padding-left: 6px;
+}
+
 * {
 	font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
 	font-size: 13px;
