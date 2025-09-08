@@ -128,7 +128,10 @@
     extraRules = [
       # Allow execution of any command by all users in group sudo, requiring a password.
       {
-        groups = [ "sudo" "wheel" ];
+        groups = [
+          "sudo"
+          "wheel"
+        ];
         commands = [ "ALL" ];
       }
 
@@ -138,7 +141,7 @@
         users = [ "manse" ];
         commands = [
           {
-            command = "${/home/manse/dots/scripts/vpn.sh}";
+            command = "${/home/manse/dots/scripts/toggle-vpn.sh}";
             options = [
               "SETENV"
               "NOPASSWD"
