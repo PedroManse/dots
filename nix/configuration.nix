@@ -60,30 +60,6 @@
     #  package = pkgs.mariadb;
     #};
 
-    httpd = {
-      enable = true;
-      enablePHP = true;
-      virtualHosts = {
-        "ex9.example.com" = {
-          documentRoot = "/var/www/9";
-          listen = [ {
-            ip = "127.0.0.1";
-            port = 8009;
-            ssl = false;
-          } ];
-        };
-        "ex10.example.com" = {
-          documentRoot = "/var/www/10";
-          listen = [ {
-            ip = "127.0.0.1";
-            port = 8010;
-            ssl = false;
-          } ];
-        };
-      }
-      ;
-    };
-
     # login/display manager
     displayManager.ly.enable = true;
 
@@ -194,7 +170,6 @@
     dbeaver-bin
     xorg.xset
     playerctl
-    php
   ];
 
   fonts.packages = [
