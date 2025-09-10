@@ -12,8 +12,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({ spec = { import = "plugins" } }, opts)
+require("lazy").setup({
+	spec = { import = "plugins" },
+	lockfile = vim.fn.stdpath("config") .. "/.lock.json",
+})
 
 vim.api.nvim_command("Copilot disable")
-
-
