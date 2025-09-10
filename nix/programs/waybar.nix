@@ -10,9 +10,7 @@ let
       menu = "on-click";
       menu-file = /home/manse/dots/waybar/power.xml;
       menu-actions = {
-        suspend = "systemctl suspend";
-        hibernate = "systemctl hibernate";
-        shutdown = "shutdown";
+        shutdown = "shutdown 0";
         reboot = "reboot";
       };
     };
