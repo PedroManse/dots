@@ -43,7 +43,11 @@ __nix_edit_complete() {
 		done
 		COMPREPLY=($(compgen -W "$CR" "${COMP_WORDS[2]}" ))
 	else
-		COMPREPLY=($(compgen -W "sys home progs" "${COMP_WORDS[1]}" ))
+		if [ ${#COMP_WORDS[@]} -gt 2 ] ; then
+			return
+		else
+			COMPREPLY=($(compgen -W "sys home progs" "${COMP_WORDS[1]}" ))
+		fi
 	fi
 }
 complete -F __nix_edit_complete "nix-edit"
