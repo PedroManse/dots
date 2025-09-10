@@ -21,6 +21,7 @@ end
 nmap("<C-t>", ":terminal<CR>a")
 nmap("<SPACE>", "<ESC>:noh<CR>:<BS>")
 nmap("git", ":LazyGit<CR>")
+nmap("gb", ":ls<CR>:b<space>")
 
 --- LSP
 -- lsp config in ./lsp.lua
