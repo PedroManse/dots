@@ -66,13 +66,13 @@ lspconfig.rust_analyzer.setup({
 
 lspconfig.ts_ls.setup {}
 lspconfig.nixd.setup {}
-vim.lsp.config("lua_ls", {
+lspconfig.lua_ls.setup {
 	settings = {
 		Lua = {
 			diagnostics = {
 				globals = { "vim" } }
 		}
 	}
-})
+}
 lspconfig.emmet_language_server.setup {}
 lspconfig.bashls.setup {}
