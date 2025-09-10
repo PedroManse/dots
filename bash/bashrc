@@ -28,7 +28,7 @@ if [ -d "$DEVAPS" ] ; then
 fi
 
 bash-edit() {
-	$EDITOR $DOTS/bash/$1
+	$EDITOR $DOTS/bash/$1.bash
 	source $DOTS/bash/bashrc
 }
 
