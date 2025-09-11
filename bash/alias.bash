@@ -1,6 +1,4 @@
 alias svi="sudo nvim -u $HOME/.config/nvim/init.lua"
-alias tmod="bash-edit"
-alias ref="source $DOTS/bash/bashrc"
 alias vmod="nvim $HOME/.config/nvim/init.lua"
 alias cat="$(get_bin_path bat)"
 alias ocat="$(get_bin_path cat)"
@@ -12,14 +10,3 @@ alias flog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold 
 alias sqli="sqlite3 --header --nullvalue '<{nil}>' --column"
 alias man="batman"
 
-serve() {
-	port=$1
-	dir=$2
-	if [ "$port" = "" ] ; then
-		port="8000"
-	fi
-	if [ "$dir"  = "" ] ; then
-		dir="."
-	fi
-	python3 -m http.server $port -d $dir -p "HTTP/1.1"
-}
