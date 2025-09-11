@@ -11,5 +11,8 @@ iab vsqrt √
 iab vlambda λ
 iab vdelta Δ
 
+
+let @c = 'yoconsole.log("pA", pA);_'
+
 ]])
 
