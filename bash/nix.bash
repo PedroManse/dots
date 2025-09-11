@@ -52,6 +52,3 @@ __nix_edit_complete() {
 }
 complete -F __nix_edit_complete "nix-edit"
 
-alias nix-ehome="\$EDITOR \$DOTS/nix/home.nix"
-alias nix-esys="\$EDITOR \$DOTS/nix/configuration.nix"
-
