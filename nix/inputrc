@@ -1,0 +1,6 @@
+set enable-bracketed-paste
+set menu-complete-display-prefix on
+set show-all-if-ambiguous on
+set colored-stats on
+set colored-completion-prefix on
+TAB: menu-complete
