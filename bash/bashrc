@@ -27,8 +27,14 @@ if [ -d "$DEVAPS" ] ; then
 	export PATH="$DEVAPS/bin:$PATH"
 fi
 
-bash-edit() {
-	$EDITOR $DOTS/bash/$1.bash
+tmod() {
+	if [ "$1" = "rc" ] || [ "${1%rc}" = "bash" ] ; then
+		$EDITOR $DOTS/bash/bashrc
+	elif [ -n "$1" ] ; then
+		$EDITOR $DOTS/bash/$1.bash
+	else
+		$EDITOR $DOTS/bash/
+	fi
 	source $DOTS/bash/bashrc
 }
 
