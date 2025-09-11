@@ -31,7 +31,11 @@ prompt_command() {
 
 	# show nix logo if in nix shell
 	if [ -n "$IN_NIX_SHELL" ] ; then
-		PS="$PS $(col_cyan) $(col_reset)"
+		if [ -n "$WSL_DISTRO_NAME" ] ; then
+			PS="$PS $(col_cyan)$(col_reset)"
+		else
+			PS="$PS $(col_cyan) $(col_reset)"
+		fi
 	fi
 
 	# show git status
