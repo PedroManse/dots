@@ -12,6 +12,7 @@ if [ -z "$COMPUTER_NAME" ] ; then
 	fi
 fi
 
+source $DOTS/bash/path.bash
 get_bin_path() {
 	paths=${2:-$PATH}
 	for dr in $(echo $paths | tr ':' '\n') ; do
@@ -22,10 +23,6 @@ get_bin_path() {
 	done
 	return 1
 }
-
-if [ -d "$DEVAPS" ] ; then
-	export PATH="$DEVAPS/bin:$PATH"
-fi
 
 tmod() {
 	if [ "$1" = "rc" ] || [ "${1%rc}" = "bash" ] ; then
@@ -44,6 +41,7 @@ export ZEN="true"
 export BAT_THEME="zenburn"
 export TERM=xterm-256color
 export PAGER="less"
+
 
 for module in $DOTS/bash/*.bash; do
 	source $module
