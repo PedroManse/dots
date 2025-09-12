@@ -154,7 +154,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  environment.etc.inputrc.source = /home/manse/dots/nix/inputrc;
   environment.systemPackages = with pkgs; [
     pulseaudio
     man-pages

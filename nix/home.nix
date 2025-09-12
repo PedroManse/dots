@@ -35,6 +35,7 @@ in
       services.wpaperd = p.wpaperd { };
 
       programs = {
+        readline = p.inputrc { };
         eza = p.eza { };
         alacritty = p.alacritty { };
         git = p.git { };
