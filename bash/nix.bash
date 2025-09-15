@@ -30,25 +30,16 @@ commands:
 	esac
 }
 
-__nix_edit_complete() {
-	if [ ${#COMP_WORDS[@]} -gt 3 ] ; then
-		return
-	fi
-
-	if [ "${3%s}" = "prog" ] ; then
-		CR=""
-		for path in "$DOTS"/nix/programs/*.nix ; do
-			file=$(basename "$path")
-			CR="$CR ${file%.nix}"
-		done
-		COMPREPLY=($(compgen -W "$CR" "${COMP_WORDS[2]}" ))
-	else
-		if [ ${#COMP_WORDS[@]} -gt 2 ] ; then
-			return
-		else
-			COMPREPLY=($(compgen -W "sys home progs" "${COMP_WORDS[1]}" ))
-		fi
-	fi
+__compl_nix_edit() {
+	COMPREPLY=(
+		$(compl $DOTS/completions/nix-edit.compl ${COMP_WORDS[@]:1})
+	)
 }
-complete -F __nix_edit_complete "nix-edit"
+complete -F __compl_nix_edit "nix-edit"
 
+function __compl_tmpl() {
+	COMPREPLY=(
+		$(compl $DOTS/completions/tmpl.compl ${COMP_WORDS[@]:1})
+	)
+}
+complete -F __compl_tmpl "tmpl"

@@ -12,7 +12,7 @@ if [ -z "$COMPUTER_NAME" ] ; then
 	fi
 fi
 
-source $DOTS/bash/path.bash
+source $DOTS/bash/path.sh
 get_bin_path() {
 	paths=${2:-$PATH}
 	for dr in $(echo $paths | tr ':' '\n') ; do
@@ -25,8 +25,10 @@ get_bin_path() {
 }
 
 tmod() {
-	if [ "$1" = "rc" ] || [ "${1%rc}" = "bash" ] ; then
+	if [ "$1" = "rc" ] ; then
 		$EDITOR $DOTS/bash/bashrc
+	elif [ "$1" = "path" ] ; then
+		$EDITOR $DOTS/bash/path.sh
 	elif [ -n "$1" ] ; then
 		$EDITOR $DOTS/bash/$1.bash
 	else
@@ -41,7 +43,6 @@ export ZEN="true"
 export BAT_THEME="zenburn"
 export TERM=xterm-256color
 export PAGER="less"
-
 
 for module in $DOTS/bash/*.bash; do
 	source $module
