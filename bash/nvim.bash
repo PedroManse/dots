@@ -42,7 +42,7 @@ _open() {
 
 vim-edit() {
 	case $1 in
-		"plug" | "plugin" | "lazy" )
+		"p" | "plug" | "plugin" | "lazy" )
 			if [ -z "$2" ] ; then
 				$EDITOR "$DOTS/nvim/lua/plugins/"
 			else
@@ -50,9 +50,16 @@ vim-edit() {
 			fi
 		;;
 		* )
-			$EDITOR "$DOTS/nvim/lua/config/$1.lua"
+			$EDITOR "$DOTS/nvim/lua/$1.lua"
 		;;
 	esac
 }
+
+function __compl_vim_edit() {
+	COMPREPLY=(
+		$(compl $DOTS/completions/vim-edit.compl ${COMP_WORDS[@]:1})
+	)
+}
+complete -F __compl_vim_edit "vim-edit"
 
 alias nvim="_open"
