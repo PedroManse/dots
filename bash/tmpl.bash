@@ -18,17 +18,10 @@ tmpl () {
 	bash "$dir/$proc.sh" $@
 }
 
-__tmpl_complete() {
-	if [ ${#COMP_WORDS[@]} -gt 2 ] ; then
-		return
-	fi
-
-	CR=""
-	for path in "$dir"/*.sh ; do
-		file=$(basename "$path")
-		CR="$CR ${file%.sh}"
-	done
-	COMPREPLY=($(compgen -W "$CR" "${COMP_WORDS[1]}" ))
+function __compl_tmpl() {
+	COMPREPLY=(
+		$(compl $DOTS/completions/tmpl.compl ${COMP_WORDS[@]:1})
+	)
 }
-complete -F __tmpl_complete "tmpl"
+complete -F __compl_tmpl "tmpl"
 
