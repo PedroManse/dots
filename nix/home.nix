@@ -1,7 +1,7 @@
 pkgs:
 let
   dots-directory = /. + builtins.getEnv "DOTS";
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
+  home-manager = <home-manager>;
   p = import ./autoprogs.nix {
     inherit pkgs;
     dir = ./programs;
