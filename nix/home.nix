@@ -21,11 +21,13 @@ in
         with pkgs;
         [
           bitwarden-desktop
+          gamemode
           qbittorrent
           vlc
           vesktop
           wf-recorder
           gimp
+          cachix
         ]
         ++ (p.bat.extras pkgs)
         ++ (p.coding pkgs);

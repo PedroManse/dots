@@ -170,6 +170,7 @@
     dbeaver-bin
     xorg.xset
     playerctl
+    cargo
   ];
 
   fonts.packages = [
