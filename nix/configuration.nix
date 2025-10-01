@@ -5,6 +5,7 @@
     /etc/nixos/hardware-configuration.nix
     # Include home-manager
     /home/manse/dots/nix/home.nix
+    /etc/nixos/cachix.nix
   ];
 
   nix.settings = {
@@ -171,6 +172,7 @@
     xorg.xset
     playerctl
     cargo
+    cachix
   ];
 
   fonts.packages = [
