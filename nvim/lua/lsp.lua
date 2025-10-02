@@ -76,3 +76,4 @@ lspconfig.lua_ls.setup {
 }
 lspconfig.emmet_language_server.setup {}
 lspconfig.bashls.setup {}
+lspconfig.eslint.setup {}
