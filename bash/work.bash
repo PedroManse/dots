@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 function work {
-	git pull
+	git pull --ff
 	$EDITOR "$HOME/diary/work"
 	gitmsg=$(date +'%d/%mT%H:%M')
 	pushd "$HOME/diary"
