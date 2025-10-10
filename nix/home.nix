@@ -42,7 +42,6 @@ in
         alacritty = p.alacritty { };
         git = p.git { };
         wofi = p.wofi { };
-        direnv = p.direnv { };
         neovim = p.neovim { };
         bat = p.bat.bat { };
         bash = p.bash { configFile = dots-directory + ../bash/bashrc; };
