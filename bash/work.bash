@@ -11,7 +11,8 @@ function work {
 		$EDITOR "$DEFAULT_LOG_NAME"
 	fi
 	gitmsg=$(date +'%d/%mT%H:%M')
-	git commit -am "$gitmsg" -m "\nautomatic commit"
+	git add .
+	git commit -m "$gitmsg" -m "\nautomatic commit"
 	git push
 	popd
 }
