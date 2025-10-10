@@ -1,7 +1,4 @@
 #! /usr/bin/env bash
-DIARY_REPO="$HOME/diary"
-DEFAULT_LOG_NAME="work"
-
 function work {
 	pushd "$DIARY_REPO" || exit
 	git pull --ff
@@ -17,3 +14,12 @@ function work {
 	popd
 }
 alias log=work
+
+__compl_log() {
+	COMPREPLY=(
+		$(compl $DOTS/completions/work.compl ${COMP_WORDS[@]:1})
+	)
+}
+complete -F __compl_log "log"
+complete -F __compl_log "work"
+
