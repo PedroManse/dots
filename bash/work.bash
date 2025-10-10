@@ -12,8 +12,8 @@ function work {
 	fi
 	gitmsg=$(date +'%d/%mT%H:%M')
 	git add .
-	git commit -m "$gitmsg" -m "\nautomatic commit"
+	git commit -m "$gitmsg" -m "automatic commit"
 	git push
 	popd
 }
-
+alias log=work
