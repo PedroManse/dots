@@ -1,0 +1,7 @@
+[ ? ] -> sh[ list_logs ]
+
+# sh list_logs
+for path in "$DIARY_REPO"/* ; do
+	basename "${path}"
+done
+# end
