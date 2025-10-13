@@ -1,5 +1,3 @@
-eval "$(direnv hook bash)"
-
 if [ -f ~/.shenv.sh ] ; then
 	. ~/.shenv.sh
 fi
