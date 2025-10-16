@@ -17,4 +17,3 @@ require("lazy").setup({
 	lockfile = vim.fn.stdpath("config") .. "/.lock.json",
 })
 
-vim.api.nvim_command("Copilot disable")

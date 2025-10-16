@@ -14,5 +14,6 @@ iab vdelta Δ
 
 let @c = 'yoconsole.log("pA", pA);_'
 
+Copilot disable
 ]])
 
