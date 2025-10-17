@@ -1,19 +1,19 @@
 --- imported from ../init.lua
 
 -- vim-like maps
-function map(mode, shortcut, command)
-	vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
+local function map(mode, shortcut, command)
+	vim.keymap.set(mode, shortcut, command, { noremap = true, silent = true })
 end
 
-function tmap(shortcut, command)
+local function tmap(shortcut, command)
 	map('t', shortcut, command)
 end
 
-function nmap(shortcut, command)
+local function nmap(shortcut, command)
 	map('n', shortcut, command)
 end
 
-function imap(shortcut, command)
+local function imap(shortcut, command)
 	map('i', shortcut, command)
 end
 
@@ -26,8 +26,8 @@ nmap("gb", ":ls<CR>:b<space>")
 --- LSP
 -- lsp config in ./lsp.lua
 nmap("<A-S-n>", ":lua= vim.diagnostic.goto_next{wrap = true}<CR>")
-nmap("grt", ":lua= vim.lsp.buf.definition()<CR>")
-nmap("<A-S-m>", ":lua= vim.lsp.buf.format()<CR>")
+nmap("grt", vim.lsp.buf.definition)
+nmap("<A-S-m>", vim.lsp.buf.format)
 -- grt -> def
 -- gri -> impl
 -- grr -> refs

@@ -1,20 +1,3 @@
--- vim.opt.completeopt = { "menuone", "noselect", "popup" }
--- local function merge_table(t1, t2)
--- 	local tr = t1
--- 	for k, v in pairs(t2) do tr[k] = v end
--- 	return tr
--- end
---
--- local function on_attach(client, bufnr)
--- 	vim.lsp.completion.enable(true, client.id, bufnr, {
--- 		autotrigger = true,
--- 		convert = function(item)
--- 			return { abbr = item.label:gsub("%b()", "") }
--- 		end,
--- 	})
--- 	vim.keymap.set("i", "<C-space>", vim.lsp.completion.get, { desc = "trigger autocompletion" })
--- end
-
 local cmp = require 'cmp'
 cmp.setup {
 	sources = cmp.config.sources({
@@ -66,7 +49,6 @@ local lsps = {
 
 for idx, lsp in pairs(lsps) do
 	if type(lsp) == "table" then
-		-- local name, config = lsp[1], merge_table(lsp[2] or {}, { on_attach = on_attach })
 		local name, config = lsp[1], lsp[2] or {}
 		vim.lsp.enable(name)
 		vim.lsp.config(name, config)
