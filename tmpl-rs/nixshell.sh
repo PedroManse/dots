@@ -5,7 +5,6 @@ write_custom_shell() {
 		pkgs ? import <nixpkgs> { },
 	}:
 	pkgs.mkShellNoCC {
-		COMPUTER_NAME = \"dev-shell\";
 		packages = with pkgs; [ $* ];
 	}
 	" > shell.nix
