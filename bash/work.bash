@@ -1,4 +1,6 @@
 #! /usr/bin/env bash
+
+DEFAULT_LOG_NAME="work"
 function work {
 	pushd "$DIARY_REPO" || exit
 	git pull --ff
