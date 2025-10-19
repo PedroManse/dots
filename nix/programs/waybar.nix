@@ -3,9 +3,12 @@
   enable ? true,
 }:
 let
+  icons = {
+    power = "⏻ ";
+  };
   modules = {
     "custom/power" = {
-      format = "⏻ ";
+      format = icons.power;
       tooltip = false;
       menu = "on-click";
       menu-file = /home/manse/dots/waybar/power.xml;
