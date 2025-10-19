@@ -5,9 +5,9 @@ function work {
 	pushd "$DIARY_REPO" || exit
 	git pull --ff
 	if [ -n "$1" ] ; then
-		$EDITOR "$1"
+		$EDITOR + "$1"
 	else
-		$EDITOR "$DEFAULT_LOG_NAME"
+		$EDITOR + "$DEFAULT_LOG_NAME"
 	fi
 	gitmsg=$(date +'%d/%mT%H:%M')
 	git add .
