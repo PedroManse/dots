@@ -7,6 +7,11 @@ let
     power = "⏻ ";
   };
   modules = {
+    "custom/record" = {
+      exec = "bash ${/home/manse/dots/scripts/recording.sh}";
+      return-type = "json";
+      on-click = "bash ${/home/manse/dots/scripts/toggle-recording.sh}";
+    };
     "custom/power" = {
       format = icons.power;
       tooltip = false;
@@ -74,6 +79,7 @@ in
       "modules-right" = [
         "custom/vpn"
         "pulseaudio"
+        "custom/record"
         "tray"
         "clock"
         "custom/power"
