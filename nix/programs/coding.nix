@@ -1,6 +1,3 @@
-let
-  fenix = import (fetchTarball "https://github.com/nix-community/fenix/archive/monthly.tar.gz") { };
-in
 pkgs: with pkgs; [
   # LSPs
   nixd
@@ -12,5 +9,5 @@ pkgs: with pkgs; [
   # others
   nixfmt-rfc-style
   shellcheck
-  fenix.complete.toolchain
+  rustup
 ]
