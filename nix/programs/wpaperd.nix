@@ -7,7 +7,6 @@
     default = {
       path = ../../.backgrounds; # send to /nix/store
       duration = "1d";
-      queue-size = 3;
     };
   };
 }
