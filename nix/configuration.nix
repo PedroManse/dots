@@ -17,12 +17,22 @@
     ];
   };
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
 
   virtualisation = {
-    #docker.enable = true;
+    libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        runAsRoot = true;
+        swtpm.enable = true;
+      };
+    };
+
+    docker.enable = true;
     #vmware.host.enable = true;
     #virtualbox.host.enable = true;
   };
@@ -137,6 +147,7 @@
       "networkmanager"
       "docker"
       "wheel"
+      "libvirtd"
       "vboxusers"
     ];
   };
