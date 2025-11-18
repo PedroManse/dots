@@ -28,6 +28,7 @@ in
           wf-recorder
           gimp
           cachix
+          kdePackages.kdenlive
         ]
         ++ (p.bat.extras pkgs)
         ++ (p.coding pkgs);
