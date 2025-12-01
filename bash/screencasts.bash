@@ -13,6 +13,6 @@ function convert {
 	outfile=$2
 	framerate=$(default 24 "$3")
 	quality=$(default 28 "$4")
-	ffmpeg -i "$infile" -vcodec libx265 -crf 28 -r $framerate  "$outfile"
+	ffmpeg -i "$infile" -vcodec libx265 -crf "$quality" -r "$framerate"  "$outfile"
 }
 
