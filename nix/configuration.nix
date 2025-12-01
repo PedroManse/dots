@@ -121,21 +121,6 @@
         ];
         commands = [ "ALL" ];
       }
-
-      # Allow execution of "/home/root/secret.sh" by user `backup`, `database`
-      # and the group with GID `1006` without a password.
-      {
-        users = [ "manse" ];
-        commands = [
-          {
-            command = "${/home/manse/dots/scripts/toggle-vpn.sh}";
-            options = [
-              "SETENV"
-              "NOPASSWD"
-            ];
-          }
-        ];
-      }
     ];
   };
   security.rtkit.enable = true;
@@ -167,6 +152,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    qemu
     pulseaudio
     man-pages
     man-pages-posix
@@ -176,13 +162,9 @@
     hyprshot
     hyprlock
     hyprcursor
-    teams-for-linux
-    obs-studio
     nerd-fonts.mononoki
-    dbeaver-bin
     xorg.xset
     playerctl
-    cargo
     cachix
   ];
 

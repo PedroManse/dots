@@ -28,14 +28,6 @@ let
       on-click = "playerctl play-pause";
       tooltip = true;
     };
-    "custom/vpn" = {
-      exec = "bash ${/home/manse/dots/scripts/vpn.sh}";
-      return-type = "json";
-      # executes directly to run as root
-      # > see at security.sudo on configuration.nix
-      interval = 15;
-      on-click = "sudo ${/home/manse/dots/scripts/toggle-vpn.sh}";
-    };
     "pulseaudio" = {
       format-icons = {
         headphone = "";
@@ -77,7 +69,6 @@ in
         "hyprland/workspaces"
       ];
       "modules-right" = [
-        "custom/vpn"
         "pulseaudio"
         "custom/record"
         "tray"
