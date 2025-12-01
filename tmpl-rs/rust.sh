@@ -34,6 +34,7 @@ ci() {
 		-Dclippy::perf \
 		-Dclippy::style \
 		-Dclippy::pedantic \
+		-Wclippy::unwrap_used \
 		-Wclippy::missing_errors_doc
 	cargo test
 
