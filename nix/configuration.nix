@@ -166,6 +166,7 @@
     xorg.xset
     playerctl
     cachix
+    qpwgraph
   ];
 
   fonts.packages = [

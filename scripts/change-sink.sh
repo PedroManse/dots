@@ -6,7 +6,7 @@ else
 	dif=1
 fi
 
-sinks_str=$(pactl list sinks | grep "Name:" | cut -d' ' -f2 )
+sinks_str=$(pactl list sinks | filte and[ +Name -my ] | cut -d' ' -f2 )
 curent_sink=$(pactl get-default-sink)
 curent_sink_index="NOT DEFINED"
 iter=0

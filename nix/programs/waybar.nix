@@ -33,17 +33,14 @@ let
         headphone = "";
         speaker = "󰜟";
       };
-      on-click = "bash ${/home/manse/dots/scripts/change-sink.sh} 1";
+      # this was broken with qpwgraph
+      #on-click = "bash ${/home/manse/dots/scripts/change-sink.sh} 1";
       format = {
         format = "{icon} {volume}";
       };
     };
     "hyprland/workspaces" = {
-      format = "{icon}{id}{icon}";
-      format-icons = {
-        active = "|";
-        default = "";
-      };
+      format = "{id}";
     };
     "clock" = {
       format = ''{:%b %d | %H:%M}'';
@@ -61,7 +58,7 @@ in
       "layer" = "top";
 
       "modules-left" = [
-        "custom/player"
+        #"custom/player"
         "cpu"
         "memory"
       ];
