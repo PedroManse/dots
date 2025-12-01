@@ -12,6 +12,7 @@
 
     exec-once=waybar
     exec-once=wpaperd
+    monitor=DP-1, 3440x1440@144.00Hz, 0x0, 1
     monitor=DP-2, 1920x1080, 0x0, 1
     monitor=HDMI-A-1, preferred, auto, 1, mirror, DP-2
   '';
