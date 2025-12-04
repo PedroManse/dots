@@ -25,7 +25,9 @@
     "$terminal" = "alacritty";
     "$browser" = "firefox";
     "$menu" = "wofi --show drun";
-    "$cv" = "/home/manse/dots/scripts/change-volume.sh";
+    "$change_volume" = "${/home/manse/dots/scripts/change-volume.sh}";
+    "$change_sink" = "${/home/manse/dots/scripts/change-sink.sh}";
+    "$toggle_recording" = "${/home/manse/dots/scripts/toggle-recording.sh}";
 
     bindm = [
       "SUPER, mouse:272, movewindow"
@@ -60,12 +62,13 @@
       "SUPER, F2, exec, hyprshot --mode region --output-folder /tmp --silent"
 
       # Audio stuff
-      ", XF86AudioLowerVolume, exec, bash $cv -5%"
-      ", XF86AudioRaiseVolume, exec, bash $cv +5%"
-      "SHIFT, XF86AudioLowerVolume, exec, bash $cv -1%"
-      "SHIFT, XF86AudioRaiseVolume, exec, bash $cv +1%"
-      "CTRL, XF86AudioRaiseVolume, exec, bash /home/manse/dots/scripts/change-sink.sh"
-      "CTRL, XF86AudioLowerVolume, exec, bash /home/manse/dots/scripts/change-sink.sh"
+      ", XF86AudioLowerVolume, exec, bash $change_volume -5%"
+      ", XF86AudioRaiseVolume, exec, bash $change_volume +5%"
+      "SHIFT, XF86AudioLowerVolume, exec, bash $change_volume -1%"
+      "SHIFT, XF86AudioRaiseVolume, exec, bash $change_volume +1%"
+      "CTRL, XF86AudioRaiseVolume, exec, bash $change_sink"
+      "CTRL, XF86AudioLowerVolume, exec, bash $change_sink"
+      ", XF86AudioPlay, exec, bash $toggle_recording"
       "ALT, q, workspace, previous"
 
       # f11 -> toggle fullscreen
