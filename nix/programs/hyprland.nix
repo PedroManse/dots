@@ -12,10 +12,12 @@
 
     exec-once=waybar
     exec-once=wpaperd
-    exec-once=qpwgraph -m
+    exec-once=/home/manse/dots/scripts/start-audio.sh
+
     monitor=DP-1, 3440x1440@144.00Hz, 0x0, 1
     monitor=DP-2, 1920x1080, 0x0, 1
     monitor=HDMI-A-1, preferred, auto, 1, mirror, DP-2
+
   '';
 
   settings = {
@@ -23,6 +25,7 @@
     "$terminal" = "alacritty";
     "$browser" = "firefox";
     "$menu" = "wofi --show drun";
+    "$cv" = "/home/manse/dots/scripts/change-volume.sh";
 
     bindm = [
       "SUPER, mouse:272, movewindow"
@@ -57,13 +60,12 @@
       "SUPER, F2, exec, hyprshot --mode region --output-folder /tmp --silent"
 
       # Audio stuff
-      ", XF86AudioPlay, exec, playerctl --all-players play-pause"
-      ", XF86AudioLowerVolume, exec, pactl set-sink-volume $(pactl get-default-sink) -5%"
-      ", XF86AudioRaiseVolume, exec, pactl set-sink-volume $(pactl get-default-sink) +5%"
-      "SHIFT, XF86AudioLowerVolume, exec, pactl set-sink-volume $(pactl get-default-sink) -1%"
-      "SHIFT, XF86AudioRaiseVolume, exec, pactl set-sink-volume $(pactl get-default-sink) +1%"
-      "CTRL, XF86AudioRaiseVolume, exec, bash /home/manse/dots/scripts/change-sink.sh 1"
-      "CTRL, XF86AudioLowerVolume, exec, bash /home/manse/dots/scripts/change-sink.sh -1"
+      ", XF86AudioLowerVolume, exec, bash $cv -5%"
+      ", XF86AudioRaiseVolume, exec, bash $cv +5%"
+      "SHIFT, XF86AudioLowerVolume, exec, bash $cv -1%"
+      "SHIFT, XF86AudioRaiseVolume, exec, bash $cv +1%"
+      "CTRL, XF86AudioRaiseVolume, exec, bash /home/manse/dots/scripts/change-sink.sh"
+      "CTRL, XF86AudioLowerVolume, exec, bash /home/manse/dots/scripts/change-sink.sh"
       "ALT, q, workspace, previous"
 
       # f11 -> toggle fullscreen

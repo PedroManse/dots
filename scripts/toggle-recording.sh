@@ -1,8 +1,6 @@
 #! /usr/bin/env bash
 
-if pgrep "wf-recorder" ; then
-	pkill wf-recorder
-else
+if ! pkill -2 wf-recorder ; then
   now=$(date +'%d-%m_%H-%M.mp4')
-  wf-recorder "-a$(pactl get-default-sink)" "--file=$HOME/Screencasts/auto/$now"
+  wf-recorder "--audio=virtualmic" "--file=$HOME/Screencasts/auto/$now"
 fi

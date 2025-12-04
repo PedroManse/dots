@@ -22,13 +22,8 @@ let
         reboot = "reboot";
       };
     };
-    "custom/player" = {
-      exec = "playerctl metadata -f '{{emoji(status)}} {{title}}'";
-      interval = 5;
-      on-click = "playerctl play-pause";
-      tooltip = true;
-    };
     "pulseaudio" = {
+      on-click = "bash -c \"source ~/dots/bash/bashrc && _pwa_rotate_real_output_sinks\"";
       format-icons = {
         headphone = "";
         speaker = "󰜟";

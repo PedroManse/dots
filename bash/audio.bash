@@ -41,12 +41,10 @@ function _pwa_rotate_real_output_sinks {
 
 function _pwa_find_real_output {
 	on_desktop_audio=""
-	last_header=""
 	IFS=$'\n' links=$(pw-link -l)
 	for link in $links ; do
 		header=$(echo "$link" | filte 'i^ ')
 		is_send=$(echo "$link" | filte '^  |->' | awk ' { print $2 } ')
-		last_header=$(default "$last_header" "$header")
 
 		if [ -n "$header" ] ; then
 			: # on header
@@ -58,7 +56,6 @@ function _pwa_find_real_output {
 			fi
 		else
 			if [ -n "$on_desktop_audio" ] && [ -n "$is_send" ] && [[ ! "$is_send" =~ virtualmic ]] ; then
-				: # on link with $last_header
 				echo "$is_send" | cut -d':' -f1
 				break
 			fi
@@ -67,8 +64,7 @@ function _pwa_find_real_output {
 }
 
 function _pwa_remove_link_from_desktop {
-	pw-link -d desktop-audio-sink:monitor_FL "$1:playback_FL"
-	pw-link -d desktop-audio-sink:monitor_FR "$1:playback_FR"
+	pw-link -d "desktop-audio-sink:monitor_FL" "$1:playback_FL"
+	pw-link -d "desktop-audio-sink:monitor_FR" "$1:playback_FR"
 }
-
 
