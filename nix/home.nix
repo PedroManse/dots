@@ -41,6 +41,7 @@ in
         readline = p.inputrc { };
         eza = p.eza { };
         alacritty = p.alacritty { };
+        delta = p.delta { };
         git = p.git { };
         wofi = p.wofi { };
         neovim = p.neovim { };

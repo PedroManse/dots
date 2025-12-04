@@ -3,45 +3,38 @@
 }:
 {
   inherit enable;
-  userName = "Manse";
-  userEmail = "pedro.manse@dmk3.com.br";
-  aliases = {
-    f = "fetch --prune";
-    c = "checkout";
-    b = "branch";
-  };
-  delta = {
-    enable = true;
-    options = {
-      side-by-side = true;
+  settings = {
+    user = {
+      name = "Manse";
+      email = "122305437+PedroManse@users.noreply.github.com";
+      signingkey = "DF91ACD478B72A2567F611F36D2111546E0577D9";
     };
-  };
-  extraConfig = {
-    safe = {
-      directory = ".";
+
+    aliases = {
+      f = "fetch --prune";
+      c = "checkout";
+      b = "branch";
     };
-    commit = {
-      gpgsign = true;
-    };
-    merge = {
-      conflictstyle = "zdiff3";
-    };
-    diff = {
-      colorMoved = false;
-      # add "secret.* diff=sopsdiffer" to .gitattributes
-      # to enable sops-based viewing
-      sopsdiffer = {
-        textconv = "sops decrypt";
+    extraConfig = {
+      safe = {
+        directory = ".";
       };
-    };
-    # defined in ~/.gitconfig; not here
-    #user = { signingkey = ""; };
-    push = {
-      autoSetupRemote = true;
-      default = "current";
-    };
-    credential = {
-      helper = "!/usr/bin/gh auth git-credential";
+      commit = {
+        gpgsign = true;
+      };
+      merge = {
+        conflictstyle = "zdiff3";
+      };
+      diff = {
+        colorMoved = false;
+      };
+      push = {
+        autoSetupRemote = true;
+        default = "current";
+      };
+      credential = {
+        helper = "!/usr/bin/gh auth git-credential";
+      };
     };
   };
 }
