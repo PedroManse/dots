@@ -72,7 +72,12 @@
     #};
 
     # login/display manager
-    displayManager.ly.enable = true;
+    displayManager.ly = {
+      enable = true;
+      settings = {
+        animation = "colormix";
+      };
+    };
 
     # x keyboard
     xserver.xkb = {
