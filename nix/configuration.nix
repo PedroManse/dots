@@ -120,7 +120,10 @@
   };
 
   # Configure console keymap
-  console.keyMap = "br-abnt2";
+  console = {
+    keyMap = "br-abnt2";
+    font = "default8x9";
+  };
 
   security.sudo = {
     enable = true;
