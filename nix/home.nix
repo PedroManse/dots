@@ -50,7 +50,6 @@ in
         waybar = p.waybar {
           style = "${dots-directory + ../waybar/style.css}";
         };
-        lazygit = p.lazygit { };
 
         gh.enable = true;
       };
