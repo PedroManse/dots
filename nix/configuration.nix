@@ -76,6 +76,13 @@
       enable = true;
       settings = {
         animation = "colormix";
+        bigclock = "en";
+        bigclock_seconds = true;
+        blank_box = true;
+        colormix_col1 = "0x00FF00FF";
+        colormix_col2 = "0x0000007F";
+        colormix_col3 = "0x20000000";
+        clock = "%d/%m/%Y";
       };
     };
 
