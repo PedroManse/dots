@@ -6,6 +6,7 @@ function _pwa_startup_audio {
 
 	# microphone with all app's audio + real microphone's audio
 	pactl load-module module-null-sink media.class=Audio/Source/Virtual sink_name=virtualmic channel_map=front-left,front-right
+	pactl load-module module-null-sink media.class=Audio/Source/Virtual sink_name=realmic channel_map=front-left,front-right
 
 	# set "desktop" sink as default
 	pactl set-default-sink desktop-audio-sink
@@ -18,6 +19,22 @@ function _pwa_startup_audio {
 	real_mic=$(pactl list sources | grep Name | grep input | awk ' { print $2 } ')
 	pw-link "$real_mic:capture_FL" virtualmic:input_FL
 	pw-link "$real_mic:capture_FR" virtualmic:input_FR
+	pw-link "$real_mic:capture_FL" realmic:input_FL
+	pw-link "$real_mic:capture_FR" realmic:input_FR
+}
+
+function _pwa_fix_outputs {
+	pw-link desktop-audio-sink:monitor_FL virtualmic:input_FL
+	pw-link desktop-audio-sink:monitor_FR virtualmic:input_FR
+	real_mic=$(pactl list sources | grep Name | grep input | awk ' { print $2 } ')
+	pw-link "$real_mic:capture_FL" virtualmic:input_FL
+	pw-link "$real_mic:capture_FR" virtualmic:input_FR
+	pw-link "$real_mic:capture_FL" realmic:input_FL
+	pw-link "$real_mic:capture_FR" realmic:input_FR
+}
+
+function _pwa_stop_audio {
+	pactl unload-module module-null-sink 
 }
 
 function _pwa_set_audio_real_output {
@@ -55,7 +72,12 @@ function _pwa_find_real_output {
 				on_desktop_audio=""
 			fi
 		else
-			if [ -n "$on_desktop_audio" ] && [ -n "$is_send" ] && [[ ! "$is_send" =~ virtualmic ]] ; then
+			if
+				[ -n "$on_desktop_audio" ] &&
+				[ -n "$is_send" ] &&
+				[[ ! "$is_send" =~ virtualmic ]] &&
+				[[ ! "$is_send" =~ Pulse ]] ;
+			then
 				echo "$is_send" | cut -d':' -f1
 				break
 			fi
