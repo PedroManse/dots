@@ -1,6 +1,5 @@
 pkgs:
 let
-  dots-directory = /. + builtins.getEnv "DOTS";
   home-manager = <home-manager>;
   p = import ./autoprogs.nix {
     inherit pkgs;
@@ -46,9 +45,9 @@ in
         wofi = p.wofi { };
         neovim = p.neovim { };
         bat = p.bat.bat { };
-        bash = p.bash { configFile = dots-directory + ../bash/bashrc; };
+        bash = p.bash { configFile = /home/manse/dots/bash/bashrc; };
         waybar = p.waybar {
-          style = "${dots-directory + ../waybar/style.css}";
+          style = "${/home/manse/dots/waybar/style.css}";
         };
 
         gh.enable = true;
