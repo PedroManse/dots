@@ -6,20 +6,22 @@ function work {
 	git pull --ff
 	if [ -n "$1" ] ; then
 		$EDITOR + "$1"
+		file=$1
 	else
 		$EDITOR + "$DEFAULT_LOG_NAME"
+		file=$DEFAULT_LOG_NAME
 	fi
 	gitmsg=$(date +'%d/%mT%H:%M')
 	git add .
-	git commit -m "$gitmsg" -m "automatic commit"
+	git commit -m "$file: $gitmsg" -m "automatic commit"
 	git push
-	popd
+	popd || exit
 }
 alias log=work
 
 __compl_log() {
 	COMPREPLY=(
-		$(compl $DOTS/completions/work.compl ${COMP_WORDS[@]:1})
+		$(compl "$DOTS/completions/work.compl" ${COMP_WORDS[@]:1})
 	)
 }
 complete -F __compl_log "log"
