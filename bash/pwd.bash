@@ -16,6 +16,7 @@ format_dir() {
 }
 
 export PS1=""
+export PS1_SKIP_GS2=""
 export PS0=""
 PROMPT_COMMAND=prompt_command
 prompt_command() {
