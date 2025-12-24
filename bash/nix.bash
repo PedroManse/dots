@@ -1,8 +1,8 @@
 alias nix-switch="sudo nixos-rebuild switch"
 
 nix-clean() {
+	sudo nix-collect-garbage --delete-old
 	nix-collect-garbage --delete-old
-	sudo nix-collect-garbage -d
 }
 
 nix-edit() {
