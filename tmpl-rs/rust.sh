@@ -8,8 +8,21 @@ cd "$proj_name"
 cat >> .gitignore << EOF
 target
 EOF
-:> "src/lib.rs"
 
+cat >> Cargo.toml << EOF
+[lints.clippy]
+perf = { level = "deny", priority = -1 }
+style = { level = "deny", priority = -1 }
+pedantic = { level = "deny", priority = -1 }
+unwrap-used = "warn"
+missing-errors-doc = "warn"
+EOF
+
+cat >> clippy.toml << EOF
+allow-expect-in-tests = true
+allow-exact-repetitions = false
+check-private-items = true
+EOF
 
 cat > ci.sh << EOF
 #! /usr/bin/env bash
@@ -30,12 +43,7 @@ ci() {
 
 	cargo build
 	cargo fmt
-	cargo clippy \$fix \$allow_dirty --all-targets --all-features -- \
-		-Dclippy::perf \
-		-Dclippy::style \
-		-Dclippy::pedantic \
-		-Wclippy::unwrap_used \
-		-Wclippy::missing_errors_doc
+	cargo clippy \$fix \$allow_dirty --all-targets --all-features
 	cargo test
 
 	set +x
@@ -72,7 +80,7 @@ jobs:
     - name: Format
       run: cargo fmt --check
     - name: Lint
-      run: "cargo clippy --all-targets --all-features -- -Dclippy::perf -Dclippy::style -Dclippy::pedantic -Wclippy::missing_errors_doc"
+      run: cargo clippy --all-targets --all-features
     - name: Test
       run: cargo test
 EOF
