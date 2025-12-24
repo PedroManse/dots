@@ -74,7 +74,6 @@
       "CTRL, XF86AudioRaiseVolume, exec, bash $change_sink"
       "CTRL, XF86AudioLowerVolume, exec, bash $change_sink"
       ", XF86AudioPlay, exec, bash $toggle_recording"
-      "ALT, q, workspace, previous"
 
       # f11 -> toggle fullscreen
       ", F11, fullscreen"
