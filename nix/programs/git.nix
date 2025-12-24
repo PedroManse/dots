@@ -7,7 +7,7 @@
     user = {
       name = "Manse";
       email = "122305437+PedroManse@users.noreply.github.com";
-      signingkey = "DF91ACD478B72A2567F611F36D2111546E0577D9";
+      signingkey = "0CB4AE9E4CE2D6B00D5D35E7B79D6A7491E9A52C";
     };
 
     alias = {
