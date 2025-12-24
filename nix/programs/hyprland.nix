@@ -14,10 +14,15 @@
     exec-once=wpaperd
     exec-once=${/home/manse/dots/scripts/start-audio.sh}
 
-    monitor=DP-1, 3440x1440@144.00Hz, 0x0, 1
     monitor=DP-2, 1920x1080, 0x0, 1
     monitor=HDMI-A-1, preferred, auto, 1, mirror, DP-2
 
+    monitorv2 {
+      output = DP-1
+      mode = 3440x1440@144.00Hz
+      position = 0x0
+      scale = 1
+    }
   '';
 
   settings = {
