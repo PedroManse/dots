@@ -1,3 +1,4 @@
+[ . ? ] -> end
 [ ? ] -> sh[ list_logs ]
 
 # sh list_logs
