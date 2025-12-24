@@ -74,6 +74,7 @@
     # login/display manager
     displayManager.ly = {
       enable = true;
+      x11Support = false;
       settings = {
         animation = "colormix";
         bigclock = "en";
