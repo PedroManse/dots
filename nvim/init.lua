@@ -1,4 +1,4 @@
-require("pkgs")
+--require('pkgs')
 require('lsp')
 require('maps')
 require('options')

@@ -1,2 +1,0 @@
-return { 'HerringtonDarkholme/yats.vim' }
-

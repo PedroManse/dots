@@ -43,7 +43,7 @@ in
         delta = p.delta { };
         git = p.git { };
         wofi = p.wofi { };
-        neovim = p.neovim { };
+        neovim = p.neovim { inherit pkgs; };
         bat = p.bat.bat { };
         bash = p.bash { configFile = /home/manse/dots/bash/bashrc; };
         waybar = p.waybar {
