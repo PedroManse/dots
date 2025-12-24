@@ -5,6 +5,7 @@
 {
   inherit enable;
   bashrcExtra = ''
-    . ${configFile}
+    . ${/home/manse/.shenv.bash}
+    . ${/home/manse/dots/bash/bashrc}
   '';
 }
