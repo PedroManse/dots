@@ -15,26 +15,24 @@
       c = "checkout";
       b = "branch";
     };
-    extraConfig = {
-      safe = {
-        directory = ".";
-      };
-      commit = {
-        gpgsign = true;
-      };
-      merge = {
-        conflictstyle = "zdiff3";
-      };
-      diff = {
-        colorMoved = false;
-      };
-      push = {
-        autoSetupRemote = true;
-        default = "current";
-      };
-      credential = {
-        helper = "!/usr/bin/gh auth git-credential";
-      };
+    safe = {
+      directory = ".";
+    };
+    commit = {
+      gpgsign = true;
+    };
+    merge = {
+      conflictstyle = "zdiff3";
+    };
+    diff = {
+      colorMoved = false;
+    };
+    push = {
+      autoSetupRemote = true;
+      default = "current";
+    };
+    credential = {
+      helper = "!/usr/bin/gh auth git-credential";
     };
   };
 }
