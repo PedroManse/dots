@@ -5,7 +5,6 @@
     /etc/nixos/hardware-configuration.nix
     # Include home-manager
     /home/manse/dots/nix/home.nix
-    /etc/nixos/cachix.nix
   ];
 
   nix.settings = {
@@ -32,9 +31,9 @@
       };
     };
 
-    #docker.enable = true;
-    #vmware.host.enable = true;
-    #virtualbox.host.enable = true;
+    docker.enable = false;
+    vmware.host.enable = false;
+    virtualbox.host.enable = false;
   };
 
   # Enable networking
@@ -63,13 +62,11 @@
 
   # systemd services
   services = {
-    # postgresql.enable = true;
-
-    # mysql (with mariadb)
-    #mysql = {
-    #  enable = true;
-    #  package = pkgs.mariadb;
-    #};
+    postgresql.enable = false;
+    mysql = {
+      enable = false;
+      package = pkgs.mariadb;
+    };
 
     # login/display manager
     displayManager.ly = {
@@ -91,16 +88,6 @@
     xserver.xkb = {
       layout = "br";
       variant = "";
-    };
-
-    openvpn = {
-      servers = {
-        office = {
-          autoStart = false;
-          config = ''config ${/usr/local/share/itesp.ovpn}'';
-          updateResolvConf = true;
-        };
-      };
     };
 
     pulseaudio.enable = false;
@@ -189,5 +176,5 @@
   ];
 
   # original NixOS version; DO *NOT* ALTER
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.11";
 }
