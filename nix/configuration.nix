@@ -32,7 +32,7 @@
       };
     };
 
-    docker.enable = true;
+    #docker.enable = true;
     #vmware.host.enable = true;
     #virtualbox.host.enable = true;
   };
