@@ -6,5 +6,6 @@
   settings = {
     allow_images = true;
     key_expand = "Right";
+    gtk_dark = true;
   };
 }
