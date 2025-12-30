@@ -2,7 +2,7 @@
 
 DEFAULT_LOG_NAME="work"
 function work {
-	pushd "$DIARY_REPO" || exit
+	pushd "$DIARY_REPO" || ( echo "Can't find directory $DIARY_REPO" && return )
 	git pull --ff
 	if [ -n "$1" ] ; then
 		$EDITOR + "$1"
