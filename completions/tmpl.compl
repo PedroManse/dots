@@ -1,4 +1,4 @@
-[ . ? ] -> end
+[ sh"list_tmpl_files" ] -> end
 [ ? ] -> sh[ list_tmpl_files ]
 
 # sh list_tmpl_files

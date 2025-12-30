@@ -1,18 +1,10 @@
-[ plugin ? ] -> sh[ list_plugs ]
-[ p ? ] -> sh[ list_plugs ]
-[ plug ? ] -> sh[ list_plugs ]
-[ lazy ? ] -> sh[ list_plugs ]
+[ plugins ] -> end
+[ sh"list_opts" ] -> end
 [ ? ] -> sh[ list_opts ]
 
 # sh list_opts
 for path in "$DOTS"/nvim/lua/*.lua ; do
 	basename ${path%.lua}
 done
-echo plugin
-# end
-
-# sh list_plugs
-for path in $DOTS/nvim/lua/plugins/*.lua ; do
-	basename ${path%.lua}
-done
+echo plugins
 # end
