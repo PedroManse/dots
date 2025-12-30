@@ -1,0 +1,10 @@
+[ sh"list_bash_files" ] -> end
+[ ? ] -> sh[ list_bash_files ]
+
+# sh list_bash_files
+for path in "$DOTS"/bash/*.bash ; do
+	basename "${path%.bash}"
+done
+echo "rc"
+echo "path"
+# end

@@ -35,6 +35,13 @@ tmod() {
 	source $DOTS/bash/bashrc
 }
 
+__compl_tmod() {
+	COMPREPLY=(
+		$(compl $DOTS/completions/tmod.compl ${COMP_WORDS[@]:1})
+	)
+}
+complete -F __compl_tmod "tmod"
+
 export GPG_TTY=$(tty)
 export PSQL_EDITOR="$(get_bin_path nvim) -n -u $HOME/.vimrc"
 export ZEN="true"
