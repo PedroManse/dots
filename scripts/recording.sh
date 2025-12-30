@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+set -e
+
 gen_json() {
 	text="$1"
 	alt="$2"
