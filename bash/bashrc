@@ -1,3 +1,7 @@
+if ! [[ $- = *i* ]] ; then
+	source "$HOME"/.shenv.bash
+fi
+
 if [ -z "$COMPUTER_NAME" ] ; then
 	if [ -f /etc/hostname ] ; then
 		COMPUTER_NAME=$(cat /etc/hostname)
