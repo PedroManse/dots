@@ -11,7 +11,7 @@ _nvim_con() {
 
 # start host and open file
 _nvim_srv() {
-	$(get_bin_path nvim) --listen "$HOME"/.cache/nvim/$$-server.pipe $@
+	$(get_bin_path nvim) --listen "$HOME"/.cache/nvim/$$-server.pipe "$@"
 }
 
 if [ -n "$NVIM" ] ; then
@@ -36,18 +36,14 @@ _open() {
 			$(get_bin_path nvim) --listen "$HOME"/.cache/nvim/$$-server.pipe "$file" "+:$line"
 		fi
 	else
-		$EDITOR $file
+		$EDITOR "$file"
 	fi
 }
 
 vim-edit() {
 	case $1 in
-		"p" | "plug" | "plugin" | "lazy" )
-			if [ -z "$2" ] ; then
-				$EDITOR "$DOTS/nvim/lua/plugins/"
-			else
-				$EDITOR "$DOTS/nvim/lua/plugins/$2.lua"
-			fi
+		"p" | "plug" | "plugin" | "plugins" )
+			$EDITOR "$DOTS/nix/programs/neovim.nix"
 		;;
 		* )
 			$EDITOR "$DOTS/nvim/lua/$1.lua"
