@@ -97,10 +97,14 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+    pcscd.enable = true;
+    dnsmasq = {
+      enable = false;
+      settings = { };
+    };
   };
 
   # gpg agent + pin entry
-  services.pcscd.enable = true;
   programs.gnupg.agent = {
     enable = true;
     pinentryPackage = pkgs.pinentry-curses;

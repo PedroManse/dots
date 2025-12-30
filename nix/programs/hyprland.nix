@@ -26,25 +26,16 @@
   '';
 
   settings = {
-    "$mod" = "SUPER";
-    "$terminal" = "alacritty";
-    "$browser" = "firefox";
-    "$menu" = "wofi --show drun";
-    "$change_volume" = "${/home/manse/dots/scripts/change-volume.sh}";
-    "$change_sink" = "${/home/manse/dots/scripts/change-sink.sh}";
-    "$toggle_recording" = "${/home/manse/dots/scripts/toggle-recording.sh}";
-
     bindm = [
       "SUPER, mouse:272, movewindow"
       "SUPER, mouse:273, resizewindow"
     ];
     bind = [
       # program executor
-      "ALT, space, exec, pkill wofi ; $menu"
+      "ALT, space, exec, pkill wofi ; wofi --show drun"
       # open term
-      "SUPER, return, exec, $terminal"
-      # open browser
-      "SUPER, bracketright, exec, $browser"
+      "SUPER, return, exec, alacritty"
+      "SUPER, bracketright, exec, firefox"
       # move self/focus into left/right workspace
       "SUPER, h, workspace, r-1"
       "SHIFT SUPER, h, movetoworkspace, r-1"
@@ -67,13 +58,13 @@
       "SUPER, F2, exec, hyprshot --mode region --output-folder /tmp --silent"
 
       # Audio stuff
-      ", XF86AudioLowerVolume, exec, bash $change_volume -5%"
-      ", XF86AudioRaiseVolume, exec, bash $change_volume +5%"
-      "SHIFT, XF86AudioLowerVolume, exec, bash $change_volume -1%"
-      "SHIFT, XF86AudioRaiseVolume, exec, bash $change_volume +1%"
-      "CTRL, XF86AudioRaiseVolume, exec, bash $change_sink"
-      "CTRL, XF86AudioLowerVolume, exec, bash $change_sink"
-      ", XF86AudioPlay, exec, bash $toggle_recording"
+      ", XF86AudioLowerVolume, exec, bash ${/home/manse/dots/scripts/change-volume.sh} -5%"
+      ", XF86AudioRaiseVolume, exec, bash ${/home/manse/dots/scripts/change-volume.sh} +5%"
+      "SHIFT, XF86AudioLowerVolume, exec, bash ${/home/manse/dots/scripts/change-volume.sh} -1%"
+      "SHIFT, XF86AudioRaiseVolume, exec, bash ${/home/manse/dots/scripts/change-volume.sh} +1%"
+      "CTRL, XF86AudioRaiseVolume, exec, bash ${/home/manse/dots/scripts/change-sink.sh}"
+      "CTRL, XF86AudioLowerVolume, exec, bash ${/home/manse/dots/scripts/change-sink.sh}"
+      ", XF86AudioPlay, exec, bash ${/home/manse/dots/scripts/toggle-recording.sh}"
 
       # f11 -> toggle fullscreen
       ", F11, fullscreen"
