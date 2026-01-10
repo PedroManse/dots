@@ -1,10 +1,6 @@
 vim.o.syntax="enable"
 vim.o.winborder = 'rounded'
 
-require'gruber-darker'.setup{
-	background=false
-}
-
 -- zenburn
 vim.g.zenburn_force_dark_Background=1
 vim.g.zenburn_transparent=1
