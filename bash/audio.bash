@@ -90,3 +90,17 @@ function _pwa_remove_link_from_desktop {
 	pw-link -d "desktop-audio-sink:monitor_FR" "$1:playback_FR"
 }
 
+function _pwa_find_real_named_output {
+	local names="
+alsa_output.pci-0000_0d_00.4.analog-stereo headphone
+alsa_output.pci-0000_0b_00.1.hdmi-stereo-extra3 alto-falante
+	"
+
+	sink=$(_pwa_find_real_output)
+	sink_name=$(convert "$names" "$sink" "optional")
+	if [ -z "$sink_name" ] ; then
+		echo "$1"
+	else
+		echo "$sink_name"
+	fi
+}
