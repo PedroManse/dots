@@ -103,6 +103,21 @@
       settings = { };
     };
   };
+  systemd.services = {
+    fanControl = {
+      wantedBy = [ "multi-user.target" ];
+      description = "Start fancontrol program.";
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = pkgs.lib.getExe pkgs.writeShellApplication {
+          text = ''
+            echo 1 > /sys/class/drm/card1/device/hwmon/hwmon0/fan1_enable
+            ${pkgs.lm_sensors}/bin/fancontrol
+          '';
+        };
+      };
+    };
+  };
 
   # gpg agent + pin entry
   programs.gnupg.agent = {
@@ -173,6 +188,7 @@
     xorg.xset
     playerctl
     cachix
+    lm_sensors
   ];
 
   fonts.packages = [
