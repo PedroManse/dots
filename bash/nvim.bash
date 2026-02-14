@@ -59,3 +59,4 @@ function __compl_vim_edit() {
 complete -F __compl_vim_edit "vim-edit"
 
 alias nvim="_open"
+alias vi="$(get_bin_path nvim)"
