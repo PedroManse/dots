@@ -22,26 +22,19 @@ let
         reboot = "reboot";
       };
     };
-    "pulseaudio" = {
-      on-click = "bash -c \"source ~/dots/bash/bashrc && _pwa_rotate_real_output_sinks\"";
-      format-icons = {
-        headphone = "";
-        speaker = "󰜟";
-      };
-      # this was broken with qpwgraph
-      #on-click = "bash ${/home/manse/dots/scripts/change-sink.sh} 1";
-      format = {
-        format = "{icon} {volume}";
-      };
+    "custom/audio" = {
+      exec = "bash ${/home/manse/dots/scripts/waybar-show-sink-volume.bash}";
+      return-type = "json";
+      on-click = "bash ${/home/manse/dots/scripts/change-sink.sh}";
     };
     "hyprland/workspaces" = {
       format = "{id}";
     };
     "clock" = {
-      format = ''{:%b %d | %H:%M}'';
+      format = "{:%b %d | %H:%M}";
     };
     "memory" = {
-      format = ''{used:.1f} / {total:.1f}'';
+      format = "{used:.1f} / {total:.1f}";
     };
   };
 in
@@ -61,7 +54,7 @@ in
         "hyprland/workspaces"
       ];
       "modules-right" = [
-        "pulseaudio"
+        "custom/audio"
         "custom/record"
         "tray"
         "clock"

@@ -34,7 +34,7 @@ function _pwa_fix_outputs {
 }
 
 function _pwa_stop_audio {
-	pactl unload-module module-null-sink 
+	pactl unload-module module-null-sink
 }
 
 function _pwa_set_audio_real_output {
@@ -103,4 +103,24 @@ alsa_output.pci-0000_0b_00.1.hdmi-stereo-extra3 alto-falante
 	else
 		echo "$sink_name"
 	fi
+}
+
+function _pwa_find_icon {
+	local names="
+alsa_output.pci-0000_0d_00.4.analog-stereo .
+alsa_output.pci-0000_0b_00.1.hdmi-stereo-extra3 󰓃
+	"
+
+	sink=$(_pwa_find_real_output)
+	sink_name=$(convert "$names" "$sink" "optional")
+	if [ -z "$sink_name" ] ; then
+		echo "$1"
+	else
+		echo "$sink_name"
+	fi
+}
+
+function _pwa_get_current_audio {
+	sink=$(_pwa_find_real_output)
+	pactl get-sink-volume "$sink" | head -n1 | awk ' { print $5 } '
 }

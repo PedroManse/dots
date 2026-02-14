@@ -71,7 +71,7 @@ button:hover {
 }
 
 /* you can set a style on hover for any module like this */
-#pulseaudio:hover {
+#pulseaudio:hover,#custom-audio:hover {
 	background-color: #A37800;
 }
 
@@ -116,6 +116,7 @@ button:hover {
 #backlight,
 #network,
 #pulseaudio,
+#custom-audio,
 #wireplumber,
 #custom-media,
 #tray,
@@ -223,12 +224,12 @@ label:focus {
 	background-color: #F53C3C;
 }
 
-#pulseaudio {
+#pulseaudio,#custom-audio {
 	background-color: #F1C40F;
 	color: #000000;
 }
 
-#pulseaudio.muted {
+#pulseaudio.muted,#custom-audio.muted {
 	background-color: #90B1B1;
 	color: #2A5C45;
 }
