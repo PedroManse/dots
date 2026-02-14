@@ -1,14 +1,4 @@
-function default {
-	default=$1
-	optional=$2
-	if [ -z "$optional" ] ; then
-		echo "$default"
-	else
-		echo "$optional"
-	fi
-}
-
-function convert {
+function convert-video {
 	infile=$1
 	outfile=$2
 	framerate=$(default 24 "$3")

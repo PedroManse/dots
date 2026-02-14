@@ -27,3 +27,14 @@ function convert() {
 		exit 1
 	fi
 }
+
+### default <default value> <optional value>
+function default {
+	default=$1
+	optional=$2
+	if [ -z "$optional" ] ; then
+		echo "$default"
+	else
+		echo "$optional"
+	fi
+}
