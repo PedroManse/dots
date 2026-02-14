@@ -19,6 +19,7 @@ in
       home.packages =
         with pkgs;
         [
+          w3m
           bitwarden-desktop
           gamemode
           qbittorrent
@@ -49,6 +50,7 @@ in
         waybar = p.waybar {
           style = "${/home/manse/dots/waybar/style.css}";
         };
+        aerc = p.aerc { lib = pkgs.lib; };
 
         gh.enable = true;
       };

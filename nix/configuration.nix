@@ -194,8 +194,6 @@
     playerctl
     cachix
     lm_sensors
-    aerc
-    w3m
   ];
 
   fonts.packages = [
