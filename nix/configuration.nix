@@ -109,12 +109,17 @@
       description = "Start fancontrol program.";
       serviceConfig = {
         Type = "simple";
-        ExecStart = pkgs.lib.getExe pkgs.writeShellApplication {
-          text = ''
-            echo 1 > /sys/class/drm/card1/device/hwmon/hwmon0/fan1_enable
-            ${pkgs.lm_sensors}/bin/fancontrol
-          '';
-        };
+        ExecStart =
+          let
+            script_drv = pkgs.writeShellApplication {
+              name = "init";
+              text = ''
+                echo 1 > /sys/class/drm/card1/device/hwmon/hwmon0/fan1_enable
+                ${pkgs.lm_sensors}/bin/fancontrol
+              '';
+            };
+          in
+          "${script_drv}/bin/init";
       };
     };
   };
@@ -189,6 +194,8 @@
     playerctl
     cachix
     lm_sensors
+    aerc
+    w3m
   ];
 
   fonts.packages = [
