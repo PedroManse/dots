@@ -22,4 +22,12 @@ in
     };
   };
   extraConfig.general.unsafe-accounts-conf = true;
+  extraConfig.filters = {
+    "text/plain" = "colorize";
+    "text/calendar" = "calendar";
+    "message/delivery-status" = "colorize";
+    "message/rfc822" = "colorize";
+    "text/html" = "html | colorize";
+    ".headers" = "colorize";
+  };
 }
