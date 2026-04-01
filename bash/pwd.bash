@@ -49,13 +49,11 @@ prompt_command() {
 	fi
 
 	# pushd/popd list
-	dirlist=$(dirs)
-	dircount=$(echo "$dirlist" | wc -w)
+	dirlist=$(dirs -p)
+	dircount=$(echo "$dirlist" | wc -l)
 	comdirs=""
-	for i in $(seq 2 "$dircount"); do
-		d='$'
-		d+="$i"
-		thisdir=$(echo "$dirlist" | awk "{printf $d }")
+	for i in $(seq 1 "$((dircount - 1))"); do
+		thisdir=$(echo "$dirlist" | head -n "$i" | tail -n1)
 		thisdir=$(format_dir "$thisdir")
 		comdirs+=$thisdir
 		comdirs+="$(col_reset) | "
