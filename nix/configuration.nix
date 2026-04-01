@@ -24,11 +24,6 @@
   virtualisation = {
     libvirtd = {
       enable = true;
-      qemu = {
-        package = pkgs.qemu_kvm;
-        runAsRoot = true;
-        swtpm.enable = true;
-      };
     };
 
     docker.enable = false;
@@ -179,7 +174,8 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    qemu
+    librewolf
+    chromium
     pulseaudio
     man-pages
     man-pages-posix
@@ -194,6 +190,7 @@
     playerctl
     cachix
     lm_sensors
+    w3m
   ];
 
   fonts.packages = [
