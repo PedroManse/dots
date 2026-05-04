@@ -36,7 +36,7 @@ _open() {
 			$(get_bin_path nvim) --listen "$HOME"/.cache/nvim/$$-server.pipe "$file" "+:$line"
 		fi
 	else
-		$EDITOR "$file"
+		$EDITOR $file
 	fi
 }
 
@@ -59,4 +59,4 @@ function __compl_vim_edit() {
 complete -F __compl_vim_edit "vim-edit"
 
 alias nvim="_open"
-alias vi="$(get_bin_path nvim)"
+alias vi="\$(get_bin_path nvim)"
