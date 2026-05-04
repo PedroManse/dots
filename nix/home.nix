@@ -19,6 +19,7 @@ in
       home.packages =
         with pkgs;
         [
+          prismlauncher
           w3m
           bitwarden-desktop
           gamemode
