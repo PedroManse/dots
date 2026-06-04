@@ -24,39 +24,16 @@ allow-exact-repetitions = false
 check-private-items = true
 EOF
 
-cat > ci.sh << EOF
-#! /usr/bin/env bash
-set -e
+cat > Makefile << EOF
+.PHONY: build ci
 
-if [ -n "\$FIX" ] && [ "\$FIX" != "0" ] ; then
-	fix="--fix"
-fi
-
-if [ -n "\$DIRTY" ] && [ "\$DIRTY" != "0" ] ; then
-	allow_dirty="--allow-dirty"
-fi
-
-
-ci() {
-	pushd \$1
-	set -x
-
+build:
 	cargo build
+
+ci: build
 	cargo fmt
-	cargo clippy \$fix \$allow_dirty --all-targets --all-features
+	cargo clippy --all-targets
 	cargo test
-
-	set +x
-	popd
-}
-
-if [ "\$#" != 0 ] ; then
-	for target in "\$@" ; do
-		ci \$target
-	done
-else
-	ci .
-fi
 EOF
 
 mkdir -p .github/workflows
@@ -80,7 +57,7 @@ jobs:
     - name: Format
       run: cargo fmt --check
     - name: Lint
-      run: cargo clippy --all-targets --all-features
+      run: cargo clippy --all-targets
     - name: Test
       run: cargo test
 EOF
