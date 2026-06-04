@@ -5,6 +5,10 @@ let
     inherit pkgs;
     dir = ./programs;
   };
+  l = import ./autolinks.nix {
+    to_dir = ".local/share/applications/";
+    from_dir = ./links;
+  };
 in
 {
   imports = [
@@ -15,6 +19,8 @@ in
     { pkgs, ... }:
     {
       nixpkgs.config.allowUnfree = true;
+
+      home.file = l;
 
       home.packages =
         with pkgs;
