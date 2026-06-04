@@ -25,7 +25,15 @@ nmap("gb", ":ls<CR>:b<space>")
 
 --- LSP
 -- lsp config in ./lsp.lua
-nmap("<A-S-n>", ":lua= vim.diagnostic.goto_next{wrap = true}<CR>")
+vim.diagnostic.config({
+	severity_sort = true,
+	float = {
+		source = "always", -- Or "if_many"
+	},
+})
+nmap("<A-S-n>", function()
+	vim.diagnostic.jump { wrap = true, count = 1, float = true }
+end)
 nmap("grt", vim.lsp.buf.definition)
 nmap("<A-S-m>", vim.lsp.buf.format)
 -- grt -> def
