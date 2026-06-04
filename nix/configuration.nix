@@ -28,6 +28,7 @@
 
     docker.enable = false;
     vmware.host.enable = false;
+    virtualbox.guest.enable = false;
     virtualbox.host.enable = false;
   };
 
@@ -55,7 +56,7 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
-  # systemd services
+  # system services
   services = {
     postgresql.enable = false;
     mysql = {
@@ -93,11 +94,8 @@
       pulse.enable = true;
     };
     pcscd.enable = true;
-    dnsmasq = {
-      enable = false;
-      settings = { };
-    };
   };
+
   systemd.services = {
     fanControl = {
       wantedBy = [ "multi-user.target" ];
