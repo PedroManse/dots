@@ -184,7 +184,7 @@
     hyprlock
     hyprcursor
     nerd-fonts.mononoki
-    xorg.xset
+    xset
     playerctl
     cachix
     lm_sensors

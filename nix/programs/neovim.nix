@@ -5,6 +5,16 @@
 {
   inherit enable;
   defaultEditor = true;
+  withPython3 = false;
+  withRuby = false;
+  initLua = ''
+    require('lsp')
+    require('maps')
+    require('options')
+    require('vim')
+    require('auto-cmd')
+    require('color')
+  '';
   plugins = with pkgs.vimPlugins; [
     vim-airline
     vim-airline-themes

@@ -7,7 +7,7 @@ pkgs: with pkgs; [
   emmet-language-server
 
   # others
-  nixfmt-rfc-style
+  nixfmt
   shellcheck
   rustup
 ]

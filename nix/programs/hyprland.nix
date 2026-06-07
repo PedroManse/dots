@@ -3,6 +3,8 @@
 }:
 {
   inherit enable;
+  # TODO: update to lua
+  configType = "hyprlang";
   extraConfig = ''
     input {
       kb_layout=br

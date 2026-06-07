@@ -1,7 +1,1 @@
---require('pkgs')
-require('lsp')
-require('maps')
-require('options')
-require('vim')
-require('auto-cmd')
-require('color')
+/nix/store/iv98xgyakrgdhng3ifc6gklsa8hm07h9-home-manager-files/.config/nvim/init.lua

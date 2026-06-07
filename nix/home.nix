@@ -28,7 +28,6 @@ in
           gnumake
           prismlauncher
           w3m
-          bitwarden-desktop
           gamemode
           qbittorrent
           vlc
