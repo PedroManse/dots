@@ -97,24 +97,24 @@
   };
 
   systemd.services = {
-    fanControl = {
-      wantedBy = [ "multi-user.target" ];
-      description = "Start fancontrol program.";
-      serviceConfig = {
-        Type = "simple";
-        ExecStart =
-          let
-            script_drv = pkgs.writeShellApplication {
-              name = "init";
-              text = ''
-                echo 1 > /sys/class/drm/card1/device/hwmon/hwmon0/fan1_enable
-                ${pkgs.lm_sensors}/bin/fancontrol
-              '';
-            };
-          in
-          "${script_drv}/bin/init";
-      };
-    };
+    #fanControl = {
+    #  wantedBy = [ "multi-user.target" ];
+    #  description = "Start fancontrol program.";
+    #  serviceConfig = {
+    #    Type = "simple";
+    #    ExecStart =
+    #      let
+    #        script_drv = pkgs.writeShellApplication {
+    #          name = "init";
+    #          text = ''
+    #            echo 1 > /sys/class/drm/card1/device/hwmon/*/fan1_enable
+    #            ${pkgs.lm_sensors}/bin/fancontrol
+    #          '';
+    #        };
+    #      in
+    #      "${script_drv}/bin/init";
+    #  };
+    #};
   };
 
   # gpg agent + pin entry
@@ -161,7 +161,14 @@
     neovim.enable = true;
     hyprland.enable = true;
     firefox.enable = true;
-    steam.enable = true;
+    gamemode = {
+      enableRenice = true;
+      enable = true;
+    };
+    steam = {
+      extraCompatPackages = with pkgs; [ proton-ge-bin ];
+      enable = true;
+    };
     nix-ld = {
       enable = true;
       libraries = [ pkgs.libgcc ];
@@ -172,6 +179,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    protonup-qt
     librewolf
     chromium
     pulseaudio

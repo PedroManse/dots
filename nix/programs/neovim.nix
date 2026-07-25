@@ -7,7 +7,9 @@
   defaultEditor = true;
   withPython3 = false;
   withRuby = false;
+
   initLua = ''
+    require('locals')
     require('lsp')
     require('maps')
     require('options')
@@ -15,14 +17,15 @@
     require('auto-cmd')
     require('color')
   '';
+
   plugins = with pkgs.vimPlugins; [
+    telescope-nvim
     vim-airline
     vim-airline-themes
     nvim-autopairs
     cmp-nvim-lsp
     nvim-cmp
     zenburn
-    copilot-vim
     vim-flog
     vim-fugitive
     git-blame-nvim
@@ -34,6 +37,7 @@
     vim-prisma
     rust-vim
     undotree
+    alabaster-nvim
     zig-vim
   ];
 }

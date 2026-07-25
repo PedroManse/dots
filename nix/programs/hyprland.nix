@@ -3,6 +3,7 @@
 }:
 {
   inherit enable;
+  xwayland.enable = false;
   # TODO: update to lua
   configType = "hyprlang";
   extraConfig = ''
