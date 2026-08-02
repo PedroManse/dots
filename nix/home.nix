@@ -29,13 +29,11 @@ in
           usbutils
           prismlauncher
           w3m
-          gamemode
           gamescope
           (heroic.override {
             extraPkgs =
               pkgs': with pkgs'; [
                 gamescope
-                gamemode
               ];
           })
           qbittorrent
@@ -51,7 +49,6 @@ in
 
       gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
       wayland.windowManager.hyprland = p.hyprland { };
-      #services.wpaperd = p.wpaperd { };
       services.hyprpaper = p.hyprpaper { };
 
       programs = {

@@ -164,6 +164,11 @@
     gamemode = {
       enableRenice = true;
       enable = true;
+      settings = {
+        general = {
+          renice = 10;
+        };
+      };
     };
     steam = {
       extraCompatPackages = with pkgs; [ proton-ge-bin ];
@@ -179,6 +184,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    htop
     protonup-qt
     librewolf
     chromium
