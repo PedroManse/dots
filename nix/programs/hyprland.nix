@@ -61,10 +61,10 @@
       "SUPER, F2, exec, hyprshot --mode region --output-folder /tmp --silent"
 
       # Audio stuff
-      ", XF86AudioLowerVolume, exec, bash ${/home/manse/dots/scripts/change-volume.sh} -5%"
-      ", XF86AudioRaiseVolume, exec, bash ${/home/manse/dots/scripts/change-volume.sh} +5%"
-      "SHIFT, XF86AudioLowerVolume, exec, bash ${/home/manse/dots/scripts/change-volume.sh} -1%"
-      "SHIFT, XF86AudioRaiseVolume, exec, bash ${/home/manse/dots/scripts/change-volume.sh} +1%"
+      ", XF86AudioLowerVolume, exec, bash ${/home/manse/dots/scripts/change-volume.sh} -5% -1%"
+      ", XF86AudioRaiseVolume, exec, bash ${/home/manse/dots/scripts/change-volume.sh} +5% +1%"
+      "SHIFT, XF86AudioLowerVolume, exec, bash ${/home/manse/dots/scripts/change-volume.sh} -1% -1%"
+      "SHIFT, XF86AudioRaiseVolume, exec, bash ${/home/manse/dots/scripts/change-volume.sh} +1% +1%"
       "CTRL, XF86AudioRaiseVolume, exec, bash ${/home/manse/dots/scripts/change-sink.sh}"
       "CTRL, XF86AudioLowerVolume, exec, bash ${/home/manse/dots/scripts/change-sink.sh}"
       ", XF86AudioPlay, exec, bash ${/home/manse/dots/scripts/toggle-recording.sh}"

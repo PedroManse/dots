@@ -26,6 +26,7 @@ in
         with pkgs;
         [
           gnumake
+          usbutils
           prismlauncher
           w3m
           gamemode
