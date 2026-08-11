@@ -65,8 +65,8 @@
       ", XF86AudioRaiseVolume, exec, bash ${/home/manse/dots/scripts/change-volume.sh} +5% +1%"
       "SHIFT, XF86AudioLowerVolume, exec, bash ${/home/manse/dots/scripts/change-volume.sh} -1% -1%"
       "SHIFT, XF86AudioRaiseVolume, exec, bash ${/home/manse/dots/scripts/change-volume.sh} +1% +1%"
-      "CTRL, XF86AudioRaiseVolume, exec, bash ${/home/manse/dots/scripts/change-sink.sh}"
-      "CTRL, XF86AudioLowerVolume, exec, bash ${/home/manse/dots/scripts/change-sink.sh}"
+      "CTRL, XF86AudioRaiseVolume, exec, bash ${/home/manse/dots/scripts/change-sink.sh} next"
+      "CTRL, XF86AudioLowerVolume, exec, bash ${/home/manse/dots/scripts/change-sink.sh} prev"
       ", XF86AudioPlay, exec, bash ${/home/manse/dots/scripts/toggle-recording.sh}"
 
       # f11 -> toggle fullscreen

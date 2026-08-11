@@ -1,64 +1,76 @@
 #! /usr/bin/env bash
 
-function _pwa_startup_audio {
-	# create "desktop audio" for all apps
+function pwa.startup_audio {
+	# "desktop audio" for all programs to send audio to
 	pactl load-module module-null-sink media.class=Audio/Sink sink_name=desktop-audio-sink channel_map=stereo
 
-	# microphone with all app's audio + real microphone's audio
-	pactl load-module module-null-sink media.class=Audio/Source/Virtual sink_name=virtualmic channel_map=front-left,front-right
-	pactl load-module module-null-sink media.class=Audio/Source/Virtual sink_name=realmic channel_map=front-left,front-right
+	# Real microphone's audio
+	pactl load-module module-null-sink media.class=Audio/Source/Virtual sink_name=realmic channel_map=stereo
 
-	# set "desktop" sink as default
+	# Real Microphone + "desktop audio"
+	pactl load-module module-null-sink media.class=Audio/Source/Virtual sink_name=record-audio-sink channel_map=stereo
+
+	# set "desktop audio" as system's default sink
 	pactl set-default-sink desktop-audio-sink
 
-	# send "desktop" audio to virt mic
-	pw-link desktop-audio-sink:monitor_FL virtualmic:input_FL
-	pw-link desktop-audio-sink:monitor_FR virtualmic:input_FR
+	# set "real mic" as system's default source
+	pactl set-default-source realmic
 
-	# send real mic to virt mic
-	real_mic=$(pactl list sources | grep Name | grep input | awk ' { print $2 } ')
-	pw-link "$real_mic:capture_FL" virtualmic:input_FL
-	pw-link "$real_mic:capture_FR" virtualmic:input_FR
+	# send "desktop" audio to "record sink"
+	pw-link desktop-audio-sink:monitor_FL record-audio-sink:input_FL
+	pw-link desktop-audio-sink:monitor_FR record-audio-sink:input_FR
+
+	# send "real mic" to "record sink"
+	real_mic=$(pactl list sources short | grep input | grep analog | awk ' { print $2 } ')
 	pw-link "$real_mic:capture_FL" realmic:input_FL
 	pw-link "$real_mic:capture_FR" realmic:input_FR
+	pw-link "realmic:capture_FL" record-audio-sink:input_FL
+	pw-link "realmic:capture_FR" record-audio-sink:input_FR
 }
 
-function _pwa_fix_outputs {
-	pw-link desktop-audio-sink:monitor_FL virtualmic:input_FL
-	pw-link desktop-audio-sink:monitor_FR virtualmic:input_FR
-	real_mic=$(pactl list sources | grep Name | grep input | awk ' { print $2 } ')
-	pw-link "$real_mic:capture_FL" virtualmic:input_FL
-	pw-link "$real_mic:capture_FR" virtualmic:input_FR
+function pwa.link_real_mic {
+	#pw-link desktop-audio-sink:monitor_FL record-audio-sink:input_FL
+	#pw-link desktop-audio-sink:monitor_FR record-audio-sink:input_FR
+	real_mic=$(pactl list sources short | grep input | grep analog | awk ' { print $2 } ')
 	pw-link "$real_mic:capture_FL" realmic:input_FL
 	pw-link "$real_mic:capture_FR" realmic:input_FR
+	#pw-link "realmic:capture_FL" record-audio-sink:input_FL
+	#pw-link "realmic:capture_FR" record-audio-sink:input_FR
 }
 
-function _pwa_stop_audio {
+function pwa.stop_audio {
 	pactl unload-module module-null-sink
 }
 
-function _pwa_set_audio_real_output {
+function pwa.set_audio_real_output {
 	pw-link desktop-audio-sink:monitor_FL "$1:playback_FL"
 	pw-link desktop-audio-sink:monitor_FR "$1:playback_FR"
 }
 
-function _pwa_rotate_real_output_sinks {
-	old_sink=$(_pwa_find_real_output)
-	_pwa_remove_link_from_desktop "$old_sink"
-
-	# don't send audio to a real audio sink
-	real_sinks=$(pactl list sinks | grep 'Name: alsa_output' | awk ' { print $2 } ')
-	for sink in $real_sinks ; do
-		if [ ! "$sink" = "$old_sink" ] ; then
-			_pwa_set_audio_real_output "$sink"
-			break
-		fi
-	done
+function pwa.find_real_outputs {
+	pactl list sinks short | filte -"desktop-audio-sink" | awk ' { print $2 } '
 }
 
-function _pwa_find_real_output {
+function pwa.rotate_real_output_sinks {
+	old_sink=$(pwa.find_current_output)
+	# don't send audio to a desktop-audio-sink
+	if [ "$1" = "prev" ] ; then
+		real_sinks=$(pwa.find_real_outputs | tac)
+	else
+		real_sinks=$(pwa.find_real_outputs)
+	fi
+	# _cyclic_find_next_item from ./bashrc
+	new_sink=$( _cyclic_find_next_item "$old_sink" "$real_sinks"  )
+
+	pwa.set_audio_real_output "$new_sink"
+	if [ -n "$old_sink" ] ; then
+		pwa.remove_link_from_desktop "$old_sink"
+	fi
+}
+
+function pwa.find_current_output {
 	on_desktop_audio=""
-	IFS=$'\n' links=$(pw-link -l)
+	IFS=$'\n' links=$(pw-link -l '' 'desktop-audio-sink')
 	for link in $links ; do
 		header=$(echo "$link" | filte 'i^ ')
 		is_send=$(echo "$link" | filte '^  |->' | awk ' { print $2 } ')
@@ -75,7 +87,7 @@ function _pwa_find_real_output {
 			if
 				[ -n "$on_desktop_audio" ] &&
 				[ -n "$is_send" ] &&
-				[[ ! "$is_send" =~ virtualmic ]] &&
+				[[ ! "$is_send" =~ record-audio-sink ]] &&
 				[[ ! "$is_send" =~ Pulse ]] ;
 			then
 				echo "$is_send" | cut -d':' -f1
@@ -85,18 +97,20 @@ function _pwa_find_real_output {
 	done
 }
 
-function _pwa_remove_link_from_desktop {
+
+function pwa.remove_link_from_desktop {
 	pw-link -d "desktop-audio-sink:monitor_FL" "$1:playback_FL"
 	pw-link -d "desktop-audio-sink:monitor_FR" "$1:playback_FR"
 }
 
-function _pwa_find_real_named_output {
+function pwa.find_real_named_output {
 	local names="
 alsa_output.pci-0000_0d_00.4.analog-stereo headphone
 alsa_output.pci-0000_0b_00.1.hdmi-stereo-extra3 alto-falante
+bluez_output.E8_EE_CC_6F_35_FE.1 bluetooth-headphone
 	"
 
-	sink=$(_pwa_find_real_output)
+	sink=$(pwa.find_current_output)
 	sink_name=$(convert "$names" "$sink" "optional")
 	if [ -z "$sink_name" ] ; then
 		echo "$1"
@@ -105,13 +119,14 @@ alsa_output.pci-0000_0b_00.1.hdmi-stereo-extra3 alto-falante
 	fi
 }
 
-function _pwa_find_icon {
+function pwa.find_icon {
 	local names="
-alsa_output.pci-0000_0d_00.4.analog-stereo .
+alsa_output.pci-0000_0d_00.4.analog-stereo 
 alsa_output.pci-0000_0b_00.1.hdmi-stereo-extra3 󰓃
-	"
+bluez_output.E8_EE_CC_6F_35_FE.1 
+"
 
-	sink=$(_pwa_find_real_output)
+	sink=$(pwa.find_current_output)
 	sink_name=$(convert "$names" "$sink" "optional")
 	if [ -z "$sink_name" ] ; then
 		echo "$1"
@@ -120,7 +135,7 @@ alsa_output.pci-0000_0b_00.1.hdmi-stereo-extra3 󰓃
 	fi
 }
 
-function _pwa_get_current_audio {
-	sink=$(_pwa_find_real_output)
+function pwa.get_current_audio {
+	sink=$(pwa.find_current_output)
 	pactl get-sink-volume "$sink" | head -n1 | awk ' { print $5 } '
 }

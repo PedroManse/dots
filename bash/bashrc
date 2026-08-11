@@ -10,10 +10,10 @@ if [ -z "$COMPUTER_NAME" ] ; then
 	fi
 fi
 
-source $DOTS/bash/path.sh
+source "$DOTS/bash/path.sh"
 get_bin_path() {
 	paths=${2:-$PATH}
-	for dr in $(echo $paths | tr ':' '\n') ; do
+	for dr in $(echo "$paths" | tr ':' '\n') ; do
 		if [ -f "$dr/$1" ] ; then
 			echo "$dr/$1"
 			return 0
@@ -22,13 +22,36 @@ get_bin_path() {
 	return 1
 }
 
+# $1 = Current Item
+# $2 IFS="\n" string or Items
+#
+# If $1 not in $2, first line of $2 will be returned
+function _cyclic_find_next_item {
+	old_item=$1
+	items=$2
+
+	found_current=0
+	for item in $items ; do
+		if [ "$item" = "$old_item" ] ; then
+			found_current=1
+		elif [ "$found_current" = "1" ] ; then
+			echo "$item"
+			found_current=2
+			break
+		fi
+	done
+	if [ "$found_current" != "2" ] ; then
+		echo "$items" | head -n1
+	fi
+}
+
 tmod() {
 	if [ "$1" = "rc" ] ; then
-		$EDITOR $DOTS/bash/bashrc
+		$EDITOR "$DOTS/bash/bashrc"
 	elif [ "$1" = "path" ] ; then
-		$EDITOR $DOTS/bash/path.sh
+		$EDITOR "$DOTS/bash/path.sh"
 	elif [ -n "$1" ] ; then
-		$EDITOR $DOTS/bash/$1.bash
+		$EDITOR "$DOTS/bash/$1.bash"
 	else
 		$EDITOR $DOTS/bash/
 	fi

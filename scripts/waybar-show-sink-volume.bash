@@ -10,11 +10,12 @@ gen_json() {
 	echo '{ "text": "'"$text"'", "alt": "'"$alt"'", "class": "'"$class"'", "tooltip": "'"$tooltip"'" }'
 }
 
-source "$HOME/dots/bash/bashrc"
+source "/home/manse/.shenv.bash"
+source "/home/manse/dots/bash/bashrc"
 while true ; do
-	sink=$(_pwa_find_real_output)
+	sink=$(pwa.find_current_output)
 	volume=$(pactl get-sink-volume "$sink" | head -n1 | awk ' { print $5 } ')
-	icon=$(_pwa_find_icon)
+	icon=$(pwa.find_icon)
 	gen_json "$icon $volume" "Volume of sink ${sink}: ${volume}" "volume" "Click to change sinks"
 	sleep 1
 done
