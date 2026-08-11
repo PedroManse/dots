@@ -75,6 +75,10 @@ button:hover {
 	background-color: #A37800;
 }
 
+#custom-audio {
+	font-family: 'Mononoki Nerd Font';
+}
+
 #workspaces {
 	background-color: rgba(255, 255, 255, 0.6);
 }
