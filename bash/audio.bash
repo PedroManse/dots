@@ -17,25 +17,17 @@ function pwa.startup_audio {
 	pactl set-default-source realmic
 
 	# send "desktop" audio to "record sink"
-	pw-link desktop-audio-sink:monitor_FL record-audio-sink:input_FL
-	pw-link desktop-audio-sink:monitor_FR record-audio-sink:input_FR
+	pw-link desktop-audio-sink record-audio-sink
 
 	# send "real mic" to "record sink"
 	real_mic=$(pactl list sources short | grep input | grep analog | awk ' { print $2 } ')
-	pw-link "$real_mic:capture_FL" realmic:input_FL
-	pw-link "$real_mic:capture_FR" realmic:input_FR
-	pw-link "realmic:capture_FL" record-audio-sink:input_FL
-	pw-link "realmic:capture_FR" record-audio-sink:input_FR
+	pw-link "$real_mic" realmic
+	pw-link "realmic" record-audio-sink
 }
 
 function pwa.link_real_mic {
-	#pw-link desktop-audio-sink:monitor_FL record-audio-sink:input_FL
-	#pw-link desktop-audio-sink:monitor_FR record-audio-sink:input_FR
 	real_mic=$(pactl list sources short | grep input | grep analog | awk ' { print $2 } ')
-	pw-link "$real_mic:capture_FL" realmic:input_FL
-	pw-link "$real_mic:capture_FR" realmic:input_FR
-	#pw-link "realmic:capture_FL" record-audio-sink:input_FL
-	#pw-link "realmic:capture_FR" record-audio-sink:input_FR
+	pw-link "$real_mic" realmic
 }
 
 function pwa.stop_audio {
@@ -43,8 +35,11 @@ function pwa.stop_audio {
 }
 
 function pwa.set_audio_real_output {
-	pw-link desktop-audio-sink:monitor_FL "$1:playback_FL"
-	pw-link desktop-audio-sink:monitor_FR "$1:playback_FR"
+	pw-link desktop-audio-sink "$1"
+}
+
+function pwa.remove_link_from_desktop {
+	pw-link -d "desktop-audio-sink" "$1"
 }
 
 function pwa.find_real_outputs {
@@ -97,11 +92,6 @@ function pwa.find_current_output {
 	done
 }
 
-
-function pwa.remove_link_from_desktop {
-	pw-link -d "desktop-audio-sink:monitor_FL" "$1:playback_FL"
-	pw-link -d "desktop-audio-sink:monitor_FR" "$1:playback_FR"
-}
 
 function pwa.find_real_named_output {
 	local names="
