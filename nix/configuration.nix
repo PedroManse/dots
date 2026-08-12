@@ -184,6 +184,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    inotify-tools
     htop
     protonup-qt
     librewolf
@@ -205,9 +206,7 @@
     w3m
   ];
 
-  fonts.packages = builtins.filter pkgs.lib.attrsets.isDerivation (
-    builtins.attrValues pkgs.nerd-fonts
-  );
+  fonts.packages = [ pkgs.nerd-fonts.mononoki ];
 
   hardware.bluetooth = {
     enable = true;
