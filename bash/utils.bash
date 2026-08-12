@@ -28,13 +28,26 @@ function convert() {
 	fi
 }
 
-### default <default value> <optional value>
-function default {
-	default=$1
-	optional=$2
-	if [ -z "$optional" ] ; then
-		echo "$default"
-	else
-		echo "$optional"
+# $1 = Current Item
+# $2 IFS="\n" string or Items
+#
+# If $1 not in $2, first line of $2 will be returned
+function cyclic_find_next_item {
+	old_item=$1
+	items=$2
+
+	found_current=0
+	for item in $items ; do
+		if [ "$item" = "$old_item" ] ; then
+			found_current=1
+		elif [ "$found_current" = "1" ] ; then
+			echo "$item"
+			found_current=2
+			break
+		fi
+	done
+	if [ "$found_current" != "2" ] ; then
+		echo "$items" | head -n1
 	fi
 }
+

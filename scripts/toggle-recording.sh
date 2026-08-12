@@ -7,7 +7,7 @@ format_rec_time() {
 if ! pkill -2 wf-recorder ; then
 	source "/home/manse/.shenv.bash"
 	source "/home/manse/dots/bash/bashrc"
-	pwa.fix_outputs
+	pwa.mic.autofix
 	now=$(date +'%d-%m_%H:%M.mp4')
 	now_unix=$(date +'%s')
 	wf-recorder "--audio=record-audio-sink" "--file=$HOME/Screencasts/auto/$now"

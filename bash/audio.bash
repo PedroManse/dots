@@ -1,69 +1,55 @@
 #! /usr/bin/env bash
 
-function pwa.startup_audio {
-	# "desktop audio" for all programs to send audio to
+# (analog mic) -> "mic" -> "record-audio-sink" <- "desktop-audio-sink" <- (all programs)
+
+# PipeWireAction
+
+function pwa.start {
+	# Create PWA :: Desktop
 	pactl load-module module-null-sink media.class=Audio/Sink sink_name=desktop-audio-sink channel_map=stereo
 
-	# Real microphone's audio
-	pactl load-module module-null-sink media.class=Audio/Source/Virtual sink_name=realmic channel_map=stereo
+	# Create PWA :: Mic
+	pactl load-module module-null-sink media.class=Audio/Source/Virtual sink_name=mic channel_map=stereo
 
-	# Real Microphone + "desktop audio"
+	# Create PWA :: Record
 	pactl load-module module-null-sink media.class=Audio/Source/Virtual sink_name=record-audio-sink channel_map=stereo
 
-	# set "desktop audio" as system's default sink
+	# set Desktop Audio as system's default sink
 	pactl set-default-sink desktop-audio-sink
 
-	# set "real mic" as system's default source
-	pactl set-default-source realmic
+	# set Mic as system's default source
+	pactl set-default-source mic
 
-	# send "desktop" audio to "record sink"
-	pw-link desktop-audio-sink record-audio-sink
+	# send Desktop Audio and Mic audio to "record sink"
+	pw-link "desktop-audio-sink" "record-audio-sink"
+	pw-link "mic" "record-audio-sink"
 
-	# send "real mic" to "record sink"
-	real_mic=$(pactl list sources short | grep input | grep analog | awk ' { print $2 } ')
-	pw-link "$real_mic" realmic
-	pw-link "realmic" record-audio-sink
+	# try link analog mic -> Mic
+	pwa.mic.autofix
 }
 
-function pwa.link_real_mic {
-	real_mic=$(pactl list sources short | grep input | grep analog | awk ' { print $2 } ')
-	pw-link "$real_mic" realmic
+function pwa.stop { pactl unload-module module-null-sink ; }
+
+# PWA :: Mic
+
+function pwa.mic.link { pw-link "$1" mic ; }
+function pwa.mic.unlink { pw-link -d "$1" mic ; }
+function pwa.mic.autofix {
+	pwa.mic.link "$(pw.find_analog_input)"
 }
 
-function pwa.stop_audio {
-	pactl unload-module module-null-sink
-}
+# PWA :: Desktop
 
-function pwa.set_audio_real_output {
-	pw-link desktop-audio-sink "$1"
-}
+function pwa.desktop.unlink { pw-link -d "desktop-audio-sink" "$1" ; }
+function pwa.desktop.link { pw-link "desktop-audio-sink" "$1" ; }
 
-function pwa.remove_link_from_desktop {
-	pw-link -d "desktop-audio-sink" "$1"
-}
-
-function pwa.find_real_outputs {
+# Get all possible hardware outputs
+function pwa.desktop.find_possible_links {
 	pactl list sinks short | filte -"desktop-audio-sink" | awk ' { print $2 } '
 }
 
-function pwa.rotate_real_output_sinks {
-	old_sink=$(pwa.find_current_output)
-	# don't send audio to a desktop-audio-sink
-	if [ "$1" = "prev" ] ; then
-		real_sinks=$(pwa.find_real_outputs | tac)
-	else
-		real_sinks=$(pwa.find_real_outputs)
-	fi
-	# _cyclic_find_next_item from ./bashrc
-	new_sink=$( _cyclic_find_next_item "$old_sink" "$real_sinks"  )
-
-	pwa.set_audio_real_output "$new_sink"
-	if [ -n "$old_sink" ] ; then
-		pwa.remove_link_from_desktop "$old_sink"
-	fi
-}
-
-function pwa.find_current_output {
+# Get current hardware output
+function pwa.desktop.get_current_link {
 	on_desktop_audio=""
 	IFS=$'\n' links=$(pw-link -l '' 'desktop-audio-sink')
 	for link in $links ; do
@@ -92,40 +78,59 @@ function pwa.find_current_output {
 	done
 }
 
-
-function pwa.find_real_named_output {
-	local names="
-alsa_output.pci-0000_0d_00.4.analog-stereo headphone
-alsa_output.pci-0000_0b_00.1.hdmi-stereo-extra3 alto-falante
-bluez_output.E8_EE_CC_6F_35_FE.1 bluetooth-headphone
-	"
-
-	sink=$(pwa.find_current_output)
-	sink_name=$(convert "$names" "$sink" "optional")
-	if [ -z "$sink_name" ] ; then
-		echo "$1"
+# Use next hardware output (wraps)
+# If $1 is "prev" use previous hardware output instead of next
+function pwa.desktop.rotate_current_link {
+	old_sink=$(pwa.desktop.get_current_link)
+	if [ "$1" = "prev" ] ; then
+		real_sinks=$(pwa.desktop.find_possible_links | tac)
 	else
-		echo "$sink_name"
+		real_sinks=$(pwa.desktop.find_possible_links)
 	fi
+
+	# cyclic_find_next_item from ./utils.bash
+	new_sink=$( cyclic_find_next_item "$old_sink" "$real_sinks"  )
+
+	pwa.desktop.link "$new_sink"
+	if [ -n "$old_sink" ] ; then
+		pwa.desktop.unlink "$old_sink"
+	fi
+
+	echo "$new_sink"
 }
 
-function pwa.find_icon {
+# $1 device name
+# $2 default name
+function pwa.pretty_name_of {
 	local names="
-alsa_output.pci-0000_0d_00.4.analog-stereo 
-alsa_output.pci-0000_0b_00.1.hdmi-stereo-extra3 󰓃
-bluez_output.E8_EE_CC_6F_35_FE.1 
+alsa_output.pci-0000_0d_00.4.analog-stereo      headphone
+alsa_output.pci-0000_0b_00.1.hdmi-stereo-extra3 alto-falante
+bluez_output.E8_EE_CC_6F_35_FE.1                bluetooth-headphone
 "
 
-	sink=$(pwa.find_current_output)
-	sink_name=$(convert "$names" "$sink" "optional")
-	if [ -z "$sink_name" ] ; then
-		echo "$1"
-	else
-		echo "$sink_name"
-	fi
+	sink_name=$(convert "$names" "$1" "optional")
+	echo "${sink_name:-$2}"
 }
 
-function pwa.get_current_audio {
-	sink=$(pwa.find_current_output)
-	pactl get-sink-volume "$sink" | head -n1 | awk ' { print $5 } '
+# $1 device name
+# $2 default icon
+function pwa.pretty_icon_of {
+	local names="
+alsa_output.pci-0000_0d_00.4.analog-stereo      
+alsa_output.pci-0000_0b_00.1.hdmi-stereo-extra3 󰓃
+bluez_output.E8_EE_CC_6F_35_FE.1                
+"
+
+	sink_icon=$(convert "$names" "$1" "optional")
+	echo "${sink_icon:-$2}"
+}
+
+# Generic PipeWire functions
+
+function pw.get_volume_by_name {
+	pactl get-sink-volume "$1" | cut -w -f5 | head -n1
+}
+
+function pw.find_analog_input {
+	pactl list sources short | grep input | grep analog | awk ' { print $2 } '
 }

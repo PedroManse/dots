@@ -11,7 +11,7 @@ else
   volume_diff=$2
 fi
 
-sink=$(pwa.find_current_output)
+sink=$(pwa.desktop.get_current_link)
 pactl set-sink-volume "$sink" "$volume_diff"
 volume=$(pactl get-sink-volume "$sink" | awk '{print $5}')
 hyprctl dismissnotify
