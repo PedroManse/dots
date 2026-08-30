@@ -11,7 +11,7 @@
     {
       inherit enable;
       config = {
-        "theme" = "zenburn";
+        theme = "zenburn";
       };
     };
 }

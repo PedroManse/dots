@@ -5,8 +5,10 @@ pkgs: with pkgs; [
   typescript-language-server
   lua-language-server
   emmet-language-server
+  zls
 
   # others
+  zig
   nixfmt
   shellcheck
   rustup
