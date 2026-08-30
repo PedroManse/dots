@@ -26,6 +26,25 @@ function pwa.start {
 
 	# try link analog mic -> Mic
 	pwa.mic.autofix
+
+	mkdir -p "/tmp/pwa"
+	pwa.awake change-volume change-sink
+}
+
+# wait for any changes on files in /tmp/pwa (needs zawait)
+function pwa.await {
+	# shellcheck disable=2046
+	zawait $(for f in "$@" ; do
+		echo -n "/tmp/pwa/$f "
+	done)
+}
+
+# use zawake to alert files watched by zawait
+function pwa.awake {
+	# shellcheck disable=2046
+	zawake $(for f in "$@" ; do
+		echo -n "/tmp/pwa/$f "
+	done)
 }
 
 function pwa.stop { pactl unload-module module-null-sink ; }
