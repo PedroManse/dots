@@ -36,6 +36,7 @@ in
           wf-recorder
           gimp
           cachix
+          ((import /home/manse/code/zawait) pkgs).pkg
         ]
         ++ (p.bat.extras pkgs)
         ++ (p.coding pkgs);
