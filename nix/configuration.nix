@@ -60,7 +60,7 @@
   services = {
     postgresql.enable = false;
     mysql = {
-      enable = false;
+      enable = true;
       package = pkgs.mariadb;
     };
 
@@ -92,29 +92,43 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+      wireplumber = {
+        enable = true;
+        extraConfig.extraConfig."10-bluez" = {
+          "monitor.bluez.properties" = {
+            "bluez5.enable-sbc-xq" = true;
+            "bluez5.enable-msbc" = true;
+            "bluez5.enable-hw-volume" = true;
+            "bluez5.roles" = [
+              "hsp_hs"
+              "hsp_ag"
+              "hfp_hf"
+              "hfp_ag"
+            ];
+          };
+        };
+      };
     };
     pcscd.enable = true;
-  };
+    mediawiki = {
+      enable = false;
+      name = "Sample MediaWiki";
+      httpd.virtualHost = {
+        hostName = "localhost";
+        adminAddr = "pedro.manse@duck.com";
+      };
+      passwordFile = pkgs.writeText "password" "myawesomefuckingpassword";
+      extraConfig = ''
+        # Disable anonymous editing
+        $wgGroupPermissions['*']['edit'] = false;
+      '';
 
-  systemd.services = {
-    #fanControl = {
-    #  wantedBy = [ "multi-user.target" ];
-    #  description = "Start fancontrol program.";
-    #  serviceConfig = {
-    #    Type = "simple";
-    #    ExecStart =
-    #      let
-    #        script_drv = pkgs.writeShellApplication {
-    #          name = "init";
-    #          text = ''
-    #            echo 1 > /sys/class/drm/card1/device/hwmon/*/fan1_enable
-    #            ${pkgs.lm_sensors}/bin/fancontrol
-    #          '';
-    #        };
-    #      in
-    #      "${script_drv}/bin/init";
-    #  };
-    #};
+      extensions = {
+        # some extensions are included and can enabled by passing null
+        VisualEditor = null;
+      };
+    };
+
   };
 
   # gpg agent + pin entry
@@ -171,6 +185,7 @@
       };
     };
     steam = {
+      extest.enable = true;
       extraCompatPackages = with pkgs; [ proton-ge-bin ];
       enable = true;
     };
@@ -208,6 +223,7 @@
 
   fonts.packages = [ pkgs.nerd-fonts.mononoki ];
 
+  hardware.steam-hardware.enable = true;
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
