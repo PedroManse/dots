@@ -28,6 +28,25 @@ function convert() {
 	fi
 }
 
+function convert2() {
+	data=$(trim_string "$1")
+	query_key=$(trim_string "$2")
+	store_into=$(trim_string "${3:-REPLY}")
+
+	export IFS=$'\n'
+	for line in $data ; do
+		export IFS=' '
+		declare -a data_array=()
+		read -ra data_array <<< "$line"
+		line_key=$(trim_string "${data_array[0]}")
+		if [ "$query_key" = "$line_key" ] ; then
+			read -ra "${store_into?}" <<< "${data_array[*]:1}"
+			return 0
+		fi
+	done
+	return 1
+}
+
 # $1 = Current Item
 # $2 IFS="\n" string or Items
 #
@@ -51,3 +70,6 @@ function cyclic_find_next_item {
 	fi
 }
 
+function trim_string {
+	echo "$1" | awk '{$1=$1};1'
+}
