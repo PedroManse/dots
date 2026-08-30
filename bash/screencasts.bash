@@ -3,6 +3,6 @@ function convert-video {
 	outfile=$2
 	framerate=${3:-24}
 	quality=${4:-28}
-	echo ffmpeg -i "$infile" -vcodec libx265 -crf "$quality" -r "$framerate"  "$outfile"
+	ffmpeg -i "$infile" -vcodec libx265 -crf "$quality" -r "$framerate"  "$outfile"
 }
 
